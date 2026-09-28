@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+/*
+ * Cyanotype palette: the site is drawn like a blueprint.
+ * ink      page ground
+ * plate    raised surfaces, the transition shutter
+ * line     rules, frames and construction lines
+ * chalk    primary text
+ * graphite secondary text
+ * signal   the braces of the frame, and interactive states
+ */
+@theme {
+  --color-ink: #0a1826;
+  --color-plate: #10233a;
+  --color-line: #1f3a57;
+  --color-chalk: #e6edf3;
+  --color-graphite: #8ba3ba;
+  --color-signal: #7cc4fa;
+
+  /* Classic typographic scale: 14 16 18 21 24 36 48 60 72 */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.3125rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 3.75rem;
+  --text-6xl: 4.5rem;
+
+  --ease-structural: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+}
+
+/*
+ * One family, three widths. Width carries hierarchy:
+ * expanded for display, normal for reading, condensed for annotation.
+ */
+@utility stretch-wide {
+  font-variation-settings: "wdth" 125;
+}
+@utility stretch-normal {
+  font-variation-settings: "wdth" 100;
+}
+@utility stretch-narrow {
+  font-variation-settings: "wdth" 72;
+}
+
+@utility container-sheet {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-chalk);
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Construction lines draw themselves once, on the home page hero. */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 900ms var(--ease-structural) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+.settle {
+  opacity: 0;
+  animation: settle 600ms ease-out forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .settle {
+    animation: none;
+    opacity: 1;
+  }
+}
