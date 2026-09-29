@@ -7,7 +7,7 @@ import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
 import { pillars } from "@/lib/pillars";
 import { projects } from "@/lib/projects";
-import { site } from "@/lib/site";
+import { services } from "@/lib/services";
 
 const questions: Question[] = [
   {
@@ -17,6 +17,10 @@ const questions: Question[] = [
   {
     q: "What stack do you build with?",
     a: "Our default is TypeScript end to end: Next.js and React for interfaces, Node.js for services, Prisma for data access and PostgreSQL as the foundation. We add queues, caches and infrastructure per project, based on the load the system has to carry.",
+  },
+  {
+    q: "How much does a project cost?",
+    a: "It depends on what the system has to carry. Once we understand the project, we send a written proposal for the first phase with its scope, team and cost, so you know the price before any work starts.",
   },
   {
     q: "Can you work on an existing codebase?",
@@ -32,7 +36,7 @@ const questions: Question[] = [
   },
   {
     q: "How do we start?",
-    a: "Email us with what you are building and where it strains. We reply with questions, then a short written proposal for the first phase.",
+    a: "Send us an inquiry with what you are building and where it strains. We reply with questions, then a short written proposal for the first phase.",
   },
 ];
 
@@ -51,9 +55,9 @@ export default function HomePage() {
               data and your team multiply.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={`mailto:${site.email}`} className="btn-primary">
+              <Link href="/start" className="btn-primary">
                 Start a project
-              </a>
+              </Link>
               <Link href="/work" className="btn-secondary">
                 See the work
               </Link>
@@ -63,6 +67,52 @@ export default function HomePage() {
         <div className="mt-12 lg:mt-16">
           <ProjectPlanner />
         </div>
+      </section>
+
+      <section id="services" aria-labelledby="services-title" className="container-sheet scroll-mt-24 pb-24 lg:pb-36">
+        <SectionHeading
+          id="services-title"
+          lead="Pick the one closest to where you are. Each starts with a written proposal for the first phase, so scope and cost are agreed before any work."
+        >
+          Ways to work with us.
+        </SectionHeading>
+        <ul className="mt-12 grid overflow-hidden rounded-2xl border border-line-strong bg-surface lg:grid-cols-3">
+          {services.map((service) => (
+            <li
+              key={service.id}
+              className="flex flex-col border-line p-6 not-last:border-b sm:p-8 lg:not-last:border-r lg:not-last:border-b-0"
+            >
+              <h3 className="text-2xl font-semibold tracking-[-0.02em]">{service.name}</h3>
+              <p className="mt-3 text-muted">{service.audience}</p>
+              <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
+                {service.includes.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 16 16"
+                      className="mt-1 size-4 shrink-0 text-muted"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                    >
+                      <path d="m3.5 8.5 3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto pt-8">
+                <p className="flex justify-between gap-4 border-t border-line pt-4 text-sm">
+                  <span className="text-muted">Typical length</span>
+                  <span className="font-medium">{service.length}</span>
+                </p>
+                <Link href={`/start?service=${service.id}`} className="btn-secondary mt-5 w-full justify-center">
+                  Get a quote
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section aria-labelledby="pillars" className="container-sheet pb-24 lg:pb-36">

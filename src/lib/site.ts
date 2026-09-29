@@ -7,6 +7,7 @@ export const site = {
 };
 
 export const navigation = [
+  { href: "/#services", label: "Services" },
   { href: "/philosophy", label: "Philosophy" },
   { href: "/systems", label: "Systems" },
   { href: "/work", label: "Work" },

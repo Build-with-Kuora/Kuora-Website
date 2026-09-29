@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { navigation, site } from "@/lib/site";
+import { navigation } from "@/lib/site";
 import { KuraMark } from "./kura-mark";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -26,7 +26,7 @@ export function SiteHeader() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`px-2 py-2 text-[0.9375rem] transition-colors sm:px-3.5 ${
+                    className={`px-1.5 py-2 text-sm transition-colors sm:px-3.5 sm:text-[0.9375rem] ${
                       active ? "text-fg" : "text-muted hover:text-fg"
                     }`}
                   >
@@ -38,9 +38,9 @@ export function SiteHeader() {
           </ul>
           <div className="ml-2 flex items-center gap-3 sm:ml-4">
             <ThemeToggle />
-            <a href={`mailto:${site.email}`} className="btn-primary hidden h-9 px-4 text-sm md:inline-flex">
+            <Link href="/start" className="btn-primary hidden h-9 px-4 text-sm md:inline-flex">
               Start a project
-            </a>
+            </Link>
           </div>
         </nav>
       </div>

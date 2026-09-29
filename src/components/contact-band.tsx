@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/lib/site";
 
 /** The closing call to action at the foot of every page. */
@@ -13,9 +14,17 @@ export function ContactBand({ heading = "Have a system that needs to carry more?
             Tell us what you are building and where it strains. We will reply with how we would
             approach it.
           </p>
-          <a href={`mailto:${site.email}`} className="btn-primary mt-6">
-            Email {site.email}
-          </a>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <Link href="/start" className="btn-primary">
+              Start a project
+            </Link>
+            <a
+              href={`mailto:${site.email}`}
+              className="text-[0.9375rem] underline decoration-line-strong underline-offset-4 hover:decoration-fg"
+            >
+              {site.email}
+            </a>
+          </div>
         </div>
       </div>
     </section>

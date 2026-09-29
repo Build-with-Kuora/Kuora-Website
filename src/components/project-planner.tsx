@@ -2,18 +2,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { joinList as list } from "@/lib/format";
 import { addedAt, blueprints, systemAt, tiers, type Tier } from "@/lib/planner";
 import { projects } from "@/lib/projects";
-import { site } from "@/lib/site";
 import { SystemDiagram } from "./system-diagram";
-
-function list(items: string[]) {
-  return items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
-}
 
 /**
  * Pick what you are building and how many people it serves, and see the
- * system we would start from. The plan can be sent to us as an email.
+ * system we would start from. The plan carries over to the inquiry form.
  */
 export function ProjectPlanner() {
   const [blueprintId, setBlueprintId] = useState(blueprints[0].id);
@@ -24,21 +20,6 @@ export function ProjectPlanner() {
   const added = addedAt(blueprint, tier);
   const project = projects.find((item) => item.slug === blueprint.project)!;
   const components = system.nodes.map((node) => node.label);
-
-  const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
-    `New project: ${blueprint.label}`,
-  )}&body=${encodeURIComponent(
-    [
-      "Hi Kura,",
-      "",
-      `We are building: ${blueprint.label.toLowerCase()}`,
-      `Expected size: ${tiers[tier].label.toLowerCase()}`,
-      `Starting system from your planner: ${list(components)}`,
-      "",
-      "A bit more about the project:",
-      "",
-    ].join("\n"),
-  )}`;
 
   return (
     <div className="grid overflow-hidden rounded-2xl border border-line-strong bg-surface lg:grid-cols-12">
@@ -98,9 +79,12 @@ export function ProjectPlanner() {
           </div>
         </fieldset>
 
-        <a href={mailto} className="btn-primary mt-8 w-full justify-center">
-          Email us this plan
-        </a>
+        <Link
+          href={`/start?service=build&plan=${blueprint.id}&size=${tier}`}
+          className="btn-primary mt-8 w-full justify-center"
+        >
+          Continue with this plan
+        </Link>
       </form>
 
       <div className="flex min-w-0 flex-col p-6 sm:p-8 lg:col-span-8" aria-live="polite">
