@@ -3,18 +3,18 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Concrete and signal. Light theme is cast-concrete grey with green-black
- * linework; dark theme inverts it. Panels stay dark in both and carry the
- * neon: green for load and action, blue for structure.
+ * Quiet by default. Light theme is a cool off-white with green-black ink;
+ * dark theme inverts it. Panels stay dark in both, and the neon is kept for
+ * small signals rather than large fills.
  */
 :root,
 [data-theme="light"] {
-  --canvas: #e9ece8;
-  --surface: #f6f7f5;
-  --line: #cdd2cc;
-  --line-strong: #a3aba4;
+  --canvas: #f6f7f5;
+  --surface: #ffffff;
+  --line: #e1e5e0;
+  --line-strong: #c4cac3;
   --fg: #0e1310;
-  --muted: #515953;
+  --muted: #5a625c;
   --panel: #0e1310;
   --panel-fg: #e9ece8;
   --panel-muted: #8a938c;
@@ -55,8 +55,8 @@
   --color-panel-muted: var(--panel-muted);
   --color-panel-line: var(--panel-line);
 
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-martian), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 @utility container-sheet {
@@ -72,22 +72,19 @@
   }
 }
 
-/* Display type: Archivo pushed wide and heavy, like stencilled lettering on steel. */
+/* Headings: the same sans, set tight and semibold. */
 @utility display {
-  font-variation-settings: "wdth" 118;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.035em;
-  line-height: 0.98;
+  line-height: 1.04;
 }
 
-/* Condensed mono for sheet references and annotations. */
-@utility label-mono {
-  font-family: var(--font-mono);
-  font-variation-settings: "wdth" 80;
-  font-size: 0.6875rem;
+/* Small supporting text: references, dates, captions. */
+@utility label {
+  font-size: 0.8125rem;
   line-height: 1.4;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 
@@ -95,19 +92,16 @@
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  height: 2.875rem;
+  height: 2.75rem;
   padding-inline: 1.25rem;
-  border: 1px solid var(--fg);
-  background-color: var(--color-neon-green);
-  color: var(--color-on-neon);
+  border-radius: 0.5rem;
+  background-color: var(--fg);
+  color: var(--canvas);
   font-size: 0.9375rem;
-  font-weight: 600;
-  transition:
-    background-color 150ms,
-    color 150ms;
+  font-weight: 500;
+  transition: opacity 150ms;
   &:hover {
-    background-color: var(--fg);
-    color: var(--color-neon-green);
+    opacity: 0.85;
   }
 }
 
@@ -115,18 +109,16 @@
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
-  height: 2.875rem;
+  height: 2.75rem;
   padding-inline: 1.25rem;
-  border: 1px solid var(--fg);
+  border: 1px solid var(--line-strong);
+  border-radius: 0.5rem;
   color: var(--fg);
   font-size: 0.9375rem;
   font-weight: 500;
-  transition:
-    background-color 150ms,
-    color 150ms;
+  transition: border-color 150ms;
   &:hover {
-    background-color: var(--fg);
-    color: var(--canvas);
+    border-color: var(--fg);
   }
 }
 
@@ -162,8 +154,8 @@
     background-color: var(--canvas);
     color: var(--fg);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.55;
+    font-size: 1.0625rem;
+    line-height: 1.6;
     transition:
       background-color 200ms,
       color 200ms;
@@ -191,6 +183,52 @@
 
   summary::-webkit-details-marker {
     display: none;
+  }
+}
+
+/*
+ * Route changes (see PageTransition). The old page leaves quickly, the new
+ * one arrives with a slight rise, and the header does not move. The rest of
+ * the page swaps without a fade so nothing flashes.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(root),
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(root),
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(.page-exit) {
+  animation: 140ms ease-in both page-fade reverse;
+}
+
+::view-transition-new(.page-enter) {
+  animation:
+    260ms ease-out 80ms both page-fade,
+    420ms cubic-bezier(0.22, 1, 0.36, 1) both page-rise;
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes page-rise {
+  from {
+    translate: 0 14px;
   }
 }
 
@@ -227,13 +265,6 @@
   }
 }
 
-/* Budget bars fill once when the hero loads. */
-@keyframes fill-bar {
-  from {
-    transform: scaleX(0);
-  }
-}
-
 .draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -261,15 +292,14 @@
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
-.fill-bar {
-  transform-origin: left;
-  animation: fill-bar 900ms var(--ease-structural) both;
-  animation-delay: var(--delay, 0ms);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .status-dot,
-  .fill-bar {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+  .status-dot {
     animation: none;
   }
   .draw {

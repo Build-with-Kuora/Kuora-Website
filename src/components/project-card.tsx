@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { getPillar } from "@/lib/pillars";
 import type { Project } from "@/lib/projects";
 import { PillarGlyph } from "./kura-mark";
-import { TransitionLink } from "./page-transition";
 import { SystemDiagram } from "./system-diagram";
 
 export function ProjectCard({
@@ -19,8 +19,8 @@ export function ProjectCard({
   return (
     <article className="group relative flex flex-col border border-fg bg-surface">
       <div className="flex items-center justify-between gap-4 border-b border-fg px-4 py-2.5">
-        <span className="label-mono text-fg">Sheet {sheet}</span>
-        <span className="label-mono flex items-center gap-1.5">
+        <span className="label text-fg">Sheet {sheet}</span>
+        <span className="label flex items-center gap-1.5">
           <PillarGlyph pillar={project.focus} className="size-3 text-fg" />
           {pillar.name}
         </span>
@@ -35,17 +35,17 @@ export function ProjectCard({
       </div>
       <div className="flex flex-1 flex-col border-t border-fg p-5 sm:p-6">
         <Heading className="display text-[1.875rem]">
-          <TransitionLink
+          <Link
             href={`/work/${project.slug}`}
             className="after:absolute after:inset-0 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-6"
           >
             {project.name}
-          </TransitionLink>
+          </Link>
         </Heading>
         <p className="mt-3 text-[0.9375rem] text-muted">{project.summary}</p>
         <div className="mt-auto pt-6">
           <div className="flex items-center justify-between gap-4 border-t border-line-strong pt-4">
-            <span className="label-mono">
+            <span className="label">
               {project.sector} · {project.year}
             </span>
             <span

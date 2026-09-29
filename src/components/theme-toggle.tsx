@@ -2,8 +2,8 @@
 
 /** Switches between the light and dark themes and remembers the choice. */
 const tones = {
-  canvas: "border-line-strong text-fg hover:border-fg",
-  panel: "border-panel-line text-panel-fg hover:border-panel-fg",
+  canvas: "border-line text-muted hover:border-line-strong hover:text-fg",
+  panel: "border-panel-line text-panel-muted hover:text-panel-fg",
 };
 
 export function ThemeToggle({ tone = "canvas" }: { tone?: keyof typeof tones }) {
@@ -21,7 +21,7 @@ export function ThemeToggle({ tone = "canvas" }: { tone?: keyof typeof tones }) 
       type="button"
       onClick={toggle}
       aria-label="Toggle dark mode"
-      className={`grid size-10 place-items-center border transition-colors ${tones[tone]}`}
+      className={`grid size-9 place-items-center rounded-lg border transition-colors ${tones[tone]}`}
     >
       {/* Both icons render; CSS shows the one for the current theme. */}
       <svg

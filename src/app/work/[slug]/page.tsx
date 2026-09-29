@@ -1,8 +1,8 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactBand } from "@/components/contact-band";
 import { PillarGlyph } from "@/components/kura-mark";
-import { TransitionLink } from "@/components/page-transition";
 import { RegistrationMarks } from "@/components/registration-marks";
 import { SectionHeading } from "@/components/section-heading";
 import { DiagramLegend, SystemDiagram } from "@/components/system-diagram";
@@ -43,12 +43,12 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
       <article>
         <header className="container-sheet pt-10 pb-14 sm:pt-14 lg:pb-20">
           <div className="flex items-center justify-between gap-4 border-b border-line-strong pb-3">
-            <p className="label-mono text-fg">Sheet K-03.{index + 1}</p>
-            <TransitionLink href="/work" className="label-mono transition-colors hover:text-fg">
+            <p className="label text-fg">Sheet K-03.{index + 1}</p>
+            <Link href="/work" className="label transition-colors hover:text-fg">
               ← All work
-            </TransitionLink>
+            </Link>
           </div>
-          <p className="label-mono mt-12 sm:mt-16">
+          <p className="label mt-12 sm:mt-16">
             Case study · {project.year} · {project.sector}
           </p>
           <h1 className="display mt-5 text-[clamp(3rem,8vw,6.5rem)]">{project.name}</h1>
@@ -57,17 +57,17 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           <dl className="grid-hairline mt-12 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
             {facts.map((fact) => (
               <div key={fact.term} className="p-5">
-                <dt className="label-mono">{fact.term}</dt>
+                <dt className="label">{fact.term}</dt>
                 <dd className="mt-2 text-[0.9375rem]">{fact.value}</dd>
               </div>
             ))}
             <div className="p-5">
-              <dt className="label-mono">Focus</dt>
+              <dt className="label">Focus</dt>
               <dd className="mt-2 flex items-center gap-2 text-[0.9375rem]">
                 <PillarGlyph pillar={project.focus} className="size-3.5 text-fg" />
-                <TransitionLink href={`/philosophy#${pillar.id}`} className="link-line">
+                <Link href={`/philosophy#${pillar.id}`} className="link-line">
                   {pillar.name}
-                </TransitionLink>
+                </Link>
               </dd>
             </div>
           </dl>
@@ -79,7 +79,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             <figcaption className="flex items-center justify-between gap-4 border-b border-panel-line px-5 py-3 sm:px-7">
               <h2
                 id="architecture"
-                className="label-mono flex items-center gap-2 text-panel-muted"
+                className="label flex items-center gap-2 text-panel-muted"
               >
                 <span aria-hidden="true" className="status-dot size-1.5 bg-neon-green" />
                 Fig. 01 · Architecture · <span className="text-neon-green">{project.diagram.nodes.length} components</span>
@@ -102,15 +102,15 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         <section aria-label="Problem and approach">
           <div className="container-sheet grid gap-14 pb-24 lg:grid-cols-12 lg:gap-10 lg:pb-32">
             <div className="border-t-2 border-fg pt-3 lg:col-span-5">
-              <p className="label-mono text-fg">The problem</p>
+              <p className="label text-fg">The problem</p>
               <p className="mt-6 text-2xl leading-snug font-medium tracking-[-0.015em]">{project.challenge}</p>
             </div>
             <div className="border-t-2 border-fg pt-3 lg:col-span-6 lg:col-start-7">
-              <p className="label-mono text-fg">What we built</p>
+              <p className="label text-fg">What we built</p>
               <ol className="mt-6 border-t border-line-strong">
                 {project.approach.map((step, stepIndex) => (
                   <li key={step} className="grid grid-cols-[2.5rem_1fr] gap-2 border-b border-line-strong py-4 text-[0.9375rem]">
-                    <span className="label-mono pt-1">
+                    <span className="label pt-1">
                       {String(stepIndex + 1).padStart(2, "0")}
                     </span>
                     {step}
@@ -123,7 +123,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
         <section aria-labelledby="results">
           <div className="container-sheet pb-24 lg:pb-32">
-            <SectionHeading id="results" label="Results" index="02">
+            <SectionHeading id="results">
               What changed.
             </SectionHeading>
             <dl className="mt-12 grid border border-fg sm:grid-cols-3">
@@ -134,10 +134,10 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
                 </div>
               ))}
             </dl>
-            <h3 className="label-mono mt-12">Stack</h3>
+            <h3 className="label mt-12">Stack</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((tool) => (
-                <li key={tool} className="label-mono border border-fg px-3 py-2 text-fg">
+                <li key={tool} className="label border border-fg px-3 py-2 text-fg">
                   {tool}
                 </li>
               ))}
@@ -147,15 +147,15 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
       </article>
 
       <nav aria-label="Next project" className="border-t border-fg">
-        <TransitionLink
+        <Link
           href={`/work/${next.slug}`}
           className="group container-sheet flex flex-wrap items-end justify-between gap-4 py-16"
         >
-          <span className="label-mono text-fg">Next sheet · K-03.{((index + 1) % projects.length) + 1}</span>
+          <span className="label text-fg">Next sheet · K-03.{((index + 1) % projects.length) + 1}</span>
           <span className="display text-[clamp(2.25rem,5vw,3.75rem)] group-hover:underline group-hover:decoration-2 group-hover:underline-offset-8">
             {next.name} →
           </span>
-        </TransitionLink>
+        </Link>
       </nav>
 
       <ContactBand />

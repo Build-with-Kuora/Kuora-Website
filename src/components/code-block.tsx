@@ -52,7 +52,7 @@ export async function CodeBlock({
 
   return (
     <figure className="flex min-w-0 flex-col border border-panel-line bg-panel">
-      <figcaption className="flex items-center gap-2 border-b border-panel-line px-4 py-3 label-mono text-panel-muted">
+      <figcaption className="flex items-center gap-2 border-b border-panel-line px-4 py-3 label text-panel-muted">
         <span aria-hidden="true" className="status-dot size-1.5 bg-neon-green" />
         {filename}
       </figcaption>

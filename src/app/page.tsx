@@ -1,17 +1,13 @@
-import { BracedFrame } from "@/components/braced-frame";
+import Link from "next/link";
 import { ContactBand } from "@/components/contact-band";
-import { DrawingRegister } from "@/components/drawing-register";
 import { Faq, type Question } from "@/components/faq";
-import { LatencyBudget } from "@/components/latency-budget";
-import { TransitionLink } from "@/components/page-transition";
-import { PillarFrame } from "@/components/pillar-frame";
+import { PillarGlyph } from "@/components/kura-mark";
 import { ProcessBeam } from "@/components/process-beam";
-import { RegistrationMarks } from "@/components/registration-marks";
+import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
+import { pillars } from "@/lib/pillars";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
-
-const coreStack = ["Next.js", "Node.js", "Prisma", "PostgreSQL"];
 
 const questions: Question[] = [
   {
@@ -43,108 +39,105 @@ const questions: Question[] = [
 export default function HomePage() {
   return (
     <>
-      {/* The hero is the frame: four quadrants, two of them lit. */}
-      <section className="container-sheet pt-8 pb-24 sm:pt-12 lg:pb-32">
-        <div className="grid border border-fg lg:grid-cols-[1.35fr_1fr]">
-          <div className="relative border-b border-fg p-6 sm:p-10 lg:border-r">
-            <RegistrationMarks />
-            <div className="flex items-center justify-between gap-4">
-              <p className="label-mono text-fg">Sheet K-00</p>
-              <p className="label-mono">Software engineering studio</p>
-            </div>
-            <h1 className="display mt-14 text-[clamp(3rem,7.2vw,6.5rem)] sm:mt-20">
-              Software built to carry load.
-            </h1>
-          </div>
-
-          <div className="relative border-b border-panel-line bg-panel p-6 text-panel-fg sm:p-8">
-            <RegistrationMarks />
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="label-mono text-panel-muted">Fig. 01 · The frame</p>
-              <p className="label-mono text-neon-green">4 members</p>
-            </div>
-            <div className="mx-auto mt-4 max-w-sm">
-              <BracedFrame />
-            </div>
-          </div>
-
-          <div className="relative flex flex-col justify-between gap-10 border-b border-fg p-6 sm:p-10 lg:border-r lg:border-b-0">
-            <RegistrationMarks />
-            <p className="max-w-lg text-lg sm:text-xl">
-              Kura designs, builds and runs full-cycle software for companies that expect to grow. We
-              start from the data model and work up, so what we ship still holds when traffic, data
-              and your team multiply.
+      <section className="container-sheet pt-16 pb-24 sm:pt-24 lg:pt-28 lg:pb-36">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <h1 className="display text-[clamp(3rem,7vw,6.5rem)] leading-[0.98] tracking-[-0.04em] lg:col-span-8">
+            Software built to carry load.
+          </h1>
+          <div className="lg:col-span-4">
+            <p className="max-w-xl text-lg text-muted">
+              Kura designs, builds and runs full-cycle software for companies that expect to grow.
+              We start from the data model and work up, so what we ship still holds when traffic,
+              data and your team multiply.
             </p>
-            <div>
-              <div className="flex flex-wrap gap-3">
-                <a href={`mailto:${site.email}`} className="btn-primary">
-                  Start a project <span aria-hidden="true">→</span>
-                </a>
-                <TransitionLink href="/work" className="btn-secondary">
-                  See the work
-                </TransitionLink>
-              </div>
-              <ul aria-label="Core stack" className="mt-8 flex flex-wrap border-t border-line-strong pt-4">
-                {coreStack.map((tool, index) => (
-                  <li key={tool} className="label-mono flex items-center text-fg">
-                    {index > 0 && (
-                      <span aria-hidden="true" className="mx-3 text-line-strong">
-                        /
-                      </span>
-                    )}
-                    {tool}
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={`mailto:${site.email}`} className="btn-primary">
+                Start a project
+              </a>
+              <Link href="/work" className="btn-secondary">
+                See the work
+              </Link>
             </div>
           </div>
-
-          <div className="relative bg-panel p-6 sm:p-8">
-            <RegistrationMarks />
-            <LatencyBudget />
-          </div>
+        </div>
+        <div className="mt-12 lg:mt-16">
+          <ProjectPlanner />
         </div>
       </section>
 
-      <section aria-labelledby="pillars" className="container-sheet pb-24 lg:pb-32">
-        <SectionHeading
-          id="pillars"
-          label="Pillars"
-          index="01"
-          lead="Kura comes from quadro, a square frame. Four members, each carrying part of the load, and none of them optional."
-        >
-          Four pillars. One frame.
-        </SectionHeading>
-        <PillarFrame />
-      </section>
-
-      <section aria-labelledby="register" className="container-sheet pb-24 lg:pb-32">
-        <SectionHeading
-          id="register"
-          label="Drawing register"
-          index="02"
-          lead="Every project is filed as its architecture. Point at a sheet to open it in the viewer."
-        >
-          Systems we have built.
-        </SectionHeading>
-        <div className="mt-12">
-          <DrawingRegister projects={projects} />
+      <section aria-labelledby="pillars" className="container-sheet pb-24 lg:pb-36">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <SectionHeading
+            id="pillars"
+            className="lg:col-span-4"
+            lead="Kura comes from quadro, a square frame. Four members, each carrying part of the load, and none of them optional."
+          >
+            Four pillars, one frame.
+          </SectionHeading>
+          <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
+            {pillars.map((pillar) => (
+              <li key={pillar.id} className="border-t border-line-strong pt-5">
+                <PillarGlyph pillar={pillar.id} className="size-4 text-muted" />
+                <h3 className="mt-5 text-xl font-semibold tracking-[-0.015em]">
+                  <Link
+                    href={`/philosophy#${pillar.id}`}
+                    className="underline-offset-4 hover:underline"
+                  >
+                    {pillar.name}
+                  </Link>
+                </h3>
+                <p className="mt-1.5 text-muted">{pillar.principle}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <section aria-labelledby="process" className="container-sheet pb-24 lg:pb-32">
-        <SectionHeading id="process" label="Process" index="03">
-          Five stages, one load path.
+      <section aria-labelledby="work" className="container-sheet pb-24 lg:pb-36">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeading id="work" lead="Systems we have designed, built and still run.">
+            Selected work.
+          </SectionHeading>
+          <Link href="/work" className="btn-secondary">
+            All projects
+          </Link>
+        </div>
+        <ul className="mt-12 border-t border-line-strong">
+          {projects.slice(0, 4).map((project) => (
+            <li key={project.slug} className="border-b border-line-strong">
+              <Link
+                href={`/work/${project.slug}`}
+                className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[minmax(0,14rem)_1fr_auto]"
+              >
+                <span className="text-2xl font-semibold tracking-[-0.02em] underline-offset-4 group-hover:underline">
+                  {project.name}
+                </span>
+                <span className="max-w-xl text-muted">{project.summary}</span>
+                <span className="label">
+                  {project.sector}, {project.year}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="process" className="container-sheet pb-24 lg:pb-36">
+        <SectionHeading
+          id="process"
+          lead="One team from the first conversation to production, and after it."
+        >
+          How a project runs.
         </SectionHeading>
         <ProcessBeam />
       </section>
 
-      <section aria-labelledby="questions" className="container-sheet pb-24 lg:pb-32">
+      <section aria-labelledby="questions" className="container-sheet pb-24 lg:pb-36">
         <div className="grid gap-12 lg:grid-cols-12">
-          <SectionHeading id="questions" label="Questions" index="04" className="lg:col-span-4">
-            Before you ask.
+          <SectionHeading id="questions" className="lg:col-span-4">
+            Common questions.
           </SectionHeading>
-          <div className="lg:col-span-7 lg:col-start-6 lg:pt-[4.25rem]">
+          <div className="lg:col-span-7 lg:col-start-6">
             <Faq questions={questions} />
           </div>
         </div>

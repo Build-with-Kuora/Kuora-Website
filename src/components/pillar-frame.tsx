@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { pillars } from "@/lib/pillars";
 import { PillarGlyph } from "./kura-mark";
-import { TransitionLink } from "./page-transition";
 
 // Borders that turn four cells into one frame with a shared centre.
 const cellBorders = ["border-b lg:border-r", "border-b", "border-b lg:border-r lg:border-b-0", ""];
@@ -21,22 +21,22 @@ export function PillarFrame({ detailed = false }: { detailed?: boolean }) {
         >
           <div className="flex items-center justify-between gap-4">
             <PillarGlyph pillar={pillar.id} className="size-5 text-fg" />
-            <span className="label-mono">Member {String(index + 1).padStart(2, "0")}</span>
+            <span className="label">Member {String(index + 1).padStart(2, "0")}</span>
           </div>
           <h3 id={`${pillar.id}-title`} className="display mt-10 text-[clamp(2rem,3.4vw,2.75rem)]">
             {detailed ? (
               pillar.name
             ) : (
-              <TransitionLink href={`/philosophy#${pillar.id}`} className="after:absolute after:inset-0 hover:underline hover:decoration-2 hover:underline-offset-6">
+              <Link href={`/philosophy#${pillar.id}`} className="after:absolute after:inset-0 hover:underline hover:decoration-2 hover:underline-offset-6">
                 {pillar.name}
-              </TransitionLink>
+              </Link>
             )}
           </h3>
           <p className="mt-3 text-xl font-medium tracking-[-0.01em]">{pillar.principle}</p>
           {detailed && (
             <>
               <p className="mt-4 max-w-prose text-[0.9375rem] leading-relaxed text-muted">{pillar.body}</p>
-              <h4 className="label-mono mt-8">In practice</h4>
+              <h4 className="label mt-8">In practice</h4>
               <ul className="mt-3 border-t border-line-strong text-[0.9375rem]">
                 {pillar.practice.map((item) => (
                   <li key={item} className="flex items-center gap-3 border-b border-line-strong py-2.5">

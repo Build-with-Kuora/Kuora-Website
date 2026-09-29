@@ -39,12 +39,12 @@ export function WorkGallery({ projects }: { projects: Project[] }) {
               >
                 {filter.id !== "all" && <PillarGlyph pillar={filter.id} className="size-3" />}
                 {filter.label}
-                <span className="label-mono text-current opacity-70">{filter.count}</span>
+                <span className="label text-current opacity-70">{filter.count}</span>
               </button>
             );
           })}
         </div>
-        <p aria-live="polite" className="label-mono">
+        <p aria-live="polite" className="label">
           Showing {visible.length} of {projects.length}
         </p>
       </div>

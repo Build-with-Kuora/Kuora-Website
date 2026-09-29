@@ -17,8 +17,8 @@ export function PageIntro({
   return (
     <section className="container-sheet pt-10 pb-16 sm:pt-14 lg:pb-24">
       <div className="flex items-center justify-between gap-4 border-b border-line-strong pb-3">
-        <p className="label-mono text-fg">Sheet {sheet}</p>
-        <p className="label-mono">{label}</p>
+        <p className="label text-fg">Sheet {sheet}</p>
+        <p className="label">{label}</p>
       </div>
       <div className={aside ? "grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-16" : ""}>
         <div>

@@ -143,8 +143,6 @@ export default function SystemsPage() {
       <section aria-labelledby="section-drawing" className="container-sheet pb-24 lg:pb-32">
         <SectionHeading
           id="section-drawing"
-          label="Section drawing"
-          index="01"
           lead="Read it like a building section. A request enters at the top and travels down to the foundation."
         >
           How a system stands
@@ -203,7 +201,7 @@ export default function SystemsPage() {
       <section aria-labelledby="typed">
         <div className="container-sheet grid gap-12 pb-24 lg:grid-cols-12 lg:gap-10 lg:pb-32">
           <div className="lg:col-span-4">
-            <SectionHeading id="typed" label="Typed end to end" index="02">
+            <SectionHeading id="typed">
               One schema, all the way to the screen.
             </SectionHeading>
             <dl className="mt-10 border-t border-line-strong text-[0.9375rem]">
@@ -228,7 +226,7 @@ export default function SystemsPage() {
 
       <section aria-labelledby="lifecycle">
         <div className="container-sheet pb-24 lg:pb-32">
-          <SectionHeading id="lifecycle" label="Full cycle" index="03">
+          <SectionHeading id="lifecycle">
             From the first question to the on-call rotation.
           </SectionHeading>
           <ProcessBeam showOutput />
@@ -239,8 +237,6 @@ export default function SystemsPage() {
         <div className="container-sheet grid gap-10 pb-24 lg:grid-cols-12 lg:pb-32">
           <SectionHeading
             id="surrounding"
-            label="Around the core"
-            index="04"
             lead="The tools we reach for when a system needs more than the core stack. We choose them per project, not by habit."
             className="lg:col-span-5"
           >
@@ -249,7 +245,7 @@ export default function SystemsPage() {
           <dl className="grid-hairline self-start sm:grid-cols-2 lg:col-span-7">
             {surrounding.map((entry) => (
               <div key={entry.group} className="p-6">
-                <dt className="label-mono">{entry.group}</dt>
+                <dt className="label">{entry.group}</dt>
                 {entry.items.map((item) => (
                   <dd key={item} className="mt-2 text-[0.9375rem]">
                     {item}

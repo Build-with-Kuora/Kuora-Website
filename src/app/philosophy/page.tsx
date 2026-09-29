@@ -1,8 +1,8 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { BracedFrame } from "@/components/braced-frame";
 import { ContactBand } from "@/components/contact-band";
 import { PageIntro } from "@/components/page-intro";
-import { TransitionLink } from "@/components/page-transition";
 import { PillarFrame } from "@/components/pillar-frame";
 import { RegistrationMarks } from "@/components/registration-marks";
 import { SectionHeading } from "@/components/section-heading";
@@ -36,8 +36,8 @@ export default function PhilosophyPage() {
           <figure className="relative border border-panel-line bg-panel p-6 text-panel-fg sm:p-8">
             <RegistrationMarks />
             <figcaption className="flex items-baseline justify-between gap-4">
-              <span className="label-mono text-panel-muted">Fig. 01 · The frame</span>
-              <span className="label-mono text-neon-green">Select a quadrant</span>
+              <span className="label text-panel-muted">Fig. 01 · The frame</span>
+              <span className="label text-neon-green">Select a quadrant</span>
             </figcaption>
             <div className="mx-auto mt-4 max-w-sm">
               <BracedFrame />
@@ -47,7 +47,7 @@ export default function PhilosophyPage() {
       />
 
       <section aria-labelledby="pillars" className="container-sheet pb-24 lg:pb-32">
-        <SectionHeading id="pillars" label="The four members" index="01">
+        <SectionHeading id="pillars">
           What each pillar carries.
         </SectionHeading>
         <PillarFrame detailed />
@@ -55,10 +55,10 @@ export default function PhilosophyPage() {
 
       <section aria-labelledby="folds" className="container-sheet pb-24 lg:pb-32">
         <div className="grid gap-12 lg:grid-cols-12">
-          <SectionHeading id="folds" label="Why four" index="02" className="lg:col-span-5">
+          <SectionHeading id="folds" className="lg:col-span-5">
             Take one member away and the frame folds.
           </SectionHeading>
-          <div className="space-y-5 text-lg text-muted lg:col-span-6 lg:col-start-7 lg:pt-[4.25rem]">
+          <div className="space-y-5 text-lg text-muted lg:col-span-6 lg:col-start-7 lg:pt-2">
             <p>
               A fast system with a brittle data model fails. So does a scalable one that nobody can
               use, or a beautiful interface over queries that time out. They fail the same way:
@@ -69,9 +69,9 @@ export default function PhilosophyPage() {
               the schema also build the interface and carry the pager, so every decision is made with
               the whole frame in view.
             </p>
-            <TransitionLink href="/systems" className="btn-secondary mt-3">
+            <Link href="/systems" className="btn-secondary mt-3">
               See how the pillars map onto our stack <span aria-hidden="true">→</span>
-            </TransitionLink>
+            </Link>
           </div>
         </div>
       </section>

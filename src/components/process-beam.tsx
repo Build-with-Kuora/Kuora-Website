@@ -1,22 +1,17 @@
 import { lifecycle } from "@/lib/process";
 
-/** The engagement drawn as one beam, with a joint at every stage. */
+/** The stages of an engagement, in order. */
 export function ProcessBeam({ showOutput = false }: { showOutput?: boolean }) {
   return (
-    <ol className="relative mt-14 grid gap-10 pl-9 lg:grid-cols-5 lg:gap-6 lg:pt-10 lg:pl-0">
-      <span aria-hidden="true" className="absolute top-2 bottom-2 left-[7px] w-0.5 bg-fg lg:inset-x-0 lg:top-[7px] lg:bottom-auto lg:h-0.5 lg:w-auto" />
+    <ol className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
       {lifecycle.map((step, index) => (
-        <li key={step.stage} className="relative">
-          <span
-            aria-hidden="true"
-            className="absolute top-1 -left-9 size-4 bg-neon-green ring-1 ring-fg lg:-top-10 lg:left-0"
-          />
-          <p className="label-mono">Stage {String(index + 1).padStart(2, "0")}</p>
-          <h3 className="display mt-3 text-2xl">{step.stage}</h3>
+        <li key={step.stage} className="border-t border-line-strong pt-5">
+          <p className="label">{index + 1}</p>
+          <h3 className="mt-3 text-xl font-semibold tracking-[-0.015em]">{step.stage}</h3>
           <p className="mt-2 text-[0.9375rem] font-medium">{step.question}</p>
-          <p className="mt-2 text-[0.9375rem] text-muted">{step.body}</p>
+          <p className="mt-1.5 text-[0.9375rem] text-muted">{step.body}</p>
           {showOutput && (
-            <p className="mt-4 border-t border-line-strong pt-3 font-mono text-[0.75rem] [font-variation-settings:'wdth'_85]">
+            <p className="mt-4 border-t border-line pt-3 text-sm">
               <span className="text-muted">Output: </span>
               {step.output.toLowerCase()}
             </p>

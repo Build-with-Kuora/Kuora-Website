@@ -1,6 +1,6 @@
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { pillars } from "@/lib/pillars";
-import { TransitionLink } from "./page-transition";
 
 const labelPlacement = [
   "items-start justify-start text-left",
@@ -36,13 +36,13 @@ export function BracedFrame() {
         <ul className="absolute inset-[5.357%] grid grid-cols-2 grid-rows-2">
           {pillars.map((pillar, index) => (
             <li key={pillar.id} className="flex">
-              <TransitionLink
+              <Link
                 href={`/philosophy#${pillar.id}`}
                 className={`settle flex flex-1 p-3 text-sm font-medium text-panel-fg transition-colors hover:bg-neon-blue/10 hover:text-neon-green focus-visible:bg-neon-blue/10 focus-visible:text-neon-green focus-visible:outline-offset-[-3px] sm:p-4 sm:text-base ${labelPlacement[index]}`}
                 style={delay(1500)}
               >
                 {pillar.name}
-              </TransitionLink>
+              </Link>
             </li>
           ))}
         </ul>
