@@ -1,58 +1,67 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
- * Cyanotype palette: the site is drawn like a blueprint.
- * ink      page ground
- * plate    raised surfaces, the transition shutter
- * line     rules, frames and construction lines
- * chalk    primary text
- * graphite secondary text
- * signal   the braces of the frame, and interactive states
+ * Concrete and signal. Light theme is cast-concrete grey with green-black
+ * linework; dark theme inverts it. Panels stay dark in both and carry the
+ * neon: green for load and action, blue for structure.
  */
+:root,
+[data-theme="light"] {
+  --canvas: #e9ece8;
+  --surface: #f6f7f5;
+  --line: #cdd2cc;
+  --line-strong: #a3aba4;
+  --fg: #0e1310;
+  --muted: #515953;
+  --panel: #0e1310;
+  --panel-fg: #e9ece8;
+  --panel-muted: #8a938c;
+  --panel-line: #242b26;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --canvas: #0b0e0c;
+  --surface: #121613;
+  --line: #232a25;
+  --line-strong: #37403a;
+  --fg: #e9ece8;
+  --muted: #9aa39c;
+  --panel: #050706;
+  --panel-fg: #e9ece8;
+  --panel-muted: #8a938c;
+  --panel-line: #1f2621;
+  color-scheme: dark;
+}
+
 @theme {
-  --color-ink: #0a1826;
-  --color-plate: #10233a;
-  --color-line: #1f3a57;
-  --color-chalk: #e6edf3;
-  --color-graphite: #8ba3ba;
-  --color-signal: #7cc4fa;
-
-  /* Classic typographic scale: 14 16 18 21 24 36 48 60 72 */
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.3125rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 3rem;
-  --text-5xl: 3.75rem;
-  --text-6xl: 4.5rem;
-
+  --color-neon-green: #39ff88;
+  --color-neon-blue: #33a1ff;
+  --color-on-neon: #0e1310;
   --ease-structural: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 @theme inline {
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
-}
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-panel: var(--panel);
+  --color-panel-fg: var(--panel-fg);
+  --color-panel-muted: var(--panel-muted);
+  --color-panel-line: var(--panel-line);
 
-/*
- * One family, three widths. Width carries hierarchy:
- * expanded for display, normal for reading, condensed for annotation.
- */
-@utility stretch-wide {
-  font-variation-settings: "wdth" 125;
-}
-@utility stretch-normal {
-  font-variation-settings: "wdth" 100;
-}
-@utility stretch-narrow {
-  font-variation-settings: "wdth" 72;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 @utility container-sheet {
   width: 100%;
-  max-width: 80rem;
+  max-width: 84rem;
   margin-inline: auto;
   padding-inline: 1rem;
   @media (width >= 40rem) {
@@ -63,29 +72,110 @@
   }
 }
 
+/* Display type: Archivo pushed wide and heavy, like stencilled lettering on steel. */
+@utility display {
+  font-variation-settings: "wdth" 118;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+/* Condensed mono for sheet references and annotations. */
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" 80;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  height: 2.875rem;
+  padding-inline: 1.25rem;
+  border: 1px solid var(--fg);
+  background-color: var(--color-neon-green);
+  color: var(--color-on-neon);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition:
+    background-color 150ms,
+    color 150ms;
+  &:hover {
+    background-color: var(--fg);
+    color: var(--color-neon-green);
+  }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  height: 2.875rem;
+  padding-inline: 1.25rem;
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition:
+    background-color 150ms,
+    color 150ms;
+  &:hover {
+    background-color: var(--fg);
+    color: var(--canvas);
+  }
+}
+
+@utility link-line {
+  text-decoration-line: underline;
+  text-decoration-color: var(--line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 150ms;
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Hairline grids: cells sit on a 1px gap over the line colour. */
+@utility grid-hairline {
+  display: grid;
+  gap: 1px;
+  background-color: var(--line-strong);
+  border: 1px solid var(--line-strong);
+  & > * {
+    background-color: var(--surface);
+  }
+}
+
 @layer base {
   html {
-    color-scheme: dark;
-    background-color: var(--color-ink);
+    background-color: var(--canvas);
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: var(--color-ink);
-    color: var(--color-chalk);
+    background-color: var(--canvas);
+    color: var(--fg);
     font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    line-height: 1.6;
-    text-rendering: optimizeLegibility;
+    font-size: 1rem;
+    line-height: 1.55;
+    transition:
+      background-color 200ms,
+      color 200ms;
   }
 
   ::selection {
-    background-color: var(--color-signal);
-    color: var(--color-ink);
+    background-color: var(--color-neon-green);
+    color: var(--color-on-neon);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-signal);
+    outline: 2px solid var(--color-neon-blue);
     outline-offset: 3px;
   }
 
@@ -98,9 +188,13 @@
   p {
     text-wrap: pretty;
   }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
 }
 
-/* Construction lines draw themselves once, on the home page hero. */
+/* Construction lines draw themselves once. */
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
@@ -113,6 +207,30 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Load travelling along a path. */
+@keyframes load-path {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Status lights in the panels. */
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Budget bars fill once when the hero loads. */
+@keyframes fill-bar {
+  from {
+    transform: scaleX(0);
   }
 }
 
@@ -129,7 +247,31 @@
   animation-delay: var(--delay, 0ms);
 }
 
+.load-pulse {
+  stroke-dasharray: 0.06 0.94;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation:
+    settle 400ms ease-out forwards,
+    load-path 4.8s linear infinite;
+  animation-delay: var(--delay, 0ms);
+}
+
+.status-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+.fill-bar {
+  transform-origin: left;
+  animation: fill-bar 900ms var(--ease-structural) both;
+  animation-delay: var(--delay, 0ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .status-dot,
+  .fill-bar {
+    animation: none;
+  }
   .draw {
     animation: none;
     stroke-dashoffset: 0;
@@ -137,5 +279,8 @@
   .settle {
     animation: none;
     opacity: 1;
+  }
+  .load-pulse {
+    display: none;
   }
 }

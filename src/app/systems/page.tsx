@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ContactBand } from "@/components/contact-band";
 import { PillarGlyph } from "@/components/kura-mark";
+import { PageIntro } from "@/components/page-intro";
+import { ProcessBeam } from "@/components/process-beam";
+import { SectionHeading } from "@/components/section-heading";
 import { getPillar, type PillarId } from "@/lib/pillars";
 
 export const metadata: Metadata = {
@@ -77,34 +80,6 @@ const floors: Floor[] = [
   },
 ];
 
-const lifecycle = [
-  {
-    stage: "Discover",
-    body: "We map the domain, the expected load and the constraints with your team.",
-    output: "a written brief and a list of risks",
-  },
-  {
-    stage: "Design",
-    body: "Data model, service boundaries and failure modes, reviewed before we build.",
-    output: "architecture decision records",
-  },
-  {
-    stage: "Build",
-    body: "Weekly releases to a production-like environment, with budgets checked in CI.",
-    output: "working software every week",
-  },
-  {
-    stage: "Launch",
-    body: "Load-tested and observable, with a rollback plan we have already rehearsed.",
-    output: "a rehearsed release plan",
-  },
-  {
-    stage: "Operate",
-    body: "We run what we build: on-call, tuning and planning for the next order of magnitude.",
-    output: "service levels and a scaling roadmap",
-  },
-];
-
 const surrounding = [
   { group: "Infrastructure", items: ["AWS", "Vercel", "Docker", "Terraform"] },
   { group: "Messaging and jobs", items: ["Kafka", "Redis", "BullMQ", "Amazon SQS"] },
@@ -152,62 +127,69 @@ export type ActiveProject = Awaited<
 export default function SystemsPage() {
   return (
     <>
-      <section className="container-sheet pt-14 pb-16 sm:pt-20 lg:pt-24 lg:pb-20">
-        <h1 className="stretch-wide max-w-4xl text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.04] font-semibold tracking-[-0.02em]">
-          The full stack, from the foundation up.
-        </h1>
-        <p className="mt-8 max-w-2xl text-lg text-graphite sm:text-xl">
-          We work across every layer and every stage of a system&apos;s life. Our core is
-          TypeScript on Node.js, Prisma and PostgreSQL: proven, well understood, and fast enough for
-          almost anything you will ask of it.
-        </p>
-      </section>
-
-      <section aria-labelledby="section-drawing" className="container-sheet pb-20 lg:pb-28">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-          <h2 id="section-drawing" className="stretch-wide text-2xl font-semibold tracking-tight">
-            How a system stands
-          </h2>
-          <p className="text-base text-graphite">
-            Drawn as a building section. A request enters at the top and travels down to the
-            foundation.
+      <PageIntro
+        sheet="K-02"
+        label="Systems"
+        title="The full stack, from the foundation up."
+        lead={
+          <p>
+            We work across every layer and every stage of a system&apos;s life. Our core is TypeScript
+            on Node.js, Prisma and PostgreSQL: proven, well understood, and fast enough for almost
+            anything you will ask of it.
           </p>
-        </div>
+        }
+      />
 
-        <ol className="mt-8 border-t-2 border-chalk">
+      <section aria-labelledby="section-drawing" className="container-sheet pb-24 lg:pb-32">
+        <SectionHeading
+          id="section-drawing"
+          label="Section drawing"
+          index="01"
+          lead="Read it like a building section. A request enters at the top and travels down to the foundation."
+        >
+          How a system stands
+        </SectionHeading>
+
+        <ol className="mt-12 border border-fg">
           {floors.map((floor) => {
             const pillar = getPillar(floor.pillar);
+            const dark = floor.belowGrade;
             return (
               <li
                 key={floor.level}
-                className={`grid gap-6 border-b border-line py-8 lg:grid-cols-[7rem_1fr_1fr] lg:gap-10 lg:py-10 ${floor.belowGrade ? "border-t-2 border-t-chalk" : ""}`}
+                className={`grid gap-6 border-fg p-6 not-last:border-b sm:p-8 lg:grid-cols-[8rem_1.2fr_1fr] lg:gap-10 ${
+                  dark ? "bg-panel text-panel-fg" : "bg-surface"
+                }`}
               >
                 <div className="flex items-baseline gap-4 lg:block">
-                  <p className="stretch-narrow text-5xl leading-none font-medium text-graphite">
+                  <p className={`font-mono text-4xl ${dark ? "text-neon-green" : ""}`}>
                     <span className="sr-only">Level </span>
                     {floor.level}
                   </p>
-                  {floor.belowGrade && (
-                    <p className="stretch-narrow text-sm text-graphite lg:mt-3">Below grade</p>
-                  )}
+                  <p className={`font-mono text-[0.6875rem] tracking-[0.12em] uppercase lg:mt-3 ${dark ? "text-panel-muted" : "text-muted"}`}>
+                    {dark ? "Below grade" : floor.layer}
+                  </p>
                 </div>
                 <div>
-                  <h3 className="stretch-wide text-2xl font-semibold tracking-tight">
-                    {floor.tech}
-                  </h3>
-                  <p className="stretch-narrow mt-1 text-sm text-graphite">{floor.layer}</p>
-                  <p className="mt-4 max-w-prose text-base text-graphite">{floor.body}</p>
-                  <p className="mt-5 flex items-center gap-2 text-sm">
-                    <PillarGlyph pillar={floor.pillar} className="size-3.5" />
+                  <h3 className="display text-3xl">{floor.tech}</h3>
+                  <p className={`mt-3 max-w-prose text-[0.9375rem] leading-relaxed ${dark ? "text-panel-muted" : "text-muted"}`}>
+                    {floor.body}
+                  </p>
+                  <p className={`mt-5 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.12em] uppercase ${dark ? "text-panel-muted" : "text-muted"}`}>
+                    <PillarGlyph pillar={floor.pillar} className={`size-3 ${dark ? "text-neon-green" : "text-fg"}`} />
                     Carries {pillar.name.toLowerCase()}
                   </p>
                 </div>
-                <ul
-                  className="space-y-2.5 self-start text-base lg:pt-1"
-                >
+                <ul className={`self-start border-t font-mono text-[0.8125rem] ${dark ? "border-panel-line" : "border-line"}`}>
                   {floor.capabilities.map((capability) => (
-                    <li key={capability} className="flex gap-3">
-                      <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 bg-signal" />
+                    <li
+                      key={capability}
+                      className={`flex items-center gap-2.5 border-b py-2.5 ${dark ? "border-panel-line" : "border-line"}`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`size-2 shrink-0 bg-neon-green ${dark ? "status-dot" : "ring-1 ring-fg"}`}
+                      />
                       {capability}
                     </li>
                   ))}
@@ -216,33 +198,26 @@ export default function SystemsPage() {
             );
           })}
         </ol>
-        {/* Ground beneath the foundation, hatched as on a section drawing. */}
-        <div
-          aria-hidden="true"
-          className="h-8 bg-[repeating-linear-gradient(135deg,var(--color-line)_0_1px,transparent_1px_12px)]"
-        />
       </section>
 
-      <section aria-labelledby="typed" className="border-t border-line">
-        <div className="container-sheet grid gap-12 py-20 lg:grid-cols-12 lg:gap-10 lg:py-28">
+      <section aria-labelledby="typed">
+        <div className="container-sheet grid gap-12 pb-24 lg:grid-cols-12 lg:gap-10 lg:pb-32">
           <div className="lg:col-span-4">
-            <h2 id="typed" className="stretch-wide text-3xl leading-tight font-semibold tracking-tight">
-              One schema, typed all the way to the screen.
-            </h2>
-            <ul className="mt-8 space-y-5 text-base text-graphite">
-              <li>
-                <span className="text-chalk">The index is designed with the query.</span> It is not
-                added after the first incident.
-              </li>
-              <li>
-                <span className="text-chalk">Cursor pagination</span> keeps the ten-thousandth page
-                as fast as the first.
-              </li>
-              <li>
-                <span className="text-chalk">Types flow upward.</span> Rename a column and the build
-                fails, not the page your customer is looking at.
-              </li>
-            </ul>
+            <SectionHeading id="typed" label="Typed end to end" index="02">
+              One schema, all the way to the screen.
+            </SectionHeading>
+            <dl className="mt-10 border-t border-line-strong text-[0.9375rem]">
+              {[
+                ["The index is designed with the query.", "It is not added after the first incident."],
+                ["Cursor pagination", "keeps the ten-thousandth page as fast as the first."],
+                ["Types flow upward.", "Rename a column and the build fails, not the page your customer is looking at."],
+              ].map(([term, detail]) => (
+                <div key={term} className="border-b border-line py-4">
+                  <dt className="inline">{term} </dt>
+                  <dd className="inline text-muted">{detail}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
           <div className="grid min-w-0 gap-4 lg:col-span-8">
             <CodeBlock code={schemaExample} lang="prisma" filename="prisma/schema.prisma" />
@@ -251,47 +226,32 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="lifecycle" className="border-t border-line">
-        <div className="container-sheet py-20 lg:py-28">
-          <h2 id="lifecycle" className="stretch-wide max-w-2xl text-3xl leading-tight font-semibold tracking-tight">
-            Full cycle, from the first question to the on-call rotation.
-          </h2>
-          <ol className="mt-12 grid border-t-2 border-chalk md:grid-cols-2 lg:grid-cols-5">
-            {lifecycle.map((step, index) => (
-              <li
-                key={step.stage}
-                className="border-b border-line py-6 md:px-5 md:odd:border-r lg:border-r lg:border-b-0 lg:px-5 lg:first:pl-0 lg:last:border-r-0"
-              >
-                <p className="stretch-narrow text-sm text-graphite">Stage {index + 1}</p>
-                <h3 className="stretch-wide mt-2 text-xl font-semibold">{step.stage}</h3>
-                <p className="mt-3 text-base text-graphite">{step.body}</p>
-                <p className="mt-4 border-t border-line pt-3 text-sm">
-                  <span className="text-graphite">You get </span>
-                  {step.output}.
-                </p>
-              </li>
-            ))}
-          </ol>
+      <section aria-labelledby="lifecycle">
+        <div className="container-sheet pb-24 lg:pb-32">
+          <SectionHeading id="lifecycle" label="Full cycle" index="03">
+            From the first question to the on-call rotation.
+          </SectionHeading>
+          <ProcessBeam showOutput />
         </div>
       </section>
 
-      <section aria-labelledby="surrounding" className="border-t border-line">
-        <div className="container-sheet grid gap-10 py-20 lg:grid-cols-12 lg:py-28">
-          <div className="lg:col-span-4">
-            <h2 id="surrounding" className="stretch-wide text-2xl font-semibold tracking-tight">
-              Around the core
-            </h2>
-            <p className="mt-4 text-base text-graphite">
-              The tools we reach for when a system needs more than the core stack. We choose them
-              per project, not by habit.
-            </p>
-          </div>
-          <dl className="grid gap-8 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-4">
+      <section aria-labelledby="surrounding">
+        <div className="container-sheet grid gap-10 pb-24 lg:grid-cols-12 lg:pb-32">
+          <SectionHeading
+            id="surrounding"
+            label="Around the core"
+            index="04"
+            lead="The tools we reach for when a system needs more than the core stack. We choose them per project, not by habit."
+            className="lg:col-span-5"
+          >
+            Chosen for the load.
+          </SectionHeading>
+          <dl className="grid-hairline self-start sm:grid-cols-2 lg:col-span-7">
             {surrounding.map((entry) => (
-              <div key={entry.group} className="border-t border-line pt-4">
-                <dt className="stretch-narrow text-sm text-graphite">{entry.group}</dt>
+              <div key={entry.group} className="p-6">
+                <dt className="label-mono">{entry.group}</dt>
                 {entry.items.map((item) => (
-                  <dd key={item} className="mt-1.5 text-base">
+                  <dd key={item} className="mt-2 text-[0.9375rem]">
                     {item}
                   </dd>
                 ))}

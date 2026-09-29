@@ -1,27 +1,27 @@
 import { site } from "@/lib/site";
 
+/** The closing call to action: a full-width band in the signal colour. */
 export function ContactBand({ heading = "Have a system that needs to carry more?" }: { heading?: string }) {
   return (
-    <section className="border-t border-line bg-plate" aria-labelledby="contact-heading">
-      <div className="container-sheet grid gap-8 py-20 lg:grid-cols-12 lg:items-end lg:py-24">
+    <section className="border-y border-fg bg-neon-green text-on-neon" aria-labelledby="contact-heading">
+      <div className="container-sheet grid gap-10 py-20 lg:grid-cols-12 lg:items-end lg:py-28">
         <div className="lg:col-span-8">
-          <h2
-            id="contact-heading"
-            className="stretch-wide text-3xl leading-tight font-semibold tracking-tight sm:text-4xl"
-          >
+          <p className="label-mono text-on-neon">Start a project</p>
+          <h2 id="contact-heading" className="display mt-6 text-[clamp(2.5rem,6vw,5rem)]">
             {heading}
           </h2>
-          <p className="mt-5 max-w-xl text-lg text-graphite">
+        </div>
+        <div className="lg:col-span-4">
+          <p className="text-lg">
             Tell us what you are building and where it strains. We will reply with how we would
             approach it.
           </p>
-        </div>
-        <div className="lg:col-span-4 lg:justify-self-end">
           <a
             href={`mailto:${site.email}`}
-            className="inline-block bg-chalk px-6 py-4 text-base font-medium text-ink transition-colors hover:bg-signal"
+            className="mt-6 flex h-14 items-center justify-between gap-6 bg-on-neon px-6 font-semibold text-neon-green transition-colors hover:bg-on-neon/85"
           >
             Email {site.email}
+            <span aria-hidden="true">→</span>
           </a>
         </div>
       </div>

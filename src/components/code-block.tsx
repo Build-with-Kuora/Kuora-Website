@@ -7,24 +7,24 @@ const kuraTheme: ThemeRegistration = {
   name: "kura",
   type: "dark",
   colors: {
-    "editor.background": "#10233a",
-    "editor.foreground": "#e6edf3",
+    "editor.background": "#151514",
+    "editor.foreground": "#f3f0ea",
   },
   tokenColors: [
-    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#8ba3ba", fontStyle: "italic" } },
+    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#948f86", fontStyle: "italic" } },
     {
       scope: ["keyword", "storage", "storage.type", "keyword.operator.new", "keyword.control"],
-      settings: { foreground: "#7cc4fa" },
+      settings: { foreground: "#33a1ff" },
     },
-    { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#9ed8c8" } },
+    { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#39ff88" } },
     {
       scope: ["entity.name.type", "support.type", "entity.name.class", "support.class"],
-      settings: { foreground: "#e6edf3", fontStyle: "bold" },
+      settings: { foreground: "#f3f0ea", fontStyle: "bold" },
     },
-    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#e6edf3" } },
-    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#8ba3ba" } },
+    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#f3f0ea" } },
+    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#948f86" } },
     // Prisma attributes such as @id and @@index.
-    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#7cc4fa" } },
+    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#33a1ff" } },
   ],
 };
 
@@ -51,12 +51,13 @@ export async function CodeBlock({
   const html = (await getHighlighter()).codeToHtml(code.trim(), { lang, theme: "kura" });
 
   return (
-    <figure className="flex min-w-0 flex-col border border-line bg-plate">
-      <figcaption className="stretch-narrow border-b border-line px-4 py-2.5 text-sm text-graphite">
+    <figure className="flex min-w-0 flex-col border border-panel-line bg-panel">
+      <figcaption className="flex items-center gap-2 border-b border-panel-line px-4 py-3 label-mono text-panel-muted">
+        <span aria-hidden="true" className="status-dot size-1.5 bg-neon-green" />
         {filename}
       </figcaption>
       <div
-        className="overflow-x-auto p-4 font-mono text-[0.8125rem] leading-relaxed [&_pre]:bg-transparent!"
+        className="overflow-x-auto p-4 font-mono text-[0.8125rem] leading-relaxed text-panel-fg [&_pre]:bg-transparent!"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </figure>

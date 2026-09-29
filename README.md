@@ -26,6 +26,11 @@ npm run build   # static production build
 
 ## Design system
 
-- Palette tokens live in `src/app/globals.css` under `@theme` (`ink`, `plate`, `line`, `chalk`, `graphite`, `signal`).
-- One typeface, Archivo, loaded with its width axis. Use `stretch-wide` for display type, `stretch-narrow` for annotations.
-- Page transitions: `src/components/page-transition.tsx`. Use `TransitionLink` instead of `next/link` for internal links so the four-panel shutter runs. Reduced-motion users and browser back/forward get an instant swap.
+The visual language is a set of engineering drawings: every page is a numbered sheet (K-00 to K-03), sections open with a heavy cut line, and the Kura frame (a braced 2 × 2 square) appears throughout.
+
+- Theme tokens live in `src/app/globals.css`: `canvas`, `surface`, `line`, `fg` and `muted` switch between the light (concrete) and dark themes; `panel` tokens stay dark in both. `neon-green` is the action and load colour, `neon-blue` marks structure.
+- The theme defaults to light. `ThemeToggle` switches it and saves the choice to `localStorage`; an inline script in `layout.tsx` applies it before first paint.
+- Type: Archivo (variable width) for text and headlines, set wide and heavy with the `display` utility; Martian Mono, condensed, for sheet references and labels (`label-mono`).
+- Shared utilities: `btn-primary`, `btn-secondary`, `link-line`, `grid-hairline`.
+- Signature components: `BracedFrame`, `LatencyBudget`, `DrawingRegister`, `PillarFrame`, `ProcessBeam`, `RegistrationMarks`.
+- Page transitions: `src/components/page-transition.tsx`. Use `TransitionLink` instead of `next/link` for internal links so the four-panel transition runs. Reduced-motion users and browser back/forward get an instant swap.

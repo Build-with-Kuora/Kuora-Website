@@ -106,7 +106,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
         {plates.map((plate) => (
           <div
             key={plate.corner}
-            className={`absolute h-1/2 w-1/2 border-line bg-plate ${plate.corner} ${
+            className={`absolute h-1/2 w-1/2 border-panel-line bg-panel ${plate.corner} ${
               phase === "idle"
                 ? `invisible ${plate.away}`
                 : phase === "opening"
@@ -115,6 +115,12 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
             }`}
           />
         ))}
+        {/* The joint lights up where the four plates meet. */}
+        <div
+          className={`absolute top-1/2 left-1/2 size-4 -translate-1/2 rotate-45 bg-neon-green shadow-[0_0_24px_var(--color-neon-green)] transition-opacity ${
+            phase === "covered" || phase === "closing" ? "opacity-100 delay-300 duration-150" : "opacity-0 duration-100"
+          }`}
+        />
       </div>
     </NavigateContext.Provider>
   );

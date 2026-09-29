@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactBand } from "@/components/contact-band";
+import { PageIntro } from "@/components/page-intro";
 import { WorkGallery } from "@/components/work-gallery";
 import { projects } from "@/lib/projects";
 
@@ -11,14 +12,18 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
-      <section className="container-sheet pt-14 pb-20 sm:pt-20 lg:pt-24 lg:pb-28">
-        <h1 className="stretch-wide max-w-4xl text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.04] font-semibold tracking-[-0.02em]">
-          Systems in production.
-        </h1>
-        <p className="mt-8 mb-12 max-w-2xl text-lg text-graphite sm:text-xl">
-          Each project is shown as its architecture, because that is the part we are proudest of.
-          Filter by the pillar that shaped it most.
-        </p>
+      <PageIntro
+        sheet="K-03"
+        label="Work"
+        title="Systems in production."
+        lead={
+          <p>
+            Each project is filed as its architecture, because that is the part we are proudest of.
+            Filter by the pillar that shaped it most.
+          </p>
+        }
+      />
+      <section className="container-sheet pb-24 lg:pb-32">
         <WorkGallery projects={projects} />
       </section>
       <ContactBand />

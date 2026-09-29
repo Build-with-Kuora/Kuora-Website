@@ -4,44 +4,59 @@ import { PillarGlyph } from "./kura-mark";
 import { TransitionLink } from "./page-transition";
 import { SystemDiagram } from "./system-diagram";
 
-export function ProjectCard({ project, headingLevel = "h3" }: { project: Project; headingLevel?: "h2" | "h3" }) {
+export function ProjectCard({
+  project,
+  sheet,
+  headingLevel = "h3",
+}: {
+  project: Project;
+  sheet: string;
+  headingLevel?: "h2" | "h3";
+}) {
   const Heading = headingLevel;
   const pillar = getPillar(project.focus);
 
   return (
-    <article className="group relative flex flex-col">
-      <div className="border border-line bg-plate p-4 transition-colors group-hover:border-graphite sm:p-6">
+    <article className="group relative flex flex-col border border-fg bg-surface">
+      <div className="flex items-center justify-between gap-4 border-b border-fg px-4 py-2.5">
+        <span className="label-mono text-fg">Sheet {sheet}</span>
+        <span className="label-mono flex items-center gap-1.5">
+          <PillarGlyph pillar={project.focus} className="size-3 text-fg" />
+          {pillar.name}
+        </span>
+      </div>
+      <div className="bg-panel px-4 py-7 transition-colors sm:px-6">
         <SystemDiagram
           diagram={project.diagram}
+          tone="panel"
           label={`Architecture of ${project.name}`}
           className="w-full"
         />
       </div>
-      <div className="mt-5 flex items-start justify-between gap-4">
-        <Heading className="stretch-wide text-xl font-semibold tracking-tight">
+      <div className="flex flex-1 flex-col border-t border-fg p-5 sm:p-6">
+        <Heading className="display text-[1.875rem]">
           <TransitionLink
             href={`/work/${project.slug}`}
-            className="underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-signal after:absolute after:inset-0"
+            className="after:absolute after:inset-0 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-6"
           >
             {project.name}
           </TransitionLink>
         </Heading>
-        <span className="stretch-narrow shrink-0 pt-1 text-sm text-graphite">{project.year}</span>
+        <p className="mt-3 text-[0.9375rem] text-muted">{project.summary}</p>
+        <div className="mt-auto pt-6">
+          <div className="flex items-center justify-between gap-4 border-t border-line-strong pt-4">
+            <span className="label-mono">
+              {project.sector} · {project.year}
+            </span>
+            <span
+              aria-hidden="true"
+              className="grid size-8 place-items-center border border-fg transition-colors group-hover:bg-neon-green group-hover:text-on-neon"
+            >
+              →
+            </span>
+          </div>
+        </div>
       </div>
-      <p className="mt-2 text-base text-graphite">{project.summary}</p>
-      <dl className="stretch-narrow mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
-        <div className="flex gap-1.5">
-          <dt className="sr-only">Sector</dt>
-          <dd>{project.sector}</dd>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <dt className="sr-only">Focus</dt>
-          <dd className="flex items-center gap-1.5">
-            <PillarGlyph pillar={project.focus} className="size-3.5" />
-            {pillar.name}
-          </dd>
-        </div>
-      </dl>
     </article>
   );
 }
