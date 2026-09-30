@@ -47,15 +47,15 @@ export default function HomePage() {
       {/*
         The hero fills the first screen below the header (4rem plus its 1px
         border), so the planner starts on the next one. The logo's K sits in
-        the same centred column as the text as a large, faint watermark, its
-        right edge on the column's edge (cropped by the screen on phones).
+        the same centred column as the text, its right edge on the column's
+        edge, so text and mark read as one composition at every width.
       */}
       <section className="relative isolate flex min-h-[calc(100svh-4.0625rem)] flex-col justify-center overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
           <div className="container-sheet relative h-full">
             <KuoraMonogram
               drawDelay={250}
-              className="absolute top-1/2 right-0 h-[min(64svh,30rem)] translate-x-1/4 -translate-y-1/2 opacity-[0.12] sm:right-6 lg:right-10 lg:h-[min(80svh,52rem)] lg:translate-x-0 lg:opacity-[0.18]"
+              className="absolute top-1/2 -right-40 h-[20rem] -translate-y-1/2 opacity-15 sm:-right-28 sm:h-[24rem] lg:right-10 lg:h-[19rem] lg:opacity-100 xl:h-[24rem] 2xl:h-[27rem]"
             />
           </div>
         </div>
