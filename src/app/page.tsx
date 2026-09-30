@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
+import { KouraPortal } from "@/components/koura-portal";
 import { PillarGlyph } from "@/components/kura-mark";
 import { ProcessBeam } from "@/components/process-beam";
 import { ProjectPlanner } from "@/components/project-planner";
@@ -43,6 +44,8 @@ const questions: Question[] = [
 export default function HomePage() {
   return (
     <>
+      <KouraPortal />
+
       <section className="container-sheet pt-16 pb-24 sm:pt-24 lg:pt-28 lg:pb-36">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <h1 className="display text-[clamp(3rem,7vw,6.5rem)] leading-[0.98] tracking-[-0.04em] lg:col-span-8">
