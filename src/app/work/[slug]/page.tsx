@@ -81,8 +81,8 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
                 id="architecture"
                 className="label flex items-center gap-2 text-panel-muted"
               >
-                <span aria-hidden="true" className="status-dot size-1.5 bg-neon-green" />
-                Fig. 01 · Architecture · <span className="text-neon-green">{project.diagram.nodes.length} components</span>
+                <span aria-hidden="true" className="status-dot size-1.5 bg-brand-mint" />
+                Fig. 01 · Architecture · <span className="text-brand-mint">{project.diagram.nodes.length} components</span>
               </h2>
             </figcaption>
             <div className="overflow-x-auto p-5 sm:p-8 lg:p-12">

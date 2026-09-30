@@ -160,7 +160,7 @@ export default function SystemsPage() {
                 }`}
               >
                 <div className="flex items-baseline gap-4 lg:block">
-                  <p className={`font-mono text-4xl ${dark ? "text-neon-green" : ""}`}>
+                  <p className={`font-mono text-4xl ${dark ? "text-brand-mint" : ""}`}>
                     <span className="sr-only">Level </span>
                     {floor.level}
                   </p>
@@ -174,7 +174,7 @@ export default function SystemsPage() {
                     {floor.body}
                   </p>
                   <p className={`mt-5 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.12em] uppercase ${dark ? "text-panel-muted" : "text-muted"}`}>
-                    <PillarGlyph pillar={floor.pillar} className={`size-3 ${dark ? "text-neon-green" : "text-fg"}`} />
+                    <PillarGlyph pillar={floor.pillar} className={`size-3 ${dark ? "text-brand-mint" : "text-fg"}`} />
                     Carries {pillar.name.toLowerCase()}
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function SystemsPage() {
                     >
                       <span
                         aria-hidden="true"
-                        className={`size-2 shrink-0 bg-neon-green ${dark ? "status-dot" : "ring-1 ring-fg"}`}
+                        className={`size-2 shrink-0 bg-brand-mint ${dark ? "status-dot" : "ring-1 ring-fg"}`}
                       />
                       {capability}
                     </li>

@@ -9,18 +9,18 @@ import GlyphPortal, { type GlyphPortalStyle } from "@/components/ui/glyph-portal
  * sits in its own overflow-hidden scroller and the splash drives scrollTop;
  * visitors never scroll it. Plays on every full page load.
  *
- * Colours are the logo's: navy ground, and a scene inside the letters that
- * runs from neon cyan into neon green.
+ * Colours are the logo's: the navy tile, and inside the letters the same
+ * mint-to-sky gradient as the chevron.
  */
 
-const navy = "#0a1628";
+const navy = "#0e2440";
 const fallbackFamily = "Arial, sans-serif";
 
 const palette: GlyphPortalStyle = {
   "--gp-paper": navy,
-  "--gp-ink": "#e6f1ff",
-  "--gp-field": "#22e4ff",
-  "--gp-foreground": "#06101f",
+  "--gp-ink": "#f5f8fc",
+  "--gp-field": "#4fa6e2",
+  "--gp-foreground": "#0e2440",
 };
 
 const hold = 700; // the word rests before the camera moves
@@ -141,7 +141,7 @@ export function KouraSplash() {
                   inset: 0,
                   transform: "scale(var(--gp-field-scale,1))",
                   background:
-                    "radial-gradient(circle at 18% 12%, rgba(180,248,255,.55), transparent 34%), radial-gradient(circle at 80% 78%, rgba(57,255,136,.85), transparent 46%), linear-gradient(135deg,#22e4ff 0%,#2cf0d0 55%,#39ff88 100%)",
+                    "radial-gradient(circle at 82% 10%, rgba(59,226,166,.9), transparent 42%), radial-gradient(circle at 16% 86%, rgba(79,166,226,.9), transparent 48%), linear-gradient(210deg,#3be2a6 0%,#46c2c6 45%,#4fa6e2 100%)",
                 }}
               />
             }

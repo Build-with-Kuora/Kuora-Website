@@ -7,24 +7,24 @@ const kouraTheme: ThemeRegistration = {
   name: "koura",
   type: "dark",
   colors: {
-    "editor.background": "#06101f",
-    "editor.foreground": "#e6f1ff",
+    "editor.background": "#0a1b33",
+    "editor.foreground": "#f5f8fc",
   },
   tokenColors: [
-    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#7f97b8", fontStyle: "italic" } },
+    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#8fa6c3", fontStyle: "italic" } },
     {
       scope: ["keyword", "storage", "storage.type", "keyword.operator.new", "keyword.control"],
-      settings: { foreground: "#22e4ff" },
+      settings: { foreground: "#4fa6e2" },
     },
-    { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#39ff88" } },
+    { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#3be2a6" } },
     {
       scope: ["entity.name.type", "support.type", "entity.name.class", "support.class"],
-      settings: { foreground: "#e6f1ff", fontStyle: "bold" },
+      settings: { foreground: "#f5f8fc", fontStyle: "bold" },
     },
-    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#e6f1ff" } },
-    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#7f97b8" } },
+    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#f5f8fc" } },
+    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#8fa6c3" } },
     // Prisma attributes such as @id and @@index.
-    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#22e4ff" } },
+    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#4fa6e2" } },
   ],
 };
 
@@ -53,7 +53,7 @@ export async function CodeBlock({
   return (
     <figure className="flex min-w-0 flex-col border border-panel-line bg-panel">
       <figcaption className="flex items-center gap-2 border-b border-panel-line px-4 py-3 label text-panel-muted">
-        <span aria-hidden="true" className="status-dot size-1.5 bg-neon-green" />
+        <span aria-hidden="true" className="status-dot size-1.5 bg-brand-mint" />
         {filename}
       </figcaption>
       <div

@@ -40,7 +40,7 @@ export function PillarFrame({ detailed = false }: { detailed?: boolean }) {
               <ul className="mt-3 border-t border-line-strong text-[0.9375rem]">
                 {pillar.practice.map((item) => (
                   <li key={item} className="flex items-center gap-3 border-b border-line-strong py-2.5">
-                    <span aria-hidden="true" className="size-2 shrink-0 bg-neon-green ring-1 ring-fg" />
+                    <span aria-hidden="true" className="size-2 shrink-0 bg-brand-mint ring-1 ring-fg" />
                     {item}
                   </li>
                 ))}
@@ -52,7 +52,7 @@ export function PillarFrame({ detailed = false }: { detailed?: boolean }) {
       {/* The joint where all four members meet. */}
       <span
         aria-hidden="true"
-        className="absolute top-1/2 left-1/2 hidden size-5 -translate-1/2 rotate-45 bg-neon-green ring-1 ring-fg lg:block"
+        className="absolute top-1/2 left-1/2 hidden size-5 -translate-1/2 rotate-45 bg-brand-mint ring-1 ring-fg lg:block"
       />
     </div>
   );

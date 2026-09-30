@@ -3,46 +3,49 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Taken from the logo: a dark navy ground with a neon cyan glyph. Dark is the
- * default; light keeps the same navy as ink on a pale blue-white. Panels stay
- * navy in both. Cyan leads (actions, selection, focus) and neon green marks
- * status and live signals.
+ * Every colour comes from the logo: the navy tile is the page, the white stem
+ * is the text, and the chevron's two ends are the accents. Sky blue leads
+ * (actions, links, focus); mint marks status and live signals. The
+ * mint-to-sky gradient is kept for the mark and the one hero moment.
+ *
+ * Dark is the default. Light turns the tile navy into ink on a blue-white
+ * page, with a deeper sky so links and focus rings stay readable.
  */
 :root,
 [data-theme="dark"] {
-  --canvas: #0a1628;
-  --surface: #0f1f38;
-  --line: #1b2e4b;
-  --line-strong: #2a4266;
-  --fg: #e6f1ff;
-  --muted: #8ea5c4;
-  --panel: #06101f;
-  --panel-fg: #e6f1ff;
-  --panel-muted: #7f97b8;
-  --panel-line: #1a2c47;
-  --accent: #22e4ff;
+  --canvas: #0e2440;
+  --surface: #132d50;
+  --line: #1f3c63;
+  --line-strong: #2d4f7c;
+  --fg: #f5f8fc;
+  --muted: #a3b6cf;
+  --panel: #0a1b33;
+  --panel-fg: #f5f8fc;
+  --panel-muted: #8fa6c3;
+  --panel-line: #1b3457;
+  --accent: #4fa6e2;
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --canvas: #f2f6fb;
+  --canvas: #f4f7fb;
   --surface: #ffffff;
-  --line: #dce4ef;
-  --line-strong: #bccadd;
-  --fg: #0a1628;
-  --muted: #4d6180;
-  --panel: #0a1628;
-  --panel-fg: #e6f1ff;
-  --panel-muted: #8ea5c4;
-  --panel-line: #1f3456;
-  --accent: #0891b2;
+  --line: #dfe6ef;
+  --line-strong: #c3d0e0;
+  --fg: #0e2440;
+  --muted: #4b607e;
+  --panel: #0e2440;
+  --panel-fg: #f5f8fc;
+  --panel-muted: #a3b6cf;
+  --panel-line: #24436d;
+  --accent: #1f78bd;
   color-scheme: light;
 }
 
 @theme {
-  --color-neon-green: #39ff88;
-  --color-neon-cyan: #22e4ff;
-  --color-on-neon: #06101f;
+  --color-brand-mint: #3be2a6;
+  --color-brand-sky: #4fa6e2;
+  --color-on-brand: #0e2440;
   --ease-structural: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
@@ -99,15 +102,15 @@
   height: 2.75rem;
   padding-inline: 1.25rem;
   border-radius: 0.5rem;
-  background-color: var(--color-neon-cyan);
-  color: var(--color-on-neon);
+  background-color: var(--color-brand-sky);
+  color: var(--color-on-brand);
   font-size: 0.9375rem;
   font-weight: 600;
   transition:
     opacity 150ms,
     box-shadow 150ms;
   &:hover {
-    box-shadow: 0 0 0 1px var(--color-neon-cyan), 0 0 18px rgb(34 228 255 / 0.35);
+    box-shadow: 0 0 0 1px var(--color-brand-sky), 0 0 18px rgb(79 166 226 / 0.4);
   }
 }
 
@@ -124,7 +127,7 @@
   font-weight: 500;
   transition: border-color 150ms;
   &:hover {
-    border-color: var(--color-neon-cyan);
+    border-color: var(--color-brand-sky);
   }
 }
 
@@ -168,8 +171,8 @@
   }
 
   ::selection {
-    background-color: var(--color-neon-cyan);
-    color: var(--color-on-neon);
+    background-color: var(--color-brand-sky);
+    color: var(--color-on-brand);
   }
 
   :focus-visible {

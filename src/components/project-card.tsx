@@ -50,7 +50,7 @@ export function ProjectCard({
             </span>
             <span
               aria-hidden="true"
-              className="grid size-8 place-items-center border border-fg transition-colors group-hover:bg-neon-green group-hover:text-on-neon"
+              className="grid size-8 place-items-center border border-fg transition-colors group-hover:bg-brand-mint group-hover:text-on-brand"
             >
               →
             </span>

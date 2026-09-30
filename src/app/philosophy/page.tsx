@@ -37,7 +37,7 @@ export default function PhilosophyPage() {
             <RegistrationMarks />
             <figcaption className="flex items-baseline justify-between gap-4">
               <span className="label text-panel-muted">Fig. 01 · The frame</span>
-              <span className="label text-neon-green">Select a quadrant</span>
+              <span className="label text-brand-mint">Select a quadrant</span>
             </figcaption>
             <div className="mx-auto mt-4 max-w-sm">
               <BracedFrame />

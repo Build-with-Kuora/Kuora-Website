@@ -1,19 +1,22 @@
 import type { PillarId } from "@/lib/pillars";
 
 /*
- * The Koura frame: a square divided into four, with each quadrant braced by a
- * diagonal. Together the braces form a diamond, so no member carries the load
- * alone. The same geometry is used for the logo, the frame figure and the
- * pillar glyphs.
+ * The Koura logo: a navy tile with a white stem and a chevron that runs from
+ * mint at its tip into sky blue, together reading as a K and an opening
+ * angle bracket. Drawn on a 60-unit grid to match the source artwork.
  */
-
-export function KouraMark({ className }: { className?: string }) {
+export function KouraMark({ className, id = "koura-mark" }: { className?: string; id?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true" strokeLinecap="square">
-      <rect x="1.5" y="1.5" width="21" height="21" className="stroke-current" strokeWidth="2" />
-      <path d="M12 1.5v21M1.5 12h21" className="stroke-current" strokeWidth="1" />
-      <path d="M12 1.5 22.5 12 12 22.5 1.5 12Z" className="stroke-current" strokeWidth="1.5" />
-      <rect x="10" y="10" width="4" height="4" className="fill-neon-green stroke-current" strokeWidth="1" />
+    <svg viewBox="0 0 60 60" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient id={id} x1="44" y1="12" x2="27" y2="31" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#3be2a6" />
+          <stop offset="1" stopColor="#4fa6e2" />
+        </linearGradient>
+      </defs>
+      <rect width="60" height="60" rx="13" fill="#0e2440" />
+      <rect x="14" y="12" width="6.5" height="36" rx="1.25" fill="#fff" />
+      <path d="M44 12.5 27.5 30 44 47.5" fill="none" stroke={`url(#${id})`} strokeWidth="6.5" />
     </svg>
   );
 }
@@ -25,7 +28,7 @@ const quadrantOrigin: Record<PillarId, [number, number]> = {
   scale: [8, 8],
 };
 
-/** Shows which quadrant of the frame a pillar occupies. */
+/** Marks a pillar by its quadrant of a 2 × 2 grid. */
 export function PillarGlyph({ pillar, className }: { pillar: PillarId; className?: string }) {
   const [x, y] = quadrantOrigin[pillar];
   return (

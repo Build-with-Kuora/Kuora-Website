@@ -38,7 +38,7 @@ export function BracedFrame() {
             <li key={pillar.id} className="flex">
               <Link
                 href={`/philosophy#${pillar.id}`}
-                className={`settle flex flex-1 p-3 text-sm font-medium text-panel-fg transition-colors hover:bg-neon-cyan/10 hover:text-neon-green focus-visible:bg-neon-cyan/10 focus-visible:text-neon-green focus-visible:outline-offset-[-3px] sm:p-4 sm:text-base ${labelPlacement[index]}`}
+                className={`settle flex flex-1 p-3 text-sm font-medium text-panel-fg transition-colors hover:bg-brand-sky/10 hover:text-brand-mint focus-visible:bg-brand-sky/10 focus-visible:text-brand-mint focus-visible:outline-offset-[-3px] sm:p-4 sm:text-base ${labelPlacement[index]}`}
                 style={delay(1500)}
               >
                 {pillar.name}
@@ -56,8 +56,8 @@ export function BracedFrame() {
         >
           <defs>
             <linearGradient id="brace-gradient" x1="0" y1="0" x2="400" y2="400" gradientUnits="userSpaceOnUse">
-              <stop offset="0" style={{ stopColor: "var(--color-neon-cyan)" }} />
-              <stop offset="1" style={{ stopColor: "var(--color-neon-green)" }} />
+              <stop offset="0" style={{ stopColor: "var(--color-brand-sky)" }} />
+              <stop offset="1" style={{ stopColor: "var(--color-brand-mint)" }} />
             </linearGradient>
           </defs>
 
@@ -73,7 +73,7 @@ export function BracedFrame() {
           ))}
           <path
             d="M200 0V400M0 200H400"
-            className="settle stroke-neon-cyan/60"
+            className="settle stroke-brand-sky/60"
             strokeWidth="1.25"
             style={delay(700)}
           />
@@ -101,7 +101,7 @@ export function BracedFrame() {
               <path
                 d={BRACES}
                 pathLength={1}
-                className="load-pulse stroke-neon-green"
+                className="load-pulse stroke-brand-mint"
                 strokeWidth="12"
                 strokeOpacity="0.25"
                 strokeLinecap="round"
@@ -110,7 +110,7 @@ export function BracedFrame() {
               <path
                 d={BRACES}
                 pathLength={1}
-                className="load-pulse stroke-neon-green"
+                className="load-pulse stroke-brand-mint"
                 strokeWidth="4"
                 strokeLinecap="round"
                 style={delay(ms)}
@@ -127,7 +127,7 @@ export function BracedFrame() {
                   y={y - 4.5}
                   width="9"
                   height="9"
-                  className={centre ? "fill-neon-green stroke-neon-green" : "fill-panel stroke-panel-fg"}
+                  className={centre ? "fill-brand-mint stroke-brand-mint" : "fill-panel stroke-panel-fg"}
                   strokeWidth="1.5"
                 />
               );

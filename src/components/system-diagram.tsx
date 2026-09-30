@@ -62,15 +62,15 @@ const palette: Record<
   panel: {
     nodes: {
       client: "fill-panel stroke-panel-fg",
-      service: "fill-panel stroke-neon-cyan",
-      queue: "fill-panel stroke-neon-green",
-      data: "fill-neon-cyan/15 stroke-neon-cyan",
+      service: "fill-panel stroke-brand-sky",
+      queue: "fill-panel stroke-brand-mint",
+      data: "fill-brand-sky/15 stroke-brand-sky",
       external: "fill-none stroke-panel-muted",
     },
-    edge: "stroke-neon-cyan/60",
-    joint: "fill-neon-green",
+    edge: "stroke-brand-sky/60",
+    joint: "fill-brand-mint",
     text: "fill-panel-fg",
-    rule: "stroke-neon-cyan",
+    rule: "stroke-brand-sky",
   },
 };
 

@@ -33,7 +33,7 @@ export function WorkGallery({ projects }: { projects: Project[] }) {
                 onClick={() => setFocus(filter.id)}
                 className={`flex h-10 items-center gap-2 border px-3.5 text-sm font-medium transition-colors ${
                   pressed
-                    ? "border-fg bg-neon-green text-on-neon"
+                    ? "border-fg bg-brand-mint text-on-brand"
                     : "border-line-strong text-fg hover:border-fg"
                 }`}
               >
