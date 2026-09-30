@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import GlyphPortal, { type GlyphPortalStyle } from "@/components/ui/glyph-portal";
-import { splashKey } from "@/lib/splash";
 
 /*
  * The loading screen: the KOURA wordmark, then the camera flies into the U by
  * itself and the site fades in behind it. The portal is scroll-driven, so it
  * sits in its own overflow-hidden scroller and the splash drives scrollTop;
- * visitors never scroll it. Shown once per tab session.
+ * visitors never scroll it. Plays on every full page load.
  *
  * Colours are the logo's: navy ground, and a scene inside the letters that
  * runs from neon cyan into neon green.
@@ -30,7 +29,6 @@ const fade = 900; // the splash dissolves into the page
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
-const playedThisSession = () => document.documentElement.dataset.splash === "done";
 
 export function KouraSplash() {
   const [phase, setPhase] = useState<"cover" | "play" | "fade" | "done">("cover");
@@ -39,9 +37,6 @@ export function KouraSplash() {
 
   // Pick the face first: the portal freezes whichever one is loaded when it mounts.
   useEffect(() => {
-    // Already played in this tab: the head script hid the cover before paint.
-    if (playedThisSession()) return;
-
     let settled = false;
     const finish = (value: string) => {
       if (!settled) {
@@ -65,7 +60,7 @@ export function KouraSplash() {
 
   // Lock the page while the splash covers it.
   useEffect(() => {
-    if (phase === "done" || playedThisSession()) return;
+    if (phase === "done") return;
     const root = document.documentElement;
     const previous = root.style.overflow;
     root.style.overflow = "hidden";
@@ -99,9 +94,6 @@ export function KouraSplash() {
         });
       }
       if (cancelled) return;
-      try {
-        sessionStorage.setItem(splashKey, "1");
-      } catch {}
       setPhase("fade");
     })();
 
@@ -127,7 +119,6 @@ export function KouraSplash() {
       style={{ background: navy, opacity: phase === "fade" ? 0 : 1, pointerEvents: phase === "fade" ? "none" : undefined, transitionDuration: `${fade}ms` }}
     >
       <style>{`
-        [data-splash="done"] [data-koura-splash]{display:none}
         [data-koura-splash] [data-gp-caption],[data-koura-splash] [data-gp-touch-picker]{display:none}
       `}</style>
       <noscript>
