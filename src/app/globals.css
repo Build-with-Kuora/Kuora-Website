@@ -1,45 +1,53 @@
 @import "tailwindcss";
+/* The animate-in / slide-in utilities shadcn components (Sheet) rely on. */
+@import "tw-animate-css";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Quiet by default. Light theme is a cool off-white with green-black ink;
- * dark theme inverts it. Panels stay dark in both, and the neon is kept for
- * small signals rather than large fills.
+ * Every colour comes from the logo: the navy tile is the page, the white stem
+ * is the text, and the chevron's two ends are the accents. Sky blue leads
+ * (actions, links, focus); mint marks status and live signals. The
+ * mint-to-sky gradient is kept for the mark and the one hero moment.
+ *
+ * Dark is the default. Light turns the tile navy into ink on a blue-white
+ * page, with a deeper sky so links and focus rings stay readable.
  */
 :root,
-[data-theme="light"] {
-  --canvas: #f6f7f5;
-  --surface: #ffffff;
-  --line: #e1e5e0;
-  --line-strong: #c4cac3;
-  --fg: #0e1310;
-  --muted: #5a625c;
-  --panel: #0e1310;
-  --panel-fg: #e9ece8;
-  --panel-muted: #8a938c;
-  --panel-line: #242b26;
-  color-scheme: light;
-}
-
 [data-theme="dark"] {
-  --canvas: #0b0e0c;
-  --surface: #121613;
-  --line: #232a25;
-  --line-strong: #37403a;
-  --fg: #e9ece8;
-  --muted: #9aa39c;
-  --panel: #050706;
-  --panel-fg: #e9ece8;
-  --panel-muted: #8a938c;
-  --panel-line: #1f2621;
+  --canvas: #0e2440;
+  --surface: #132d50;
+  --line: #1f3c63;
+  --line-strong: #2d4f7c;
+  --fg: #f5f8fc;
+  --muted: #a3b6cf;
+  --panel: #0a1b33;
+  --panel-fg: #f5f8fc;
+  --panel-muted: #8fa6c3;
+  --panel-line: #1b3457;
+  --accent: #4fa6e2;
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --canvas: #f4f7fb;
+  --surface: #ffffff;
+  --line: #dfe6ef;
+  --line-strong: #c3d0e0;
+  --fg: #0e2440;
+  --muted: #4b607e;
+  --panel: #0e2440;
+  --panel-fg: #f5f8fc;
+  --panel-muted: #a3b6cf;
+  --panel-line: #24436d;
+  --accent: #1f78bd;
+  color-scheme: light;
+}
+
 @theme {
-  --color-neon-green: #39ff88;
-  --color-neon-blue: #33a1ff;
-  --color-on-neon: #0e1310;
+  --color-brand-mint: #3be2a6;
+  --color-brand-sky: #4fa6e2;
+  --color-on-brand: #0e2440;
   --ease-structural: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
@@ -54,6 +62,31 @@
   --color-panel-fg: var(--panel-fg);
   --color-panel-muted: var(--panel-muted);
   --color-panel-line: var(--panel-line);
+  --color-accent: var(--accent);
+
+  /*
+   * shadcn/ui token names, pointed at the Kuora palette so components pasted
+   * into components/ui come out navy, sky and mint rather than shadcn grey.
+   * `muted` and `accent` above keep their site meaning (muted text, the
+   * accent colour); shadcn's accent hover therefore fills with sky blue.
+   */
+  --color-background: var(--canvas);
+  --color-foreground: var(--fg);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--fg);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--fg);
+  --color-primary: var(--color-brand-sky);
+  --color-primary-foreground: var(--color-on-brand);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--fg);
+  --color-muted-foreground: var(--muted);
+  --color-accent-foreground: var(--color-on-brand);
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--line);
+  --color-input: var(--line-strong);
+  --color-ring: var(--accent);
 
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
@@ -95,13 +128,15 @@
   height: 2.75rem;
   padding-inline: 1.25rem;
   border-radius: 0.5rem;
-  background-color: var(--fg);
-  color: var(--canvas);
+  background-color: var(--color-brand-sky);
+  color: var(--color-on-brand);
   font-size: 0.9375rem;
-  font-weight: 500;
-  transition: opacity 150ms;
+  font-weight: 600;
+  transition:
+    opacity 150ms,
+    box-shadow 150ms;
   &:hover {
-    opacity: 0.85;
+    box-shadow: 0 0 0 1px var(--color-brand-sky), 0 0 18px rgb(79 166 226 / 0.4);
   }
 }
 
@@ -118,7 +153,7 @@
   font-weight: 500;
   transition: border-color 150ms;
   &:hover {
-    border-color: var(--fg);
+    border-color: var(--color-brand-sky);
   }
 }
 
@@ -162,12 +197,12 @@
   }
 
   ::selection {
-    background-color: var(--color-neon-green);
-    color: var(--color-on-neon);
+    background-color: var(--color-brand-sky);
+    color: var(--color-on-brand);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-neon-blue);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
 
@@ -229,6 +264,69 @@
 @keyframes page-rise {
   from {
     translate: 0 14px;
+  }
+}
+
+/*
+ * The reveal after the loading screen. KuoraSplash sets data-reveal="pending"
+ * on <html> while it covers the page and "in" the moment it starts to fade,
+ * so the page rises into place under the dissolving cover. Without
+ * JavaScript the attribute is never set and nothing is hidden; with reduced
+ * motion nothing moves.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] [data-reveal-item] {
+    opacity: 0;
+  }
+  [data-reveal="pending"] [data-reveal-item="rise"] {
+    translate: 0 2rem;
+  }
+  [data-reveal="pending"] [data-reveal-item="down"] {
+    translate: 0 -1rem;
+  }
+  [data-reveal="pending"] [data-reveal-draw] {
+    stroke-dashoffset: 1;
+  }
+
+  [data-reveal="in"] [data-reveal-item] {
+    transition:
+      opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      translate 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal="in"] [data-reveal-draw] {
+    transition: stroke-dashoffset 1800ms cubic-bezier(0.65, 0, 0.35, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+/*
+ * Scroll reveals (see ScrollEffects). data-scroll-fx is set on <html> only
+ * when JavaScript runs and motion is allowed, so without it nothing is
+ * hidden. "up" suits text; "pop" rises, grows and overshoots a touch, for
+ * cards and figures. Only opacity, translate and scale change, which the
+ * browser animates on the compositor.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-scroll-fx] [data-scroll-reveal]:not([data-in]) {
+    opacity: 0;
+  }
+  [data-scroll-fx] [data-scroll-reveal="up"]:not([data-in]) {
+    translate: 0 2.5rem;
+  }
+  [data-scroll-fx] [data-scroll-reveal="pop"]:not([data-in]) {
+    translate: 0 3.5rem;
+    scale: 0.94;
+  }
+  [data-scroll-fx] [data-scroll-reveal][data-in] {
+    transition:
+      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      translate 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      scale 1000ms cubic-bezier(0.34, 1.45, 0.64, 1);
+    transition-delay: var(--scroll-delay, 0ms);
+  }
+  [data-scroll-fx] [data-parallax] {
+    will-change: transform;
   }
 }
 

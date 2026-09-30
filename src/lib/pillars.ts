@@ -8,7 +8,7 @@ export type Pillar = {
   practice: string[];
 };
 
-// Order matches the quadrants of the Kura frame: top-left, top-right,
+// Order matches the quadrants of the Kuora frame: top-left, top-right,
 // bottom-left, bottom-right.
 export const pillars: Pillar[] = [
   {

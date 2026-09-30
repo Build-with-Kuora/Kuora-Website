@@ -11,7 +11,7 @@ const timelines = ["As soon as possible", "In the next 3 months", "In 3 to 6 mon
 const serviceOptions = [...services.map((service) => ({ id: service.id, name: service.name })), { id: "unsure", name: "Not sure yet" }];
 
 const field =
-  "w-full rounded-lg border border-line-strong bg-surface px-3.5 text-[0.9375rem] transition-colors placeholder:text-muted/70 hover:border-muted focus:border-fg";
+  "w-full rounded-lg border border-line-strong bg-surface px-3.5 text-[0.9375rem] transition-colors placeholder:text-muted/70 hover:border-muted focus:border-brand-sky";
 
 type Initial = { service?: string; plan?: string; size?: string };
 
@@ -91,7 +91,7 @@ export function InquiryForm({ initial = {} }: { initial?: Initial }) {
           {serviceOptions.map((option) => (
             <label
               key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-line-strong bg-surface px-4 py-3 text-[0.9375rem] transition-colors hover:border-muted has-checked:border-fg has-checked:bg-fg has-checked:text-canvas has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-neon-blue"
+              className="flex cursor-pointer items-center gap-3 rounded-lg border border-line-strong bg-surface px-4 py-3 text-[0.9375rem] transition-colors hover:border-muted has-checked:border-brand-sky has-checked:bg-brand-sky has-checked:text-on-brand has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand-sky"
             >
               <input
                 type="radio"

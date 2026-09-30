@@ -3,28 +3,28 @@ import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
 // Highlighting runs on the server at build time; no highlighter ships to the browser.
 
-const kuraTheme: ThemeRegistration = {
-  name: "kura",
+const kuoraTheme: ThemeRegistration = {
+  name: "kuora",
   type: "dark",
   colors: {
-    "editor.background": "#151514",
-    "editor.foreground": "#f3f0ea",
+    "editor.background": "#0a1b33",
+    "editor.foreground": "#f5f8fc",
   },
   tokenColors: [
-    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#948f86", fontStyle: "italic" } },
+    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#8fa6c3", fontStyle: "italic" } },
     {
       scope: ["keyword", "storage", "storage.type", "keyword.operator.new", "keyword.control"],
-      settings: { foreground: "#33a1ff" },
+      settings: { foreground: "#4fa6e2" },
     },
-    { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#39ff88" } },
+    { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#3be2a6" } },
     {
       scope: ["entity.name.type", "support.type", "entity.name.class", "support.class"],
-      settings: { foreground: "#f3f0ea", fontStyle: "bold" },
+      settings: { foreground: "#f5f8fc", fontStyle: "bold" },
     },
-    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#f3f0ea" } },
-    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#948f86" } },
+    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#f5f8fc" } },
+    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#8fa6c3" } },
     // Prisma attributes such as @id and @@index.
-    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#33a1ff" } },
+    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#4fa6e2" } },
   ],
 };
 
@@ -32,7 +32,7 @@ let highlighter: Promise<HighlighterCore> | undefined;
 
 function getHighlighter() {
   highlighter ??= createHighlighterCore({
-    themes: [kuraTheme],
+    themes: [kuoraTheme],
     langs: [import("shiki/langs/prisma.mjs"), import("shiki/langs/typescript.mjs")],
     engine: createJavaScriptRegexEngine(),
   });
@@ -48,12 +48,12 @@ export async function CodeBlock({
   lang: "prisma" | "typescript";
   filename: string;
 }) {
-  const html = (await getHighlighter()).codeToHtml(code.trim(), { lang, theme: "kura" });
+  const html = (await getHighlighter()).codeToHtml(code.trim(), { lang, theme: "kuora" });
 
   return (
     <figure className="flex min-w-0 flex-col border border-panel-line bg-panel">
       <figcaption className="flex items-center gap-2 border-b border-panel-line px-4 py-3 label text-panel-muted">
-        <span aria-hidden="true" className="status-dot size-1.5 bg-neon-green" />
+        <span aria-hidden="true" className="status-dot size-1.5 bg-brand-mint" />
         {filename}
       </figcaption>
       <div

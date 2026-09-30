@@ -1,6 +1,6 @@
-# Kura website
+# Kuora website
 
-Marketing site for Kura, built with Next.js (App Router), React, TypeScript and Tailwind CSS v4.
+Marketing site for Kuora, built with Next.js (App Router), React, TypeScript and Tailwind CSS v4.
 
 ```bash
 npm install
@@ -26,11 +26,11 @@ npm run build   # static production build
 
 ## Design system
 
-The visual language is a set of engineering drawings: every page is a numbered sheet (K-00 to K-03), sections open with a heavy cut line, and the Kura frame (a braced 2 × 2 square) appears throughout.
+Every colour comes from the Kuora logo: a navy tile, a white stem and a chevron that runs from mint into sky blue.
 
-- Theme tokens live in `src/app/globals.css`: `canvas`, `surface`, `line`, `fg` and `muted` switch between the light (concrete) and dark themes; `panel` tokens stay dark in both. `neon-green` is the action and load colour, `neon-blue` marks structure.
-- The theme defaults to light. `ThemeToggle` switches it and saves the choice to `localStorage`; an inline script in `layout.tsx` applies it before first paint.
-- Type: Archivo (variable width) for text and headlines, set wide and heavy with the `display` utility; Martian Mono, condensed, for sheet references and labels (`label-mono`).
+- Theme tokens live in `src/app/globals.css`: `canvas`, `surface`, `line`, `fg`, `muted` and `accent` switch between the dark (default) and light themes; `panel` tokens stay navy in both. `brand-sky` leads actions, links and focus; `brand-mint` marks status. The mint-to-sky gradient is kept for the logo, the hero monogram and the loading screen.
+- `ThemeToggle` switches the theme and saves the choice to `localStorage`; an inline script in `layout.tsx` applies it before first paint.
+- Type: Instrument Sans for text and headlines (headlines set tight with the `display` utility); JetBrains Mono only for code.
+- Logo: `KuoraMark` and `KuoraMonogram` in `src/components/kuora-mark.tsx`; `src/app/icon.svg` is the favicon.
+- Loading screen: `src/components/kuora-splash.tsx` plays the Glyph Portal (`src/components/ui/glyph-portal.tsx`) on every full page load.
 - Shared utilities: `btn-primary`, `btn-secondary`, `link-line`, `grid-hairline`.
-- Signature components: `BracedFrame`, `LatencyBudget`, `DrawingRegister`, `PillarFrame`, `ProcessBeam`, `RegistrationMarks`.
-- Page transitions: `src/components/page-transition.tsx`. Use `TransitionLink` instead of `next/link` for internal links so the four-panel transition runs. Reduced-motion users and browser back/forward get an instant swap.

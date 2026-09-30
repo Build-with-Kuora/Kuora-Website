@@ -1,4 +1,4 @@
-// The ways to hire Kura. Lengths are typical ranges, not quotes; every
+// The ways to hire Kuora. Lengths are typical ranges, not quotes; every
 // engagement starts with a written proposal for the first phase.
 
 export type ServiceId = "build" | "scale" | "run";

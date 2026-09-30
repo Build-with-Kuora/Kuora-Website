@@ -4,41 +4,34 @@ import { BracedFrame } from "@/components/braced-frame";
 import { ContactBand } from "@/components/contact-band";
 import { PageIntro } from "@/components/page-intro";
 import { PillarFrame } from "@/components/pillar-frame";
-import { RegistrationMarks } from "@/components/registration-marks";
 import { SectionHeading } from "@/components/section-heading";
 
 export const metadata: Metadata = {
   title: "Philosophy",
   description:
-    "The four pillars Kura builds on: architecture, performance, interface and scale.",
+    "The four pillars Kuora builds on: architecture, performance, interface and scale.",
 };
 
 export default function PhilosophyPage() {
   return (
     <>
       <PageIntro
-        sheet="K-01"
-        label="Philosophy"
         title="Structure first. Everything else rests on it."
         lead={
           <>
             <p>
-              Kura comes from <i className="text-fg">quadro</i>: a square frame of four members.
-              Each one carries part of the load, and none of them is optional.
+              Every system we ship stands on four pillars: architecture, performance, interface
+              and scale. Each one carries part of the load, and none of them is optional.
             </p>
             <p>
-              We build software the same way. Every system we ship stands on four pillars, and we
-              give each of them equal weight from the first day of a project.
+              We give each of them equal weight from the first day of a project, because a system
+              is only as strong as the one that was left for later.
             </p>
           </>
         }
         aside={
-          <figure className="relative border border-panel-line bg-panel p-6 text-panel-fg sm:p-8">
-            <RegistrationMarks />
-            <figcaption className="flex items-baseline justify-between gap-4">
-              <span className="label text-panel-muted">Fig. 01 · The frame</span>
-              <span className="label text-neon-green">Select a quadrant</span>
-            </figcaption>
+          <figure className="rounded-2xl border border-panel-line bg-panel p-6 text-panel-fg sm:p-8">
+            <figcaption className="text-sm text-panel-muted">The four pillars. Select one to read it.</figcaption>
             <div className="mx-auto mt-4 max-w-sm">
               <BracedFrame />
             </div>

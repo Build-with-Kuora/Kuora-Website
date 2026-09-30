@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ContactBand } from "@/components/contact-band";
-import { PillarGlyph } from "@/components/kura-mark";
+import { PillarGlyph } from "@/components/kuora-mark";
 import { PageIntro } from "@/components/page-intro";
 import { ProcessBeam } from "@/components/process-beam";
 import { SectionHeading } from "@/components/section-heading";
@@ -10,7 +10,7 @@ import { getPillar, type PillarId } from "@/lib/pillars";
 export const metadata: Metadata = {
   title: "Systems",
   description:
-    "Kura's full-stack capabilities: Node.js services, Prisma data access and PostgreSQL, from interface to foundation.",
+    "Kuora's full-stack capabilities: Node.js services, Prisma data access and PostgreSQL, from interface to foundation.",
 };
 
 type Floor = {
@@ -128,8 +128,6 @@ export default function SystemsPage() {
   return (
     <>
       <PageIntro
-        sheet="K-02"
-        label="Systems"
         title="The full stack, from the foundation up."
         lead={
           <p>
@@ -148,23 +146,24 @@ export default function SystemsPage() {
           How a system stands
         </SectionHeading>
 
-        <ol className="mt-12 border border-fg">
+        <ol className="mt-12 overflow-hidden rounded-2xl border border-line">
           {floors.map((floor) => {
             const pillar = getPillar(floor.pillar);
             const dark = floor.belowGrade;
             return (
               <li
                 key={floor.level}
-                className={`grid gap-6 border-fg p-6 not-last:border-b sm:p-8 lg:grid-cols-[8rem_1.2fr_1fr] lg:gap-10 ${
+                data-scroll-reveal="up"
+                className={`grid gap-6 border-line p-6 not-last:border-b sm:p-8 lg:grid-cols-[8rem_1.2fr_1fr] lg:gap-10 ${
                   dark ? "bg-panel text-panel-fg" : "bg-surface"
                 }`}
               >
                 <div className="flex items-baseline gap-4 lg:block">
-                  <p className={`font-mono text-4xl ${dark ? "text-neon-green" : ""}`}>
+                  <p className={`display text-4xl ${dark ? "text-brand-mint" : "text-accent"}`}>
                     <span className="sr-only">Level </span>
                     {floor.level}
                   </p>
-                  <p className={`font-mono text-[0.6875rem] tracking-[0.12em] uppercase lg:mt-3 ${dark ? "text-panel-muted" : "text-muted"}`}>
+                  <p className={`text-sm lg:mt-2 ${dark ? "text-panel-muted" : "text-muted"}`}>
                     {dark ? "Below grade" : floor.layer}
                   </p>
                 </div>
@@ -173,12 +172,12 @@ export default function SystemsPage() {
                   <p className={`mt-3 max-w-prose text-[0.9375rem] leading-relaxed ${dark ? "text-panel-muted" : "text-muted"}`}>
                     {floor.body}
                   </p>
-                  <p className={`mt-5 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.12em] uppercase ${dark ? "text-panel-muted" : "text-muted"}`}>
-                    <PillarGlyph pillar={floor.pillar} className={`size-3 ${dark ? "text-neon-green" : "text-fg"}`} />
+                  <p className={`mt-5 flex items-center gap-2 text-sm ${dark ? "text-panel-muted" : "text-muted"}`}>
+                    <PillarGlyph pillar={floor.pillar} className="size-3 text-brand-mint" />
                     Carries {pillar.name.toLowerCase()}
                   </p>
                 </div>
-                <ul className={`self-start border-t font-mono text-[0.8125rem] ${dark ? "border-panel-line" : "border-line"}`}>
+                <ul className={`self-start border-t text-[0.875rem] ${dark ? "border-panel-line" : "border-line"}`}>
                   {floor.capabilities.map((capability) => (
                     <li
                       key={capability}
@@ -186,7 +185,7 @@ export default function SystemsPage() {
                     >
                       <span
                         aria-hidden="true"
-                        className={`size-2 shrink-0 bg-neon-green ${dark ? "status-dot" : "ring-1 ring-fg"}`}
+                        className={`size-1.5 shrink-0 rounded-full bg-brand-mint ${dark ? "status-dot" : ""}`}
                       />
                       {capability}
                     </li>

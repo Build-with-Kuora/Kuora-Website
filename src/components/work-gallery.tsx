@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { pillars, type PillarId } from "@/lib/pillars";
 import type { Project } from "@/lib/projects";
-import { PillarGlyph } from "./kura-mark";
+import { PillarGlyph } from "./kuora-mark";
 import { ProjectCard } from "./project-card";
 
 export function WorkGallery({ projects }: { projects: Project[] }) {
@@ -11,7 +11,7 @@ export function WorkGallery({ projects }: { projects: Project[] }) {
   const visible = focus === "all" ? projects : projects.filter((project) => project.focus === focus);
 
   const filters = [
-    { id: "all" as const, label: "All sheets", count: projects.length },
+    { id: "all" as const, label: "All work", count: projects.length },
     ...pillars.map((pillar) => ({
       id: pillar.id,
       label: pillar.name,
@@ -21,7 +21,7 @@ export function WorkGallery({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-4 border-y border-fg py-3">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-y border-line py-4">
         <div role="group" aria-label="Filter by pillar" className="flex flex-wrap gap-2">
           {filters.map((filter) => {
             const pressed = focus === filter.id;
@@ -31,10 +31,10 @@ export function WorkGallery({ projects }: { projects: Project[] }) {
                 type="button"
                 aria-pressed={pressed}
                 onClick={() => setFocus(filter.id)}
-                className={`flex h-10 items-center gap-2 border px-3.5 text-sm font-medium transition-colors ${
+                className={`flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-colors ${
                   pressed
-                    ? "border-fg bg-neon-green text-on-neon"
-                    : "border-line-strong text-fg hover:border-fg"
+                    ? "border-brand-sky bg-brand-sky text-on-brand"
+                    : "border-line-strong text-fg hover:border-brand-sky"
                 }`}
               >
                 {filter.id !== "all" && <PillarGlyph pillar={filter.id} className="size-3" />}
@@ -54,7 +54,6 @@ export function WorkGallery({ projects }: { projects: Project[] }) {
           <ProjectCard
             key={project.slug}
             project={project}
-            sheet={`K-03.${projects.indexOf(project) + 1}`}
             headingLevel="h2"
           />
         ))}

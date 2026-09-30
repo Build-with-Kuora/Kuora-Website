@@ -41,7 +41,7 @@ export function ProjectPlanner() {
             {blueprints.map((item) => (
               <label
                 key={item.id}
-                className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-[0.9375rem] transition-colors hover:bg-canvas has-checked:bg-fg has-checked:text-canvas has-focus-visible:outline-2 has-focus-visible:outline-neon-blue"
+                className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-[0.9375rem] transition-colors hover:bg-canvas has-checked:bg-brand-sky has-checked:text-on-brand has-focus-visible:outline-2 has-focus-visible:outline-brand-sky"
               >
                 <input
                   type="radio"
@@ -63,7 +63,7 @@ export function ProjectPlanner() {
             {tiers.map((item, index) => (
               <label
                 key={item.label}
-                className="flex cursor-pointer items-center justify-center rounded-md px-2 py-2 text-center text-sm leading-tight transition-colors hover:bg-canvas has-checked:bg-fg has-checked:text-canvas has-focus-visible:outline-2 has-focus-visible:outline-neon-blue"
+                className="flex cursor-pointer items-center justify-center rounded-md px-2 py-2 text-center text-sm leading-tight transition-colors hover:bg-canvas has-checked:bg-brand-sky has-checked:text-on-brand has-focus-visible:outline-2 has-focus-visible:outline-brand-sky"
               >
                 <input
                   type="radio"
