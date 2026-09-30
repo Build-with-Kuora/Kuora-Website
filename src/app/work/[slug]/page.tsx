@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { DiagramLegend, SystemDiagram } from "@/components/system-diagram";
 import { getPillar } from "@/lib/pillars";
 import { getProject, projects } from "@/lib/projects";
+import { reveal } from "@/lib/reveal";
 
 export const dynamicParams = false;
 
@@ -47,8 +48,8 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           <p className="mt-12 text-sm text-brand-mint sm:mt-16">
             {project.sector}, {project.year}
           </p>
-          <h1 className="display mt-5 text-[clamp(3rem,8vw,6.5rem)]">{project.name}</h1>
-          <p className="mt-6 max-w-3xl text-xl font-medium tracking-[-0.01em] sm:text-2xl">{project.summary}</p>
+          <h1 {...reveal(200)} className="display mt-5 text-[clamp(3rem,8vw,6.5rem)]">{project.name}</h1>
+          <p {...reveal(360)} className="mt-6 max-w-3xl text-xl font-medium tracking-[-0.01em] sm:text-2xl">{project.summary}</p>
 
           <dl className="grid-hairline mt-12 grid-cols-2 overflow-hidden rounded-2xl sm:grid-cols-3 lg:grid-cols-5">
             {facts.map((fact) => (

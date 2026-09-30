@@ -5,6 +5,7 @@ import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { reveal } from "@/lib/reveal";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader />
-        <main id="main" className="flex-1">
+        <main id="main" className="flex-1" {...reveal(100, "fade")}>
           <PageTransition>{children}</PageTransition>
         </main>
         <SiteFooter />

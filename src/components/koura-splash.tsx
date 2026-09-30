@@ -58,6 +58,15 @@ export function KouraSplash() {
     };
   }, []);
 
+  // Hold the page out of view under the cover; it rises in as the cover fades.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.reveal = "pending";
+    return () => {
+      root.dataset.reveal = "in";
+    };
+  }, []);
+
   // Lock the page while the splash covers it.
   useEffect(() => {
     if (phase === "done") return;
@@ -102,9 +111,10 @@ export function KouraSplash() {
     };
   }, [phase]);
 
-  // Remove the cover once it has faded out.
+  // Start the page reveal as the cover begins to fade, then remove the cover.
   useEffect(() => {
     if (phase !== "fade") return;
+    document.documentElement.dataset.reveal = "in";
     const timeout = window.setTimeout(() => setPhase("done"), fade);
     return () => clearTimeout(timeout);
   }, [phase]);

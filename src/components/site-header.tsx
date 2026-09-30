@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { reveal } from "@/lib/reveal";
 import { navigation } from "@/lib/site";
 import { KouraMark } from "./koura-mark";
 import { ThemeToggle } from "./theme-toggle";
@@ -10,7 +11,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md [view-transition-name:site-header]">
+    <header {...reveal(0, "down")} className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md [view-transition-name:site-header]">
       <div className="container-sheet flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2.5" aria-label="Koura, home">
           <KouraMark className="size-8" />

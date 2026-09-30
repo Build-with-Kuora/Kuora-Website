@@ -241,6 +241,39 @@
   }
 }
 
+/*
+ * The reveal after the loading screen. KouraSplash sets data-reveal="pending"
+ * on <html> while it covers the page and "in" the moment it starts to fade,
+ * so the page rises into place under the dissolving cover. Without
+ * JavaScript the attribute is never set and nothing is hidden; with reduced
+ * motion nothing moves.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] [data-reveal-item] {
+    opacity: 0;
+  }
+  [data-reveal="pending"] [data-reveal-item="rise"] {
+    translate: 0 2rem;
+  }
+  [data-reveal="pending"] [data-reveal-item="down"] {
+    translate: 0 -1rem;
+  }
+  [data-reveal="pending"] [data-reveal-draw] {
+    stroke-dashoffset: 1;
+  }
+
+  [data-reveal="in"] [data-reveal-item] {
+    transition:
+      opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      translate 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal="in"] [data-reveal-draw] {
+    transition: stroke-dashoffset 1800ms cubic-bezier(0.65, 0, 0.35, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
 /* Construction lines draw themselves once. */
 @keyframes draw {
   to {

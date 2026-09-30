@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { PillarId } from "@/lib/pillars";
 
 /*
@@ -42,9 +43,19 @@ export function PillarGlyph({ pillar, className }: { pillar: PillarId; className
 
 /**
  * The logo's chevron on its own, at display size: mint at the upper tip,
- * sky blue from the vertex down.
+ * sky blue from the vertex down. With `drawDelay`, it draws itself tip to tip
+ * as the page reveals after the loading screen.
  */
-export function KouraChevron({ className }: { className?: string }) {
+export function KouraChevron({ className, drawDelay }: { className?: string; drawDelay?: number }) {
+  const draw =
+    drawDelay === undefined
+      ? {}
+      : {
+          pathLength: 1,
+          strokeDasharray: 1,
+          "data-reveal-draw": "",
+          style: { "--reveal-delay": `${drawDelay}ms` } as CSSProperties,
+        };
   return (
     <svg viewBox="0 0 420 600" fill="none" className={className} aria-hidden="true">
       <defs>
@@ -53,7 +64,7 @@ export function KouraChevron({ className }: { className?: string }) {
           <stop offset="1" stopColor="#4fa6e2" />
         </linearGradient>
       </defs>
-      <path d="M360 30 100 300l260 270" stroke="url(#koura-chevron)" strokeWidth="64" />
+      <path d="M360 30 100 300l260 270" stroke="url(#koura-chevron)" strokeWidth="64" {...draw} />
     </svg>
   );
 }

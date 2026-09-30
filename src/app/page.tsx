@@ -6,6 +6,7 @@ import { ProcessBeam } from "@/components/process-beam";
 import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
 import { pillars } from "@/lib/pillars";
+import { reveal } from "@/lib/reveal";
 import { projects } from "@/lib/projects";
 import { services } from "@/lib/services";
 
@@ -45,17 +46,17 @@ export default function HomePage() {
     <>
       {/* The logo's chevron opens the page, cropped by the right edge. */}
       <section className="relative isolate overflow-hidden">
-        <KouraChevron className="absolute top-6 -right-40 -z-10 h-[26rem] opacity-35 sm:-right-28 sm:h-[34rem] md:-right-20 md:opacity-100 lg:top-10 lg:-right-16 lg:h-[40rem] xl:right-0" />
+        <KouraChevron drawDelay={250} className="absolute top-6 -right-40 -z-10 h-[26rem] opacity-35 sm:-right-28 sm:h-[34rem] md:-right-20 md:opacity-100 lg:top-10 lg:-right-16 lg:h-[40rem] xl:right-0" />
         <div className="container-sheet pt-20 pb-20 sm:pt-28 lg:pt-36 lg:pb-32">
-          <h1 className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
+          <h1 {...reveal(200)} className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
             Software built to carry load.
           </h1>
-          <p className="mt-8 max-w-xl text-lg text-muted sm:text-xl">
+          <p {...reveal(360)} className="mt-8 max-w-xl text-lg text-muted sm:text-xl">
             Koura designs, builds and runs full-cycle software for companies that expect to grow.
             We start from the data model and work up, so what we ship still holds when traffic,
             data and your team multiply.
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div {...reveal(500)} className="mt-10 flex flex-wrap gap-3">
             <Link href="/start" className="btn-primary">
               Start a project
             </Link>
@@ -66,7 +67,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="container-sheet pb-24 lg:pb-36">
+      <div {...reveal(650)} className="container-sheet pb-24 lg:pb-36">
         <ProjectPlanner />
       </div>
 
