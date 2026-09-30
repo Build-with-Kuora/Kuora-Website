@@ -67,7 +67,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div {...reveal(650)} className="container-sheet pb-24 lg:pb-36">
+      <div {...reveal(650)} data-snap className="container-sheet pb-24 lg:pb-36">
         <ProjectPlanner />
       </div>
 
