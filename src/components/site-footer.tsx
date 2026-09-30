@@ -17,7 +17,7 @@ export function SiteFooter() {
       <div className="container-sheet grid gap-12 pt-16 pb-12 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="flex items-center gap-2.5">
-            <KuraMark className="size-[1.375rem]" />
+            <KuraMark className="size-[1.375rem] text-neon-cyan" />
             <span className="text-lg font-semibold tracking-[-0.02em]">Kura</span>
           </div>
           <p className="mt-5 max-w-xs text-[0.9375rem] text-panel-muted">

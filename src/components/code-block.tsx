@@ -7,24 +7,24 @@ const kuraTheme: ThemeRegistration = {
   name: "kura",
   type: "dark",
   colors: {
-    "editor.background": "#151514",
-    "editor.foreground": "#f3f0ea",
+    "editor.background": "#06101f",
+    "editor.foreground": "#e6f1ff",
   },
   tokenColors: [
-    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#948f86", fontStyle: "italic" } },
+    { scope: ["comment", "punctuation.definition.comment"], settings: { foreground: "#7f97b8", fontStyle: "italic" } },
     {
       scope: ["keyword", "storage", "storage.type", "keyword.operator.new", "keyword.control"],
-      settings: { foreground: "#33a1ff" },
+      settings: { foreground: "#22e4ff" },
     },
     { scope: ["string", "constant.numeric", "constant.language"], settings: { foreground: "#39ff88" } },
     {
       scope: ["entity.name.type", "support.type", "entity.name.class", "support.class"],
-      settings: { foreground: "#f3f0ea", fontStyle: "bold" },
+      settings: { foreground: "#e6f1ff", fontStyle: "bold" },
     },
-    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#f3f0ea" } },
-    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#948f86" } },
+    { scope: ["entity.name.function", "support.function"], settings: { foreground: "#e6f1ff" } },
+    { scope: ["punctuation", "meta.brace", "keyword.operator"], settings: { foreground: "#7f97b8" } },
     // Prisma attributes such as @id and @@index.
-    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#33a1ff" } },
+    { scope: ["entity.name.function.attribute", "source.prisma support.function"], settings: { foreground: "#22e4ff" } },
   ],
 };
 

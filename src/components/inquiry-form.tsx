@@ -91,7 +91,7 @@ export function InquiryForm({ initial = {} }: { initial?: Initial }) {
           {serviceOptions.map((option) => (
             <label
               key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-line-strong bg-surface px-4 py-3 text-[0.9375rem] transition-colors hover:border-muted has-checked:border-fg has-checked:bg-fg has-checked:text-canvas has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-neon-blue"
+              className="flex cursor-pointer items-center gap-3 rounded-lg border border-line-strong bg-surface px-4 py-3 text-[0.9375rem] transition-colors hover:border-muted has-checked:border-neon-cyan has-checked:bg-neon-cyan has-checked:text-on-neon has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-neon-cyan"
             >
               <input
                 type="radio"

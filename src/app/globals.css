@@ -3,43 +3,46 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /*
- * Quiet by default. Light theme is a cool off-white with green-black ink;
- * dark theme inverts it. Panels stay dark in both, and the neon is kept for
- * small signals rather than large fills.
+ * Taken from the logo: a dark navy ground with a neon cyan glyph. Dark is the
+ * default; light keeps the same navy as ink on a pale blue-white. Panels stay
+ * navy in both. Cyan leads (actions, selection, focus) and neon green marks
+ * status and live signals.
  */
 :root,
-[data-theme="light"] {
-  --canvas: #f6f7f5;
-  --surface: #ffffff;
-  --line: #e1e5e0;
-  --line-strong: #c4cac3;
-  --fg: #0e1310;
-  --muted: #5a625c;
-  --panel: #0e1310;
-  --panel-fg: #e9ece8;
-  --panel-muted: #8a938c;
-  --panel-line: #242b26;
-  color-scheme: light;
+[data-theme="dark"] {
+  --canvas: #0a1628;
+  --surface: #0f1f38;
+  --line: #1b2e4b;
+  --line-strong: #2a4266;
+  --fg: #e6f1ff;
+  --muted: #8ea5c4;
+  --panel: #06101f;
+  --panel-fg: #e6f1ff;
+  --panel-muted: #7f97b8;
+  --panel-line: #1a2c47;
+  --accent: #22e4ff;
+  color-scheme: dark;
 }
 
-[data-theme="dark"] {
-  --canvas: #0b0e0c;
-  --surface: #121613;
-  --line: #232a25;
-  --line-strong: #37403a;
-  --fg: #e9ece8;
-  --muted: #9aa39c;
-  --panel: #050706;
-  --panel-fg: #e9ece8;
-  --panel-muted: #8a938c;
-  --panel-line: #1f2621;
-  color-scheme: dark;
+[data-theme="light"] {
+  --canvas: #f2f6fb;
+  --surface: #ffffff;
+  --line: #dce4ef;
+  --line-strong: #bccadd;
+  --fg: #0a1628;
+  --muted: #4d6180;
+  --panel: #0a1628;
+  --panel-fg: #e6f1ff;
+  --panel-muted: #8ea5c4;
+  --panel-line: #1f3456;
+  --accent: #0891b2;
+  color-scheme: light;
 }
 
 @theme {
   --color-neon-green: #39ff88;
-  --color-neon-blue: #33a1ff;
-  --color-on-neon: #0e1310;
+  --color-neon-cyan: #22e4ff;
+  --color-on-neon: #06101f;
   --ease-structural: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
@@ -54,6 +57,7 @@
   --color-panel-fg: var(--panel-fg);
   --color-panel-muted: var(--panel-muted);
   --color-panel-line: var(--panel-line);
+  --color-accent: var(--accent);
 
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
@@ -95,13 +99,15 @@
   height: 2.75rem;
   padding-inline: 1.25rem;
   border-radius: 0.5rem;
-  background-color: var(--fg);
-  color: var(--canvas);
+  background-color: var(--color-neon-cyan);
+  color: var(--color-on-neon);
   font-size: 0.9375rem;
-  font-weight: 500;
-  transition: opacity 150ms;
+  font-weight: 600;
+  transition:
+    opacity 150ms,
+    box-shadow 150ms;
   &:hover {
-    opacity: 0.85;
+    box-shadow: 0 0 0 1px var(--color-neon-cyan), 0 0 18px rgb(34 228 255 / 0.35);
   }
 }
 
@@ -118,7 +124,7 @@
   font-weight: 500;
   transition: border-color 150ms;
   &:hover {
-    border-color: var(--fg);
+    border-color: var(--color-neon-cyan);
   }
 }
 
@@ -162,12 +168,12 @@
   }
 
   ::selection {
-    background-color: var(--color-neon-green);
+    background-color: var(--color-neon-cyan);
     color: var(--color-on-neon);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-neon-blue);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
 

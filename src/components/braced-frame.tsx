@@ -38,7 +38,7 @@ export function BracedFrame() {
             <li key={pillar.id} className="flex">
               <Link
                 href={`/philosophy#${pillar.id}`}
-                className={`settle flex flex-1 p-3 text-sm font-medium text-panel-fg transition-colors hover:bg-neon-blue/10 hover:text-neon-green focus-visible:bg-neon-blue/10 focus-visible:text-neon-green focus-visible:outline-offset-[-3px] sm:p-4 sm:text-base ${labelPlacement[index]}`}
+                className={`settle flex flex-1 p-3 text-sm font-medium text-panel-fg transition-colors hover:bg-neon-cyan/10 hover:text-neon-green focus-visible:bg-neon-cyan/10 focus-visible:text-neon-green focus-visible:outline-offset-[-3px] sm:p-4 sm:text-base ${labelPlacement[index]}`}
                 style={delay(1500)}
               >
                 {pillar.name}
@@ -56,7 +56,7 @@ export function BracedFrame() {
         >
           <defs>
             <linearGradient id="brace-gradient" x1="0" y1="0" x2="400" y2="400" gradientUnits="userSpaceOnUse">
-              <stop offset="0" style={{ stopColor: "var(--color-neon-blue)" }} />
+              <stop offset="0" style={{ stopColor: "var(--color-neon-cyan)" }} />
               <stop offset="1" style={{ stopColor: "var(--color-neon-green)" }} />
             </linearGradient>
           </defs>
@@ -73,7 +73,7 @@ export function BracedFrame() {
           ))}
           <path
             d="M200 0V400M0 200H400"
-            className="settle stroke-neon-blue/60"
+            className="settle stroke-neon-cyan/60"
             strokeWidth="1.25"
             style={delay(700)}
           />

@@ -5,19 +5,19 @@ import GlyphPortal, { type GlyphPortalStyle } from "@/components/ui/glyph-portal
 
 /*
  * The opening scroll: the camera flies into the Koura wordmark and comes out
- * inside it. Colours are taken from the logo, a navy tile with a sky-blue
- * glyph, so the word reads as the logo mark at full width.
+ * inside it. Colours are taken from the logo, a navy tile with a neon cyan
+ * glyph, and the scene inside runs from cyan into the site's neon green.
  */
 
-const navy = "#0e2440";
-const sky = "#4fa6e0";
+const navy = "#0a1628";
+const cyan = "#22e4ff";
 const fallbackFamily = "Arial, sans-serif";
 
 const palette: GlyphPortalStyle = {
   "--gp-paper": navy,
-  "--gp-ink": "#e8f0fa",
-  "--gp-field": sky,
-  "--gp-foreground": "#0b1a30",
+  "--gp-ink": "#e6f1ff",
+  "--gp-field": cyan,
+  "--gp-foreground": "#06101f",
 };
 
 const steps = [
@@ -74,13 +74,13 @@ export function KouraPortal() {
             inset: 0,
             transform: "scale(var(--gp-field-scale,1))",
             background:
-              "radial-gradient(circle at 18% 10%, rgba(160,212,245,.7), transparent 36%), radial-gradient(circle at 82% 24%, rgba(255,255,255,.18), transparent 30%), radial-gradient(circle at 50% 80%, rgba(30,98,168,.45), transparent 46%), linear-gradient(135deg,#6bb8ec 0%,#4fa6e0 48%,#3a8fd0 100%)",
+              "radial-gradient(circle at 18% 12%, rgba(180,248,255,.55), transparent 34%), radial-gradient(circle at 80% 78%, rgba(57,255,136,.85), transparent 46%), linear-gradient(135deg,#22e4ff 0%,#2cf0d0 55%,#39ff88 100%)",
           }}
         />
       }
       front={
         <p
-          className="absolute inset-x-6 m-0 text-center text-sm text-[#9fb6d1]"
+          className="absolute inset-x-6 m-0 text-center text-sm text-[#8ea5c4]"
           style={{ bottom: "calc(100% - var(--gp-word-top, 35%) + 32px)" }}
         >
           Software built to carry load.
@@ -93,7 +93,7 @@ export function KouraPortal() {
         </h2>
         <ul className="grid gap-7 md:grid-cols-3 md:gap-14">
           {steps.map((step) => (
-            <li key={step.no} className="border-t border-[#0b1a30]/30 pt-4">
+            <li key={step.no} className="border-t border-[#06101f]/30 pt-4">
               <h3 className="text-lg font-semibold">
                 <span className="mr-3 font-mono text-xs tracking-[0.08em] opacity-70">{step.no}</span>
                 {step.title}

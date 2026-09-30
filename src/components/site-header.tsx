@@ -13,7 +13,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md [view-transition-name:site-header]">
       <div className="container-sheet flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2.5" aria-label="Kura, home">
-          <KuraMark className="size-[1.375rem]" />
+          <KuraMark className="size-[1.375rem] text-accent" />
           <span className="hidden text-lg font-semibold tracking-[-0.02em] min-[420px]:inline">Kura</span>
         </Link>
 
@@ -27,7 +27,7 @@ export function SiteHeader() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={`px-1.5 py-2 text-sm transition-colors sm:px-3.5 sm:text-[0.9375rem] ${
-                      active ? "text-fg" : "text-muted hover:text-fg"
+                      active ? "text-accent" : "text-muted hover:text-fg"
                     }`}
                   >
                     {item.label}
