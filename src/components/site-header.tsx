@@ -3,110 +3,118 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AnimatedNavFramer } from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { reveal } from "@/lib/reveal";
 import { navigation } from "@/lib/site";
 import { KuoraMark } from "./kuora-mark";
 import { ThemeToggle } from "./theme-toggle";
 
+const items = navigation.map((item) => ({ name: item.label, href: item.href }));
+
+/*
+ * The site navigation: a floating pill (AnimatedNavFramer) centred at the top
+ * of the screen, carrying the logo, the links, the theme toggle and Start a
+ * project. It shrinks to a round button while you scroll down. Below md the
+ * links and the call to action move into a sheet that slides in from the
+ * right.
+ */
 export function SiteHeader() {
   const pathname = usePathname();
-  // The menu belongs to the page it was opened on, so any navigation closes it.
-  const [openOn, setOpenOn] = useState<string | null>(null);
-  const open = openOn === pathname;
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpenOn(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header {...reveal(0, "down")} className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md [view-transition-name:site-header]">
-      <div className="container-sheet flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Kuora, home">
-          <KuoraMark className="size-8" />
-          <span className="text-lg font-semibold tracking-[-0.02em]">Kuora</span>
-        </Link>
+    <header
+      {...reveal(0, "down")}
+      className="pointer-events-none fixed inset-x-0 top-3 z-40 flex justify-center px-4 sm:top-5 [view-transition-name:site-header]"
+    >
+      <AnimatedNavFramer
+        brand={
+          <Link href="/" aria-label="Kuora, home" className="flex items-center gap-2 rounded-full pr-1">
+            <KuoraMark className="size-8" />
+            <span className="text-base font-semibold tracking-[-0.02em]">Kuora</span>
+          </Link>
+        }
+        items={items}
+        isActive={isActive}
+        actions={
+          <>
+            <ThemeToggle tone="pill" />
+            <Button asChild size="sm" className="hidden rounded-full px-4 font-semibold md:inline-flex">
+              <Link href="/start">Start a project</Link>
+            </Button>
+            <MobileMenu isActive={isActive} />
+          </>
+        }
+      />
+    </header>
+  );
+}
 
-        <nav aria-label="Primary" className="flex items-center">
-          <ul className="hidden items-center md:flex">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`px-3.5 py-2 text-[0.9375rem] transition-colors ${
-                    isActive(item.href) ? "text-accent" : "text-muted hover:text-fg"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center gap-2 md:ml-4 md:gap-3">
-            <ThemeToggle />
-            <Link href="/start" className="btn-primary hidden h-9 px-4 text-sm md:inline-flex">
-              Start a project
-            </Link>
-            <button
-              type="button"
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-              aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpenOn(open ? null : pathname)}
-              className="grid size-9 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-line-strong hover:text-fg md:hidden"
-            >
-              <svg viewBox="0 0 20 20" className="size-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                <path
-                  d={open ? "M5 5l10 10M15 5 5 15" : "M3 6h14M3 10h14M3 14h14"}
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </div>
-        </nav>
-      </div>
+function MobileMenu({ isActive }: { isActive: (href: string) => boolean }) {
+  const [open, setOpen] = useState(false);
+  const lenis = useLenis();
 
-      {/* Below md the links live here. The panel eases open by animating its row height. */}
-      <div
-        id="mobile-menu"
-        inert={!open}
-        className={`grid transition-[grid-template-rows] duration-300 ease-out md:hidden ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="container-sheet border-t border-line pt-2 pb-5">
-            <ul>
-              {navigation.map((item) => (
-                <li key={item.href} className="border-b border-line">
+  // Hold the smooth scroller still while the sheet covers the page.
+  useEffect(() => {
+    if (!lenis) return;
+    if (open) lenis.stop();
+    else lenis.start();
+  }, [open, lenis]);
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <button
+          type="button"
+          aria-label="Open menu"
+          className="grid size-9 place-items-center rounded-full text-muted transition-colors hover:text-fg md:hidden"
+        >
+          <Menu className="size-5" aria-hidden="true" />
+        </button>
+      </SheetTrigger>
+      <SheetContent side="right" data-lenis-prevent className="flex w-[85%] flex-col border-line">
+        <SheetHeader className="text-left">
+          <SheetTitle className="flex items-center gap-2.5">
+            <KuoraMark id="kuora-mark-sheet" className="size-8" />
+            Kuora
+          </SheetTitle>
+          <SheetDescription>Software built to carry load.</SheetDescription>
+        </SheetHeader>
+        <nav aria-label="Mobile" className="mt-4">
+          <ul className="border-t border-line">
+            {items.map((item) => (
+              <li key={item.href} className="border-b border-line">
+                <SheetClose asChild>
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    onClick={() => setOpenOn(null)}
                     className={`flex py-3.5 text-lg font-medium ${isActive(item.href) ? "text-accent" : "text-fg"}`}
                   >
-                    {item.label}
+                    {item.name}
                   </Link>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/start"
-              onClick={() => setOpenOn(null)}
-              className="btn-primary mt-5 w-full justify-center"
-            >
-              Start a project
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
+                </SheetClose>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <SheetClose asChild>
+          <Button asChild className="mt-auto w-full rounded-full font-semibold">
+            <Link href="/start">Start a project</Link>
+          </Button>
+        </SheetClose>
+      </SheetContent>
+    </Sheet>
   );
 }

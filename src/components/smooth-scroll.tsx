@@ -22,7 +22,7 @@ export function SmoothScroll() {
   );
 }
 
-// Clear the sticky header plus the same 2rem breathing room as scroll-mt-24.
+// Clear the floating nav plus 2rem of breathing room, close to scroll-mt-24.
 const GAP = 32;
 
 /*
@@ -56,7 +56,9 @@ function SectionSnap() {
       frame = requestAnimationFrame(() => {
         clear();
         if (!snap) return;
-        const header = document.querySelector<HTMLElement>("body > header")?.offsetHeight ?? 0;
+        // The nav floats, so clear its bottom edge. offsetTop ignores the reveal's translate.
+        const nav = document.querySelector<HTMLElement>("body > header");
+        const header = nav ? nav.offsetTop + nav.offsetHeight : 0;
         const targets = document.querySelectorAll<HTMLElement>(
           "main section:not(section section), main [data-snap], body > footer",
         );

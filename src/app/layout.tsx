@@ -59,7 +59,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader />
-        <main id="main" className="flex-1" {...reveal(100, "fade")}>
+        {/* pt-20 keeps content clear of the floating nav, which takes no space itself. */}
+        <main id="main" className="flex-1 pt-20" {...reveal(100, "fade")}>
           <PageTransition>{children}</PageTransition>
         </main>
         <SiteFooter />

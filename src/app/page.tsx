@@ -45,12 +45,12 @@ export default function HomePage() {
   return (
     <>
       {/*
-        The hero fills the first screen below the header (4rem plus its 1px
-        border), so the planner starts on the next one. The logo's K sits in
+        The hero fills the first screen below main's 5rem clearance for the
+        floating nav, so the planner starts on the next one. The logo's K sits in
         the same centred column as the text, its right edge on the column's
         edge, so text and mark read as one composition at every width.
       */}
-      <section className="relative isolate flex min-h-[calc(100svh-4.0625rem)] flex-col justify-center overflow-hidden">
+      <section className="relative isolate flex min-h-[calc(100svh-5rem)] flex-col justify-center overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
           <div className="container-sheet relative h-full">
             <KuoraMonogram
