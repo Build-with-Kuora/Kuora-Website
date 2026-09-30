@@ -13,8 +13,6 @@ export default function WorkPage() {
   return (
     <>
       <PageIntro
-        sheet="K-03"
-        label="Work"
         title="Systems in production."
         lead={
           <p>

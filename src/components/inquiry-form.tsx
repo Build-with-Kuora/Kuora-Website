@@ -11,7 +11,7 @@ const timelines = ["As soon as possible", "In the next 3 months", "In 3 to 6 mon
 const serviceOptions = [...services.map((service) => ({ id: service.id, name: service.name })), { id: "unsure", name: "Not sure yet" }];
 
 const field =
-  "w-full rounded-lg border border-line-strong bg-surface px-3.5 text-[0.9375rem] transition-colors placeholder:text-muted/70 hover:border-muted focus:border-fg";
+  "w-full rounded-lg border border-line-strong bg-surface px-3.5 text-[0.9375rem] transition-colors placeholder:text-muted/70 hover:border-muted focus:border-brand-sky";
 
 type Initial = { service?: string; plan?: string; size?: string };
 

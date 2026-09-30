@@ -39,3 +39,21 @@ export function PillarGlyph({ pillar, className }: { pillar: PillarId; className
     </svg>
   );
 }
+
+/**
+ * The logo's chevron on its own, at display size: mint at the upper tip,
+ * sky blue from the vertex down.
+ */
+export function KouraChevron({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 420 600" fill="none" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient id="koura-chevron" x1="360" y1="30" x2="110" y2="300" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#3be2a6" />
+          <stop offset="1" stopColor="#4fa6e2" />
+        </linearGradient>
+      </defs>
+      <path d="M360 30 100 300l260 270" stroke="url(#koura-chevron)" strokeWidth="64" />
+    </svg>
+  );
+}

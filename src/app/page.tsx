@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
-import { PillarGlyph } from "@/components/koura-mark";
+import { KouraChevron, PillarGlyph } from "@/components/koura-mark";
 import { ProcessBeam } from "@/components/process-beam";
 import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
@@ -43,31 +43,32 @@ const questions: Question[] = [
 export default function HomePage() {
   return (
     <>
-      <section className="container-sheet pt-16 pb-24 sm:pt-24 lg:pt-28 lg:pb-36">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <h1 className="display text-[clamp(3rem,7vw,6.5rem)] leading-[0.98] tracking-[-0.04em] lg:col-span-8">
+      {/* The logo's chevron opens the page, cropped by the right edge. */}
+      <section className="relative isolate overflow-hidden">
+        <KouraChevron className="absolute top-6 -right-40 -z-10 h-[26rem] opacity-35 sm:-right-28 sm:h-[34rem] md:-right-20 md:opacity-100 lg:top-10 lg:-right-16 lg:h-[40rem] xl:right-0" />
+        <div className="container-sheet pt-20 pb-20 sm:pt-28 lg:pt-36 lg:pb-32">
+          <h1 className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
             Software built to carry load.
           </h1>
-          <div className="lg:col-span-4">
-            <p className="max-w-xl text-lg text-muted">
-              Koura designs, builds and runs full-cycle software for companies that expect to grow.
-              We start from the data model and work up, so what we ship still holds when traffic,
-              data and your team multiply.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/start" className="btn-primary">
-                Start a project
-              </Link>
-              <Link href="/work" className="btn-secondary">
-                See the work
-              </Link>
-            </div>
+          <p className="mt-8 max-w-xl text-lg text-muted sm:text-xl">
+            Koura designs, builds and runs full-cycle software for companies that expect to grow.
+            We start from the data model and work up, so what we ship still holds when traffic,
+            data and your team multiply.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/start" className="btn-primary">
+              Start a project
+            </Link>
+            <Link href="/work" className="btn-secondary">
+              See the work
+            </Link>
           </div>
         </div>
-        <div className="mt-12 lg:mt-16">
-          <ProjectPlanner />
-        </div>
       </section>
+
+      <div className="container-sheet pb-24 lg:pb-36">
+        <ProjectPlanner />
+      </div>
 
       <section id="services" aria-labelledby="services-title" className="container-sheet scroll-mt-24 pb-24 lg:pb-36">
         <SectionHeading
@@ -122,7 +123,7 @@ export default function HomePage() {
             className="lg:col-span-4"
             lead="Four things every system we ship has to get right. Each carries part of the load, and none of them is optional."
           >
-            Four pillars, one frame.
+            Four pillars under every system.
           </SectionHeading>
           <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {pillars.map((pillar) => (

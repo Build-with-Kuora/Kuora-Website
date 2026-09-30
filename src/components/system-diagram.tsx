@@ -95,6 +95,7 @@ function NodeShape({ kind, x, y, tone }: { kind: NodeKind; x: number; y: number;
         y={y}
         width={NODE_W}
         height={NODE_H}
+        rx="4"
         className={palette[tone].nodes[kind]}
         strokeWidth="1.25"
         strokeDasharray={dashes[kind]}
@@ -163,7 +164,7 @@ export function SystemDiagram({
 export function DiagramLegend({ tone = "paper" }: { tone?: Tone }) {
   return (
     <ul
-      className={`flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.6875rem] tracking-[0.1em] uppercase ${
+      className={`flex flex-wrap gap-x-6 gap-y-2 text-xs ${
         tone === "panel" ? "text-panel-muted" : "text-muted"
       }`}
     >

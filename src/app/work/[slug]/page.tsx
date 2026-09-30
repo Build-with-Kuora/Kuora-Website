@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactBand } from "@/components/contact-band";
 import { PillarGlyph } from "@/components/koura-mark";
-import { RegistrationMarks } from "@/components/registration-marks";
 import { SectionHeading } from "@/components/section-heading";
 import { DiagramLegend, SystemDiagram } from "@/components/system-diagram";
 import { getPillar } from "@/lib/pillars";
@@ -42,29 +41,27 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
     <>
       <article>
         <header className="container-sheet pt-10 pb-14 sm:pt-14 lg:pb-20">
-          <div className="flex items-center justify-between gap-4 border-b border-line-strong pb-3">
-            <p className="label text-fg">Sheet K-03.{index + 1}</p>
-            <Link href="/work" className="label transition-colors hover:text-fg">
-              ← All work
-            </Link>
-          </div>
-          <p className="label mt-12 sm:mt-16">
-            Case study · {project.year} · {project.sector}
+          <Link href="/work" className="text-sm text-muted transition-colors hover:text-fg">
+            <span aria-hidden="true">←</span> All work
+          </Link>
+          <p className="mt-12 text-sm text-brand-mint sm:mt-16">
+            {project.sector}, {project.year}
           </p>
           <h1 className="display mt-5 text-[clamp(3rem,8vw,6.5rem)]">{project.name}</h1>
           <p className="mt-6 max-w-3xl text-xl font-medium tracking-[-0.01em] sm:text-2xl">{project.summary}</p>
 
-          <dl className="grid-hairline mt-12 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          <dl className="grid-hairline mt-12 grid-cols-2 overflow-hidden rounded-2xl sm:grid-cols-3 lg:grid-cols-5">
             {facts.map((fact) => (
               <div key={fact.term} className="p-5">
                 <dt className="label">{fact.term}</dt>
                 <dd className="mt-2 text-[0.9375rem]">{fact.value}</dd>
               </div>
             ))}
-            <div className="p-5">
+            {/* Five facts: the last one spans the gap its row would otherwise leave. */}
+            <div className="col-span-2 p-5 lg:col-span-1">
               <dt className="label">Focus</dt>
               <dd className="mt-2 flex items-center gap-2 text-[0.9375rem]">
-                <PillarGlyph pillar={project.focus} className="size-3.5 text-fg" />
+                <PillarGlyph pillar={project.focus} className="size-3.5 text-brand-mint" />
                 <Link href={`/philosophy#${pillar.id}`} className="link-line">
                   {pillar.name}
                 </Link>
@@ -74,15 +71,14 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         </header>
 
         <section aria-labelledby="architecture" className="container-sheet pb-24 lg:pb-32">
-          <figure className="relative border border-panel-line bg-panel">
-            <RegistrationMarks />
+          <figure className="overflow-hidden rounded-2xl border border-panel-line bg-panel">
             <figcaption className="flex items-center justify-between gap-4 border-b border-panel-line px-5 py-3 sm:px-7">
               <h2
                 id="architecture"
                 className="label flex items-center gap-2 text-panel-muted"
               >
-                <span aria-hidden="true" className="status-dot size-1.5 bg-brand-mint" />
-                Fig. 01 · Architecture · <span className="text-brand-mint">{project.diagram.nodes.length} components</span>
+                <span aria-hidden="true" className="status-dot size-1.5 rounded-full bg-brand-mint" />
+                Architecture, <span className="text-brand-mint">{project.diagram.nodes.length} components</span>
               </h2>
             </figcaption>
             <div className="overflow-x-auto p-5 sm:p-8 lg:p-12">
@@ -101,15 +97,15 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
         <section aria-label="Problem and approach">
           <div className="container-sheet grid gap-14 pb-24 lg:grid-cols-12 lg:gap-10 lg:pb-32">
-            <div className="border-t-2 border-fg pt-3 lg:col-span-5">
-              <p className="label text-fg">The problem</p>
+            <div className="border-t border-line-strong pt-4 lg:col-span-5">
+              <h2 className="text-sm text-brand-mint">The problem</h2>
               <p className="mt-6 text-2xl leading-snug font-medium tracking-[-0.015em]">{project.challenge}</p>
             </div>
-            <div className="border-t-2 border-fg pt-3 lg:col-span-6 lg:col-start-7">
-              <p className="label text-fg">What we built</p>
-              <ol className="mt-6 border-t border-line-strong">
+            <div className="border-t border-line-strong pt-4 lg:col-span-6 lg:col-start-7">
+              <h2 className="text-sm text-brand-mint">What we built</h2>
+              <ol className="mt-6 border-t border-line">
                 {project.approach.map((step, stepIndex) => (
-                  <li key={step} className="grid grid-cols-[2.5rem_1fr] gap-2 border-b border-line-strong py-4 text-[0.9375rem]">
+                  <li key={step} className="grid grid-cols-[2.5rem_1fr] gap-2 border-b border-line py-4 text-[0.9375rem]">
                     <span className="label pt-1">
                       {String(stepIndex + 1).padStart(2, "0")}
                     </span>
@@ -126,9 +122,9 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             <SectionHeading id="results">
               What changed.
             </SectionHeading>
-            <dl className="mt-12 grid border border-fg sm:grid-cols-3">
+            <dl className="mt-12 grid overflow-hidden rounded-2xl border border-line sm:grid-cols-3">
               {project.outcomes.map((outcome) => (
-                <div key={outcome.label} className="flex flex-col-reverse gap-2 border-fg bg-surface p-6 not-last:border-b sm:not-last:border-r sm:not-last:border-b-0">
+                <div key={outcome.label} className="flex flex-col-reverse gap-2 border-line bg-surface p-6 not-last:border-b sm:not-last:border-r sm:not-last:border-b-0">
                   <dt className="text-[0.9375rem] text-muted">{outcome.label}</dt>
                   <dd className="display text-5xl">{outcome.value}</dd>
                 </div>
@@ -137,7 +133,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             <h3 className="label mt-12">Stack</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((tool) => (
-                <li key={tool} className="label border border-fg px-3 py-2 text-fg">
+                <li key={tool} className="rounded-full border border-line-strong px-3.5 py-1.5 text-sm">
                   {tool}
                 </li>
               ))}
@@ -146,14 +142,14 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         </section>
       </article>
 
-      <nav aria-label="Next project" className="border-t border-fg">
+      <nav aria-label="Next project" className="border-t border-line">
         <Link
           href={`/work/${next.slug}`}
           className="group container-sheet flex flex-wrap items-end justify-between gap-4 py-16"
         >
-          <span className="label text-fg">Next sheet · K-03.{((index + 1) % projects.length) + 1}</span>
-          <span className="display text-[clamp(2.25rem,5vw,3.75rem)] group-hover:underline group-hover:decoration-2 group-hover:underline-offset-8">
-            {next.name} →
+          <span className="text-sm text-muted">Next project</span>
+          <span className="display text-[clamp(2.25rem,5vw,3.75rem)] transition-colors group-hover:text-accent">
+            {next.name} <span aria-hidden="true">→</span>
           </span>
         </Link>
       </nav>

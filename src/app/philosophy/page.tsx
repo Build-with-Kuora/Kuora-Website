@@ -4,7 +4,6 @@ import { BracedFrame } from "@/components/braced-frame";
 import { ContactBand } from "@/components/contact-band";
 import { PageIntro } from "@/components/page-intro";
 import { PillarFrame } from "@/components/pillar-frame";
-import { RegistrationMarks } from "@/components/registration-marks";
 import { SectionHeading } from "@/components/section-heading";
 
 export const metadata: Metadata = {
@@ -17,8 +16,6 @@ export default function PhilosophyPage() {
   return (
     <>
       <PageIntro
-        sheet="K-01"
-        label="Philosophy"
         title="Structure first. Everything else rests on it."
         lead={
           <>
@@ -33,12 +30,8 @@ export default function PhilosophyPage() {
           </>
         }
         aside={
-          <figure className="relative border border-panel-line bg-panel p-6 text-panel-fg sm:p-8">
-            <RegistrationMarks />
-            <figcaption className="flex items-baseline justify-between gap-4">
-              <span className="label text-panel-muted">Fig. 01 · The frame</span>
-              <span className="label text-brand-mint">Select a quadrant</span>
-            </figcaption>
+          <figure className="rounded-2xl border border-panel-line bg-panel p-6 text-panel-fg sm:p-8">
+            <figcaption className="text-sm text-panel-muted">The four pillars. Select one to read it.</figcaption>
             <div className="mx-auto mt-4 max-w-sm">
               <BracedFrame />
             </div>

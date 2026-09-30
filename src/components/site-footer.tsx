@@ -77,7 +77,7 @@ export function SiteFooter() {
 
       <div className="relative border-t border-panel-line bg-panel">
         <div className="container-sheet flex items-center justify-between gap-4 py-4">
-          <p className="text-sm text-panel-muted">© {new Date().getFullYear()} Koura · Structure first</p>
+          <p className="text-sm text-panel-muted">© {new Date().getFullYear()} Koura</p>
           <ThemeToggle tone="panel" />
         </div>
       </div>
