@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
-import { KouraChevron, PillarGlyph } from "@/components/koura-mark";
+import { KouraMonogram, PillarGlyph } from "@/components/koura-mark";
 import { ProcessBeam } from "@/components/process-beam";
 import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
@@ -46,11 +46,19 @@ export default function HomePage() {
     <>
       {/*
         The hero fills the first screen below the header (4rem plus its 1px
-        border), so the planner starts on the next one. The logo's chevron
-        opens the page, cropped by the right edge.
+        border), so the planner starts on the next one. The logo's K sits in
+        the same centred column as the text, its right edge on the column's
+        edge, so text and mark read as one composition at every width.
       */}
       <section className="relative isolate flex min-h-[calc(100svh-4.0625rem)] flex-col justify-center overflow-hidden">
-        <KouraChevron drawDelay={250} className="absolute top-1/2 -right-40 -z-10 h-[26rem] -translate-y-1/2 opacity-35 sm:-right-28 sm:h-[34rem] md:-right-24 lg:-right-16 lg:h-[40rem] lg:opacity-100 xl:right-0" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+          <div className="container-sheet relative h-full">
+            <KouraMonogram
+              drawDelay={250}
+              className="absolute top-1/2 -right-40 h-[24rem] -translate-y-1/2 opacity-15 sm:-right-28 sm:h-[30rem] lg:right-10 lg:h-[24rem] lg:opacity-100 xl:h-[30rem] 2xl:h-[34rem]"
+            />
+          </div>
+        </div>
         <div className="container-sheet py-16 sm:py-20">
           <h1 {...reveal(200)} className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
             Software built to carry load.

@@ -42,29 +42,33 @@ export function PillarGlyph({ pillar, className }: { pillar: PillarId; className
 }
 
 /**
- * The logo's chevron on its own, at display size: mint at the upper tip,
- * sky blue from the vertex down. With `drawDelay`, it draws itself tip to tip
- * as the page reveals after the loading screen.
+ * The logo's K at display size, for the hero watermark: the stem in the text
+ * colour (white on navy, navy on light) and the chevron in the logo's
+ * mint-to-sky gradient, spaced like the mark. With `drawDelay`, the stem
+ * draws itself top to bottom and then the chevron tip to tip, as the page
+ * reveals after the loading screen.
  */
-export function KouraChevron({ className, drawDelay }: { className?: string; drawDelay?: number }) {
-  const draw =
+export function KouraMonogram({ className, drawDelay }: { className?: string; drawDelay?: number }) {
+  const draw = (delay: number) =>
     drawDelay === undefined
       ? {}
       : {
           pathLength: 1,
           strokeDasharray: 1,
           "data-reveal-draw": "",
-          style: { "--reveal-delay": `${drawDelay}ms` } as CSSProperties,
+          style: { "--reveal-delay": `${drawDelay + delay}ms` } as CSSProperties,
         };
   return (
-    <svg viewBox="0 0 420 600" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 470 600" fill="none" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="koura-chevron" x1="360" y1="30" x2="110" y2="300" gradientUnits="userSpaceOnUse">
+        <linearGradient id="koura-monogram" x1="433" y1="30" x2="183" y2="300" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#3be2a6" />
           <stop offset="1" stopColor="#4fa6e2" />
         </linearGradient>
       </defs>
-      <path d="M360 30 100 300l260 270" stroke="url(#koura-chevron)" strokeWidth="64" {...draw} />
+      {/* One stroke-width of air between the stem and the chevron's outer edge, as in the logo. */}
+      <path d="M32 30v540" className="stroke-fg" strokeWidth="64" {...draw(0)} />
+      <path d="M433 30 173 300l260 270" stroke="url(#koura-monogram)" strokeWidth="64" {...draw(350)} />
     </svg>
   );
 }
