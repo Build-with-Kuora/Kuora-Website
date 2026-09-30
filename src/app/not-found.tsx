@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <section className="container-sheet py-28 text-center sm:py-40">
-      <title>Page not found | Kura</title>
+      <title>Page not found | Koura</title>
       <p className="label">Error 404</p>
       <h1 className="display mx-auto mt-6 max-w-3xl text-[clamp(2.5rem,5vw,4rem)]">
         This page is not on any of our drawings.

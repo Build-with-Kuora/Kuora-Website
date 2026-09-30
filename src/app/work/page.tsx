@@ -6,7 +6,7 @@ import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Systems Kura has designed, built and run, drawn as their architecture.",
+  description: "Systems Koura has designed, built and run, drawn as their architecture.",
 };
 
 export default function WorkPage() {

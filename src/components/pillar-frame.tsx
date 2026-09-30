@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { pillars } from "@/lib/pillars";
-import { PillarGlyph } from "./kura-mark";
+import { PillarGlyph } from "./koura-mark";
 
 // Borders that turn four cells into one frame with a shared centre.
 const cellBorders = ["border-b lg:border-r", "border-b", "border-b lg:border-r lg:border-b-0", ""];
 
 /**
- * The four pillars laid out as the Kura frame itself. With `detailed`, each
+ * The four pillars laid out as the Koura frame itself. With `detailed`, each
  * quadrant carries the full principle, explanation and practices.
  */
 export function PillarFrame({ detailed = false }: { detailed?: boolean }) {

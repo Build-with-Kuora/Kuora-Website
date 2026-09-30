@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { navigation, site } from "@/lib/site";
-import { KuraMark } from "./kura-mark";
+import { KouraMark } from "./koura-mark";
 import { ThemeToggle } from "./theme-toggle";
 
 const capabilities = [
@@ -17,8 +17,8 @@ export function SiteFooter() {
       <div className="container-sheet grid gap-12 pt-16 pb-12 md:grid-cols-12">
         <div className="md:col-span-5">
           <div className="flex items-center gap-2.5">
-            <KuraMark className="size-[1.375rem] text-neon-cyan" />
-            <span className="text-lg font-semibold tracking-[-0.02em]">Kura</span>
+            <KouraMark className="size-[1.375rem] text-neon-cyan" />
+            <span className="text-lg font-semibold tracking-[-0.02em]">Koura</span>
           </div>
           <p className="mt-5 max-w-xs text-[0.9375rem] text-panel-muted">
             Scalable systems and full-cycle software development, from the first schema to the
@@ -71,13 +71,13 @@ export function SiteFooter() {
       */}
       <div aria-hidden="true" className="container-sheet select-none">
         <p className="display -mb-[0.2em] text-[clamp(6rem,26vw,24rem)] leading-[0.8] text-panel [paint-order:stroke_fill] [-webkit-text-stroke:3px_rgb(57_255_136/0.45)]">
-          Kura
+          Koura
         </p>
       </div>
 
       <div className="relative border-t border-panel-line bg-panel">
         <div className="container-sheet flex items-center justify-between gap-4 py-4">
-          <p className="text-sm text-panel-muted">© {new Date().getFullYear()} Kura · Structure first</p>
+          <p className="text-sm text-panel-muted">© {new Date().getFullYear()} Koura · Structure first</p>
           <ThemeToggle tone="panel" />
         </div>
       </div>

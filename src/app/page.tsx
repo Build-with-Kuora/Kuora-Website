@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
-import { PillarGlyph } from "@/components/kura-mark";
+import { PillarGlyph } from "@/components/koura-mark";
 import { ProcessBeam } from "@/components/process-beam";
 import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
@@ -50,7 +50,7 @@ export default function HomePage() {
           </h1>
           <div className="lg:col-span-4">
             <p className="max-w-xl text-lg text-muted">
-              Kura designs, builds and runs full-cycle software for companies that expect to grow.
+              Koura designs, builds and runs full-cycle software for companies that expect to grow.
               We start from the data model and work up, so what we ship still holds when traffic,
               data and your team multiply.
             </p>
@@ -120,7 +120,7 @@ export default function HomePage() {
           <SectionHeading
             id="pillars"
             className="lg:col-span-4"
-            lead="Kura comes from quadro, a square frame. Four members, each carrying part of the load, and none of them optional."
+            lead="Four things every system we ship has to get right. Each carries part of the load, and none of them is optional."
           >
             Four pillars, one frame.
           </SectionHeading>

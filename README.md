@@ -1,6 +1,6 @@
-# Kura website
+# Koura website
 
-Marketing site for Kura, built with Next.js (App Router), React, TypeScript and Tailwind CSS v4.
+Marketing site for Koura, built with Next.js (App Router), React, TypeScript and Tailwind CSS v4.
 
 ```bash
 npm install
@@ -26,7 +26,7 @@ npm run build   # static production build
 
 ## Design system
 
-The visual language is a set of engineering drawings: every page is a numbered sheet (K-00 to K-03), sections open with a heavy cut line, and the Kura frame (a braced 2 × 2 square) appears throughout.
+The visual language is a set of engineering drawings: every page is a numbered sheet (K-00 to K-03), sections open with a heavy cut line, and the Koura frame (a braced 2 × 2 square) appears throughout.
 
 - Theme tokens live in `src/app/globals.css`: `canvas`, `surface`, `line`, `fg` and `muted` switch between the light (concrete) and dark themes; `panel` tokens stay dark in both. `neon-green` is the action and load colour, `neon-blue` marks structure.
 - The theme defaults to light. `ThemeToggle` switches it and saves the choice to `localStorage`; an inline script in `layout.tsx` applies it before first paint.

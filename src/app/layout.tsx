@@ -20,8 +20,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kura: software built to carry load",
-    template: "%s | Kura",
+    default: "Koura: software built to carry load",
+    template: "%s | Koura",
   },
   description: site.description,
 };

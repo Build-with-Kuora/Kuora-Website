@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/section-heading";
 export const metadata: Metadata = {
   title: "Philosophy",
   description:
-    "The four pillars Kura builds on: architecture, performance, interface and scale.",
+    "The four pillars Koura builds on: architecture, performance, interface and scale.",
 };
 
 export default function PhilosophyPage() {
@@ -23,12 +23,12 @@ export default function PhilosophyPage() {
         lead={
           <>
             <p>
-              Kura comes from <i className="text-fg">quadro</i>: a square frame of four members.
-              Each one carries part of the load, and none of them is optional.
+              Every system we ship stands on four pillars: architecture, performance, interface
+              and scale. Each one carries part of the load, and none of them is optional.
             </p>
             <p>
-              We build software the same way. Every system we ship stands on four pillars, and we
-              give each of them equal weight from the first day of a project.
+              We give each of them equal weight from the first day of a project, because a system
+              is only as strong as the one that was left for later.
             </p>
           </>
         }

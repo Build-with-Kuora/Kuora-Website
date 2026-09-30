@@ -1,13 +1,13 @@
 import type { PillarId } from "@/lib/pillars";
 
 /*
- * The Kura frame: a square divided into four, with each quadrant braced by a
+ * The Koura frame: a square divided into four, with each quadrant braced by a
  * diagonal. Together the braces form a diamond, so no member carries the load
  * alone. The same geometry is used for the logo, the frame figure and the
  * pillar glyphs.
  */
 
-export function KuraMark({ className }: { className?: string }) {
+export function KouraMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true" strokeLinecap="square">
       <rect x="1.5" y="1.5" width="21" height="21" className="stroke-current" strokeWidth="2" />
