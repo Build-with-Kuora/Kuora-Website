@@ -1,4 +1,4 @@
-// The stages of a Koura engagement, in order.
+// The stages of a Kuora engagement, in order.
 export const lifecycle = [
   {
     stage: "Discover",

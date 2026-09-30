@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
-import { KouraSplash } from "@/components/koura-splash";
+import { KuoraSplash } from "@/components/kuora-splash";
 import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -22,8 +22,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Koura: software built to carry load",
-    template: "%s | Koura",
+    default: "Kuora: software built to carry load",
+    template: "%s | Kuora",
   },
   description: site.description,
 };
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="flex min-h-full flex-col">
-        <KouraSplash />
+        <KuoraSplash />
         <SmoothScroll />
         <a
           href="#main"

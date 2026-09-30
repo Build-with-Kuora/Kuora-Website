@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import GlyphPortal, { type GlyphPortalStyle } from "@/components/ui/glyph-portal";
 
 /*
- * The loading screen: the KOURA wordmark, then the camera flies into the U by
+ * The loading screen: the KUORA wordmark, then the camera flies into the O by
  * itself and the site fades in behind it. The portal is scroll-driven, so it
  * sits in its own overflow-hidden scroller and the splash drives scrollTop;
  * visitors never scroll it. Plays on every full page load.
@@ -24,13 +24,13 @@ const palette: GlyphPortalStyle = {
 };
 
 const hold = 700; // the word rests before the camera moves
-const flight = 3200; // the zoom into the U
+const flight = 3200; // the zoom into the O
 const fade = 900; // the splash dissolves into the page
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
 
-export function KouraSplash() {
+export function KuoraSplash() {
   const [phase, setPhase] = useState<"cover" | "play" | "fade" | "done">("cover");
   const [family, setFamily] = useState<string | null>(null);
   const scroller = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ export function KouraSplash() {
     const site = getComputedStyle(document.documentElement).getPropertyValue("--font-instrument-sans").trim();
     const wanted = site ? `${site}, ${fallbackFamily}` : fallbackFamily;
     const timeout = window.setTimeout(() => finish(fallbackFamily), 1600);
-    document.fonts.load(`700 100px ${wanted}`, "KOURA").then(
+    document.fonts.load(`700 100px ${wanted}`, "KUORA").then(
       () => finish(wanted),
       () => finish(fallbackFamily),
     );
@@ -78,7 +78,7 @@ export function KouraSplash() {
     };
   }, [phase]);
 
-  // Fly into the U, then dissolve.
+  // Fly into the O, then dissolve.
   useEffect(() => {
     if (phase !== "play") return;
     let cancelled = false;
@@ -123,23 +123,23 @@ export function KouraSplash() {
 
   return (
     <div
-      data-koura-splash
+      data-kuora-splash
       data-lenis-prevent
       aria-hidden="true"
       className="fixed inset-0 z-[100] transition-opacity ease-out motion-reduce:transition-none"
       style={{ background: navy, opacity: phase === "fade" ? 0 : 1, pointerEvents: phase === "fade" ? "none" : undefined, transitionDuration: `${fade}ms` }}
     >
       <style>{`
-        [data-koura-splash] [data-gp-caption],[data-koura-splash] [data-gp-touch-picker]{display:none}
+        [data-kuora-splash] [data-gp-caption],[data-kuora-splash] [data-gp-touch-picker]{display:none}
       `}</style>
       <noscript>
-        <style>{`[data-koura-splash]{display:none}`}</style>
+        <style>{`[data-kuora-splash]{display:none}`}</style>
       </noscript>
       {family && (
         <div ref={scroller} className="h-svh overflow-hidden">
           <GlyphPortal
-            word="KOURA"
-            focusChar="U"
+            word="KUORA"
+            focusChar="O"
             interactive={false}
             fontFamily={family}
             fontWeight={700}

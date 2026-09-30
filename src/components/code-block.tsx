@@ -3,8 +3,8 @@ import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
 // Highlighting runs on the server at build time; no highlighter ships to the browser.
 
-const kouraTheme: ThemeRegistration = {
-  name: "koura",
+const kuoraTheme: ThemeRegistration = {
+  name: "kuora",
   type: "dark",
   colors: {
     "editor.background": "#0a1b33",
@@ -32,7 +32,7 @@ let highlighter: Promise<HighlighterCore> | undefined;
 
 function getHighlighter() {
   highlighter ??= createHighlighterCore({
-    themes: [kouraTheme],
+    themes: [kuoraTheme],
     langs: [import("shiki/langs/prisma.mjs"), import("shiki/langs/typescript.mjs")],
     engine: createJavaScriptRegexEngine(),
   });
@@ -48,7 +48,7 @@ export async function CodeBlock({
   lang: "prisma" | "typescript";
   filename: string;
 }) {
-  const html = (await getHighlighter()).codeToHtml(code.trim(), { lang, theme: "koura" });
+  const html = (await getHighlighter()).codeToHtml(code.trim(), { lang, theme: "kuora" });
 
   return (
     <figure className="flex min-w-0 flex-col border border-panel-line bg-panel">

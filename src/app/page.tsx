@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
-import { KouraMonogram, PillarGlyph } from "@/components/koura-mark";
+import { KuoraMonogram, PillarGlyph } from "@/components/kuora-mark";
 import { ProcessBeam } from "@/components/process-beam";
 import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
@@ -53,7 +53,7 @@ export default function HomePage() {
       <section className="relative isolate flex min-h-[calc(100svh-4.0625rem)] flex-col justify-center overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
           <div className="container-sheet relative h-full">
-            <KouraMonogram
+            <KuoraMonogram
               drawDelay={250}
               className="absolute top-1/2 right-0 h-[min(64svh,30rem)] translate-x-1/4 -translate-y-1/2 opacity-[0.12] sm:right-6 lg:right-10 lg:h-[min(80svh,52rem)] lg:translate-x-0 lg:opacity-[0.18]"
             />
@@ -64,7 +64,7 @@ export default function HomePage() {
             Software built to carry load.
           </h1>
           <p {...reveal(360)} className="mt-8 max-w-xl text-lg text-muted sm:text-xl">
-            Koura designs, builds and runs full-cycle software for companies that expect to grow.
+            Kuora designs, builds and runs full-cycle software for companies that expect to grow.
             We start from the data model and work up, so what we ship still holds when traffic,
             data and your team multiply.
           </p>

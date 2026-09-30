@@ -242,7 +242,7 @@
 }
 
 /*
- * The reveal after the loading screen. KouraSplash sets data-reveal="pending"
+ * The reveal after the loading screen. KuoraSplash sets data-reveal="pending"
  * on <html> while it covers the page and "in" the moment it starts to fade,
  * so the page rises into place under the dissolving cover. Without
  * JavaScript the attribute is never set and nothing is hidden; with reduced

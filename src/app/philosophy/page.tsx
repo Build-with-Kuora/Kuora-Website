@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/section-heading";
 export const metadata: Metadata = {
   title: "Philosophy",
   description:
-    "The four pillars Koura builds on: architecture, performance, interface and scale.",
+    "The four pillars Kuora builds on: architecture, performance, interface and scale.",
 };
 
 export default function PhilosophyPage() {

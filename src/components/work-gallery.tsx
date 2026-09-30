@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { pillars, type PillarId } from "@/lib/pillars";
 import type { Project } from "@/lib/projects";
-import { PillarGlyph } from "./koura-mark";
+import { PillarGlyph } from "./kuora-mark";
 import { ProjectCard } from "./project-card";
 
 export function WorkGallery({ projects }: { projects: Project[] }) {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CodeBlock } from "@/components/code-block";
 import { ContactBand } from "@/components/contact-band";
-import { PillarGlyph } from "@/components/koura-mark";
+import { PillarGlyph } from "@/components/kuora-mark";
 import { PageIntro } from "@/components/page-intro";
 import { ProcessBeam } from "@/components/process-beam";
 import { SectionHeading } from "@/components/section-heading";
@@ -10,7 +10,7 @@ import { getPillar, type PillarId } from "@/lib/pillars";
 export const metadata: Metadata = {
   title: "Systems",
   description:
-    "Koura's full-stack capabilities: Node.js services, Prisma data access and PostgreSQL, from interface to foundation.",
+    "Kuora's full-stack capabilities: Node.js services, Prisma data access and PostgreSQL, from interface to foundation.",
 };
 
 type Floor = {

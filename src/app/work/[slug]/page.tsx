@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactBand } from "@/components/contact-band";
-import { PillarGlyph } from "@/components/koura-mark";
+import { PillarGlyph } from "@/components/kuora-mark";
 import { SectionHeading } from "@/components/section-heading";
 import { DiagramLegend, SystemDiagram } from "@/components/system-diagram";
 import { getPillar } from "@/lib/pillars";

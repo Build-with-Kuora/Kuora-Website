@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { pillars } from "@/lib/pillars";
-import { PillarGlyph } from "./koura-mark";
+import { PillarGlyph } from "./kuora-mark";
 
 // Borders that split the grid into four cells without doubling any edge.
 const cellBorders = ["border-b lg:border-r", "border-b", "border-b lg:border-r lg:border-b-0", ""];

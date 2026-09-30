@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { reveal } from "@/lib/reveal";
 import { navigation } from "@/lib/site";
-import { KouraMark } from "./koura-mark";
+import { KuoraMark } from "./kuora-mark";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
@@ -28,9 +28,9 @@ export function SiteHeader() {
   return (
     <header {...reveal(0, "down")} className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md [view-transition-name:site-header]">
       <div className="container-sheet flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Koura, home">
-          <KouraMark className="size-8" />
-          <span className="text-lg font-semibold tracking-[-0.02em]">Koura</span>
+        <Link href="/" className="flex items-center gap-2.5" aria-label="Kuora, home">
+          <KuoraMark className="size-8" />
+          <span className="text-lg font-semibold tracking-[-0.02em]">Kuora</span>
         </Link>
 
         <nav aria-label="Primary" className="flex items-center">

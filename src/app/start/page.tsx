@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Start a project",
-  description: "Tell Koura what you are building. We reply with questions, then a written proposal for the first phase.",
+  description: "Tell Kuora what you are building. We reply with questions, then a written proposal for the first phase.",
 };
 
 const steps = [

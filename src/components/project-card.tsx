@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getPillar } from "@/lib/pillars";
 import type { Project } from "@/lib/projects";
-import { PillarGlyph } from "./koura-mark";
+import { PillarGlyph } from "./kuora-mark";
 import { SystemDiagram } from "./system-diagram";
 
 export function ProjectCard({

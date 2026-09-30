@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { PillarId } from "@/lib/pillars";
 
 /*
- * The Koura K, measured from the logo artwork on its 60-unit grid. The stem
+ * The Kuora K, measured from the logo artwork on its 60-unit grid. The stem
  * and the chevron share a top (13) and bottom (47), sit 2 units apart at the
  * vertex, and the chevron's tips are cut flat. The chevron runs from mint at
  * its upper tip into sky blue.
@@ -20,7 +20,7 @@ function ChevronGradient({ id }: { id: string }) {
 }
 
 /** The logo itself: the K on its navy tile. */
-export function KouraMark({ className, id = "koura-mark" }: { className?: string; id?: string }) {
+export function KuoraMark({ className, id = "kuora-mark" }: { className?: string; id?: string }) {
   return (
     <svg viewBox="0 0 60 60" className={className} aria-hidden="true">
       <defs>
@@ -54,14 +54,14 @@ export function PillarGlyph({ pillar, className }: { pillar: PillarId; className
 
 /**
  * The logo's K without its tile, at display size, for the hero watermark.
- * Same geometry as KouraMark, cropped to the glyph; the stem takes the text
+ * Same geometry as KuoraMark, cropped to the glyph; the stem takes the text
  * colour so it stays visible in the light theme. With `drawDelay`, the stem
  * draws top to bottom and then the chevron tip to tip, as the page reveals
  * after the loading screen. The chevron is drawn as a wide stroke along its
  * centre line and clipped to the exact outline, so its flat tips stay true
  * while it draws.
  */
-export function KouraMonogram({ className, drawDelay }: { className?: string; drawDelay?: number }) {
+export function KuoraMonogram({ className, drawDelay }: { className?: string; drawDelay?: number }) {
   const draw = (delay: number) =>
     drawDelay === undefined
       ? {}
@@ -74,17 +74,17 @@ export function KouraMonogram({ className, drawDelay }: { className?: string; dr
   return (
     <svg viewBox="14 13 34 34" fill="none" className={className} aria-hidden="true">
       <defs>
-        <ChevronGradient id="koura-monogram-gradient" />
-        <clipPath id="koura-monogram-chevron">
+        <ChevronGradient id="kuora-monogram-gradient" />
+        <clipPath id="kuora-monogram-chevron">
           <path d={CHEVRON} />
         </clipPath>
       </defs>
       <path d={`M${STEM.x + STEM.width / 2} ${STEM.y}v${STEM.height}`} className="stroke-fg" strokeWidth={STEM.width} {...draw(0)} />
       <path
         d="M47.5 9 26.5 30l21 21"
-        stroke="url(#koura-monogram-gradient)"
+        stroke="url(#kuora-monogram-gradient)"
         strokeWidth="10"
-        clipPath="url(#koura-monogram-chevron)"
+        clipPath="url(#kuora-monogram-chevron)"
         {...draw(350)}
       />
     </svg>

@@ -27,7 +27,7 @@ const joints = [
   [0, 400], [200, 400], [400, 400],
 ];
 
-/** The Koura frame, with one pillar per quadrant. Drawn for a dark panel. */
+/** The Kuora frame, with one pillar per quadrant. Drawn for a dark panel. */
 export function BracedFrame() {
   return (
     <figure className="w-full">

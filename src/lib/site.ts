@@ -1,9 +1,9 @@
 export const site = {
-  name: "Koura",
+  name: "Kuora",
   description:
-    "Koura is a software team that designs, builds and runs scalable systems, from the database schema to the interface.",
+    "Kuora is a software team that designs, builds and runs scalable systems, from the database schema to the interface.",
   // Placeholder address. Replace with the team's real inbox before launch.
-  email: "hello@koura.dev",
+  email: "hello@kuora.dev",
 };
 
 export const navigation = [
