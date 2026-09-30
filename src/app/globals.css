@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* The animate-in / slide-in utilities shadcn components (Sheet) rely on. */
+@import "tw-animate-css";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
@@ -61,6 +63,30 @@
   --color-panel-muted: var(--panel-muted);
   --color-panel-line: var(--panel-line);
   --color-accent: var(--accent);
+
+  /*
+   * shadcn/ui token names, pointed at the Kuora palette so components pasted
+   * into components/ui come out navy, sky and mint rather than shadcn grey.
+   * `muted` and `accent` above keep their site meaning (muted text, the
+   * accent colour); shadcn's accent hover therefore fills with sky blue.
+   */
+  --color-background: var(--canvas);
+  --color-foreground: var(--fg);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--fg);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--fg);
+  --color-primary: var(--color-brand-sky);
+  --color-primary-foreground: var(--color-on-brand);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--fg);
+  --color-muted-foreground: var(--muted);
+  --color-accent-foreground: var(--color-on-brand);
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--line);
+  --color-input: var(--line-strong);
+  --color-ring: var(--accent);
 
   --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
