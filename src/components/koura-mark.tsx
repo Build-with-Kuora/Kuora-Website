@@ -2,22 +2,33 @@ import type { CSSProperties } from "react";
 import type { PillarId } from "@/lib/pillars";
 
 /*
- * The Koura logo: a navy tile with a white stem and a chevron that runs from
- * mint at its tip into sky blue, together reading as a K and an opening
- * angle bracket. Drawn on a 60-unit grid to match the source artwork.
+ * The Koura K, measured from the logo artwork on its 60-unit grid. The stem
+ * and the chevron share a top (13) and bottom (47), sit 2 units apart at the
+ * vertex, and the chevron's tips are cut flat. The chevron runs from mint at
+ * its upper tip into sky blue.
  */
+const STEM = { x: 14, y: 13, width: 6.5, height: 34 };
+const CHEVRON = "M39 13h9L31 30l17 17h-9L22 30Z";
+
+function ChevronGradient({ id }: { id: string }) {
+  return (
+    <linearGradient id={id} x1="46" y1="13" x2="27" y2="31" gradientUnits="userSpaceOnUse">
+      <stop offset="0.15" stopColor="#3be2a6" />
+      <stop offset="0.75" stopColor="#4fa6e2" />
+    </linearGradient>
+  );
+}
+
+/** The logo itself: the K on its navy tile. */
 export function KouraMark({ className, id = "koura-mark" }: { className?: string; id?: string }) {
   return (
     <svg viewBox="0 0 60 60" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id={id} x1="44" y1="12" x2="27" y2="31" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#3be2a6" />
-          <stop offset="1" stopColor="#4fa6e2" />
-        </linearGradient>
+        <ChevronGradient id={id} />
       </defs>
       <rect width="60" height="60" rx="13" fill="#0e2440" />
-      <rect x="14" y="12" width="6.5" height="36" rx="1.25" fill="#fff" />
-      <path d="M44 12.5 27.5 30 44 47.5" fill="none" stroke={`url(#${id})`} strokeWidth="6.5" />
+      <rect {...STEM} rx="0.75" fill="#fff" />
+      <path d={CHEVRON} fill={`url(#${id})`} />
     </svg>
   );
 }
@@ -42,11 +53,13 @@ export function PillarGlyph({ pillar, className }: { pillar: PillarId; className
 }
 
 /**
- * The logo's K at display size, for the hero watermark: the stem in the text
- * colour (white on navy, navy on light) and the chevron in the logo's
- * mint-to-sky gradient, spaced like the mark. With `drawDelay`, the stem
- * draws itself top to bottom and then the chevron tip to tip, as the page
- * reveals after the loading screen.
+ * The logo's K without its tile, at display size, for the hero watermark.
+ * Same geometry as KouraMark, cropped to the glyph; the stem takes the text
+ * colour so it stays visible in the light theme. With `drawDelay`, the stem
+ * draws top to bottom and then the chevron tip to tip, as the page reveals
+ * after the loading screen. The chevron is drawn as a wide stroke along its
+ * centre line and clipped to the exact outline, so its flat tips stay true
+ * while it draws.
  */
 export function KouraMonogram({ className, drawDelay }: { className?: string; drawDelay?: number }) {
   const draw = (delay: number) =>
@@ -59,16 +72,21 @@ export function KouraMonogram({ className, drawDelay }: { className?: string; dr
           style: { "--reveal-delay": `${drawDelay + delay}ms` } as CSSProperties,
         };
   return (
-    <svg viewBox="0 0 470 600" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="14 13 34 34" fill="none" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="koura-monogram" x1="433" y1="30" x2="183" y2="300" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#3be2a6" />
-          <stop offset="1" stopColor="#4fa6e2" />
-        </linearGradient>
+        <ChevronGradient id="koura-monogram-gradient" />
+        <clipPath id="koura-monogram-chevron">
+          <path d={CHEVRON} />
+        </clipPath>
       </defs>
-      {/* One stroke-width of air between the stem and the chevron's outer edge, as in the logo. */}
-      <path d="M32 30v540" className="stroke-fg" strokeWidth="64" {...draw(0)} />
-      <path d="M433 30 173 300l260 270" stroke="url(#koura-monogram)" strokeWidth="64" {...draw(350)} />
+      <path d={`M${STEM.x + STEM.width / 2} ${STEM.y}v${STEM.height}`} className="stroke-fg" strokeWidth={STEM.width} {...draw(0)} />
+      <path
+        d="M47.5 9 26.5 30l21 21"
+        stroke="url(#koura-monogram-gradient)"
+        strokeWidth="10"
+        clipPath="url(#koura-monogram-chevron)"
+        {...draw(350)}
+      />
     </svg>
   );
 }
