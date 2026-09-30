@@ -59,6 +59,9 @@ export function KouraPortal() {
   return (
     <GlyphPortal
       word="KOURA"
+      // Always fly into the middle letter; no letter picking.
+      focusChar="U"
+      interactive={false}
       fontFamily={family}
       fontWeight={700}
       scrollLength={2.4}
@@ -76,20 +79,12 @@ export function KouraPortal() {
         />
       }
       front={
-        <>
-          <p
-            className="absolute inset-x-6 m-0 text-center text-sm text-[#9fb6d1]"
-            style={{ bottom: "calc(100% - var(--gp-word-top, 35%) + 32px)" }}
-          >
-            Software built to carry load.
-          </p>
-          <p
-            className="absolute inset-x-6 m-0 text-center text-base text-[#c4d4e6]"
-            style={{ top: "calc(var(--gp-word-bottom, 50%) + 32px)" }}
-          >
-            Pick a letter, then scroll.
-          </p>
-        </>
+        <p
+          className="absolute inset-x-6 m-0 text-center text-sm text-[#9fb6d1]"
+          style={{ bottom: "calc(100% - var(--gp-word-top, 35%) + 32px)" }}
+        >
+          Software built to carry load.
+        </p>
       }
     >
       <div className="container-sheet flex flex-col gap-10">
