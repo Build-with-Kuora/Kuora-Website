@@ -46,7 +46,7 @@ export default function HomePage() {
     <>
       {/* The logo's chevron opens the page, cropped by the right edge. */}
       <section className="relative isolate overflow-hidden">
-        <KouraChevron drawDelay={250} className="absolute top-6 -right-40 -z-10 h-[26rem] opacity-35 sm:-right-28 sm:h-[34rem] md:-right-20 md:opacity-100 lg:top-10 lg:-right-16 lg:h-[40rem] xl:right-0" />
+        <KouraChevron drawDelay={250} className="absolute top-6 -right-40 -z-10 h-[26rem] opacity-35 sm:-right-28 sm:h-[34rem] md:-right-24 lg:top-10 lg:opacity-100 lg:-right-16 lg:h-[40rem] xl:right-0" />
         <div className="container-sheet pt-20 pb-20 sm:pt-28 lg:pt-36 lg:pb-32">
           <h1 {...reveal(200)} className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
             Software built to carry load.
