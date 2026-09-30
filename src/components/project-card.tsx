@@ -15,14 +15,20 @@ export function ProjectCard({
   const pillar = getPillar(project.focus);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-brand-sky/60">
+    <article
+      data-scroll-reveal="pop"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-brand-sky/60"
+    >
       <div className="bg-panel px-4 py-8 sm:px-6">
-        <SystemDiagram
-          diagram={project.diagram}
-          tone="panel"
-          label={`Architecture of ${project.name}`}
-          className="w-full"
-        />
+        {/* The diagram drifts slowly inside its frame, like an image in a window. */}
+        <div data-parallax="0.08" data-parallax-max="24">
+          <SystemDiagram
+            diagram={project.diagram}
+            tone="panel"
+            label={`Architecture of ${project.name}`}
+            className="w-full"
+          />
+        </div>
       </div>
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <p className="flex items-center gap-2 text-sm text-muted">

@@ -17,6 +17,7 @@ export function PillarFrame({ detailed = false }: { detailed?: boolean }) {
           key={pillar.id}
           id={detailed ? pillar.id : undefined}
           aria-labelledby={`${pillar.id}-title`}
+          data-scroll-reveal="up"
           className={`relative scroll-mt-24 border-line p-6 sm:p-10 ${cellBorders[index]}`}
         >
           <PillarGlyph pillar={pillar.id} className="size-5 text-brand-mint" />

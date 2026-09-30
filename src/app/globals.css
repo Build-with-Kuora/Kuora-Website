@@ -300,6 +300,36 @@
   }
 }
 
+/*
+ * Scroll reveals (see ScrollEffects). data-scroll-fx is set on <html> only
+ * when JavaScript runs and motion is allowed, so without it nothing is
+ * hidden. "up" suits text; "pop" rises, grows and overshoots a touch, for
+ * cards and figures. Only opacity, translate and scale change, which the
+ * browser animates on the compositor.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-scroll-fx] [data-scroll-reveal]:not([data-in]) {
+    opacity: 0;
+  }
+  [data-scroll-fx] [data-scroll-reveal="up"]:not([data-in]) {
+    translate: 0 2.5rem;
+  }
+  [data-scroll-fx] [data-scroll-reveal="pop"]:not([data-in]) {
+    translate: 0 3.5rem;
+    scale: 0.94;
+  }
+  [data-scroll-fx] [data-scroll-reveal][data-in] {
+    transition:
+      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      translate 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      scale 1000ms cubic-bezier(0.34, 1.45, 0.64, 1);
+    transition-delay: var(--scroll-delay, 0ms);
+  }
+  [data-scroll-fx] [data-parallax] {
+    will-change: transform;
+  }
+}
+
 /* Construction lines draw themselves once. */
 @keyframes draw {
   to {

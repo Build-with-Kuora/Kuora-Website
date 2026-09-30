@@ -52,14 +52,15 @@ export default function HomePage() {
       */}
       <section className="relative isolate flex min-h-[calc(100svh-5rem)] flex-col justify-center overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="container-sheet relative h-full">
+          {/* Two parallax depths: the K lags furthest behind, the text a little less. */}
+          <div data-parallax="0.4" data-parallax-max="400" className="container-sheet relative h-full">
             <KuoraMonogram
               drawDelay={250}
               className="absolute top-1/2 -right-40 h-[20rem] -translate-y-1/2 opacity-15 sm:-right-28 sm:h-[24rem] lg:right-10 lg:h-[19rem] lg:opacity-100 xl:h-[24rem] 2xl:h-[27rem]"
             />
           </div>
         </div>
-        <div className="container-sheet py-16 sm:py-20">
+        <div data-parallax="0.2" data-parallax-max="400" className="container-sheet py-16 sm:py-20">
           <h1 {...reveal(200)} className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
             Software built to carry load.
           </h1>
@@ -79,8 +80,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div {...reveal(650)} data-snap className="container-sheet pb-24 lg:pb-36">
-        <ProjectPlanner />
+      {/* The pop lives on an inner wrapper so the snap point is measured untransformed. */}
+      <div data-snap className="container-sheet pb-24 lg:pb-36">
+        <div data-scroll-reveal="pop">
+          <ProjectPlanner />
+        </div>
       </div>
 
       <section id="services" aria-labelledby="services-title" className="container-sheet scroll-mt-24 pb-24 lg:pb-36">
@@ -94,6 +98,7 @@ export default function HomePage() {
           {services.map((service) => (
             <li
               key={service.id}
+              data-scroll-reveal="up"
               className="flex flex-col border-line p-6 not-last:border-b sm:p-8 lg:not-last:border-r lg:not-last:border-b-0"
             >
               <h3 className="text-2xl font-semibold tracking-[-0.02em]">{service.name}</h3>
@@ -140,7 +145,7 @@ export default function HomePage() {
           </SectionHeading>
           <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {pillars.map((pillar) => (
-              <li key={pillar.id} className="border-t border-line-strong pt-5">
+              <li key={pillar.id} data-scroll-reveal="up" className="border-t border-line-strong pt-5">
                 <PillarGlyph pillar={pillar.id} className="size-4 text-muted" />
                 <h3 className="mt-5 text-xl font-semibold tracking-[-0.015em]">
                   <Link
@@ -168,7 +173,7 @@ export default function HomePage() {
         </div>
         <ul className="mt-12 border-t border-line-strong">
           {projects.slice(0, 4).map((project) => (
-            <li key={project.slug} className="border-b border-line-strong">
+            <li key={project.slug} data-scroll-reveal="up" className="border-b border-line-strong">
               <Link
                 href={`/work/${project.slug}`}
                 className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[minmax(0,14rem)_1fr_auto]"
@@ -201,7 +206,7 @@ export default function HomePage() {
           <SectionHeading id="questions" className="lg:col-span-4">
             Common questions.
           </SectionHeading>
-          <div className="lg:col-span-7 lg:col-start-6">
+          <div data-scroll-reveal="up" className="lg:col-span-7 lg:col-start-6">
             <Faq questions={questions} />
           </div>
         </div>

@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
         </header>
 
         <section aria-labelledby="architecture" className="container-sheet pb-24 lg:pb-32">
-          <figure className="overflow-hidden rounded-2xl border border-panel-line bg-panel">
+          <figure data-scroll-reveal="pop" className="overflow-hidden rounded-2xl border border-panel-line bg-panel">
             <figcaption className="flex items-center justify-between gap-4 border-b border-panel-line px-5 py-3 sm:px-7">
               <h2
                 id="architecture"
@@ -98,11 +98,11 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
 
         <section aria-label="Problem and approach">
           <div className="container-sheet grid gap-14 pb-24 lg:grid-cols-12 lg:gap-10 lg:pb-32">
-            <div className="border-t border-line-strong pt-4 lg:col-span-5">
+            <div data-scroll-reveal="up" className="border-t border-line-strong pt-4 lg:col-span-5">
               <h2 className="text-sm text-brand-mint">The problem</h2>
               <p className="mt-6 text-2xl leading-snug font-medium tracking-[-0.015em]">{project.challenge}</p>
             </div>
-            <div className="border-t border-line-strong pt-4 lg:col-span-6 lg:col-start-7">
+            <div data-scroll-reveal="up" className="border-t border-line-strong pt-4 lg:col-span-6 lg:col-start-7">
               <h2 className="text-sm text-brand-mint">What we built</h2>
               <ol className="mt-6 border-t border-line">
                 {project.approach.map((step, stepIndex) => (
@@ -123,7 +123,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             <SectionHeading id="results">
               What changed.
             </SectionHeading>
-            <dl className="mt-12 grid overflow-hidden rounded-2xl border border-line sm:grid-cols-3">
+            <dl data-scroll-reveal="pop" className="mt-12 grid overflow-hidden rounded-2xl border border-line sm:grid-cols-3">
               {project.outcomes.map((outcome) => (
                 <div key={outcome.label} className="flex flex-col-reverse gap-2 border-line bg-surface p-6 not-last:border-b sm:not-last:border-r sm:not-last:border-b-0">
                   <dt className="text-[0.9375rem] text-muted">{outcome.label}</dt>
@@ -132,7 +132,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               ))}
             </dl>
             <h3 className="label mt-12">Stack</h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
+            <ul data-scroll-reveal="up" className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((tool) => (
                 <li key={tool} className="rounded-full border border-line-strong px-3.5 py-1.5 text-sm">
                   {tool}

@@ -15,7 +15,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto overflow-hidden bg-panel text-panel-fg">
       <div className="container-sheet grid gap-12 pt-16 pb-12 md:grid-cols-12">
-        <div className="md:col-span-5">
+        <div data-scroll-reveal="up" className="md:col-span-5">
           <div className="flex items-center gap-2.5">
             <KuoraMark id="kuora-mark-footer" className="size-8" />
             <span className="text-lg font-semibold tracking-[-0.02em]">Kuora</span>
@@ -26,7 +26,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <nav aria-label="Footer" className="md:col-span-2">
+        <nav aria-label="Footer" data-scroll-reveal="up" className="md:col-span-2">
           <h2 className="text-sm text-panel-muted">Pages</h2>
           <ul className="mt-4 space-y-2 text-[0.9375rem]">
             <li>
@@ -44,7 +44,7 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <div className="md:col-span-3">
+        <div data-scroll-reveal="up" className="md:col-span-3">
           <h2 className="text-sm text-panel-muted">Capabilities</h2>
           <ul className="mt-4 space-y-2 text-[0.9375rem] text-panel-fg/80">
             {capabilities.map((item) => (
@@ -53,7 +53,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div className="md:col-span-2">
+        <div data-scroll-reveal="up" className="md:col-span-2">
           <h2 className="text-sm text-panel-muted">Contact</h2>
           <a
             href={`mailto:${site.email}`}
@@ -70,7 +70,8 @@ export function SiteFooter() {
         the font's overlapping contours stay hidden.
       */}
       <div aria-hidden="true" className="container-sheet select-none">
-        <p className="display -mb-[0.2em] text-[clamp(6rem,26vw,24rem)] leading-[0.8] text-panel [paint-order:stroke_fill] [-webkit-text-stroke:3px_rgb(79_166_226/0.4)]">
+        {/* Settles down into place as the page reaches its end. */}
+        <p data-parallax="0.2" data-parallax-max="120" className="display -mb-[0.2em] text-[clamp(6rem,26vw,24rem)] leading-[0.8] text-panel [paint-order:stroke_fill] [-webkit-text-stroke:3px_rgb(79_166_226/0.4)]">
           Kuora
         </p>
       </div>

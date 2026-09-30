@@ -153,6 +153,7 @@ export default function SystemsPage() {
             return (
               <li
                 key={floor.level}
+                data-scroll-reveal="up"
                 className={`grid gap-6 border-line p-6 not-last:border-b sm:p-8 lg:grid-cols-[8rem_1.2fr_1fr] lg:gap-10 ${
                   dark ? "bg-panel text-panel-fg" : "bg-surface"
                 }`}
