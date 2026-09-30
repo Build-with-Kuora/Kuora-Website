@@ -44,10 +44,14 @@ const questions: Question[] = [
 export default function HomePage() {
   return (
     <>
-      {/* The logo's chevron opens the page, cropped by the right edge. */}
-      <section className="relative isolate overflow-hidden">
-        <KouraChevron drawDelay={250} className="absolute top-6 -right-40 -z-10 h-[26rem] opacity-35 sm:-right-28 sm:h-[34rem] md:-right-24 lg:top-10 lg:opacity-100 lg:-right-16 lg:h-[40rem] xl:right-0" />
-        <div className="container-sheet pt-20 pb-20 sm:pt-28 lg:pt-36 lg:pb-32">
+      {/*
+        The hero fills the first screen below the header (4rem plus its 1px
+        border), so the planner starts on the next one. The logo's chevron
+        opens the page, cropped by the right edge.
+      */}
+      <section className="relative isolate flex min-h-[calc(100svh-4.0625rem)] flex-col justify-center overflow-hidden">
+        <KouraChevron drawDelay={250} className="absolute top-1/2 -right-40 -z-10 h-[26rem] -translate-y-1/2 opacity-35 sm:-right-28 sm:h-[34rem] md:-right-24 lg:-right-16 lg:h-[40rem] lg:opacity-100 xl:right-0" />
+        <div className="container-sheet py-16 sm:py-20">
           <h1 {...reveal(200)} className="display max-w-4xl text-[clamp(3.25rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.045em]">
             Software built to carry load.
           </h1>
