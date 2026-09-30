@@ -114,6 +114,7 @@ export function KouraSplash() {
   return (
     <div
       data-koura-splash
+      data-lenis-prevent
       aria-hidden="true"
       className="fixed inset-0 z-[100] transition-opacity ease-out motion-reduce:transition-none"
       style={{ background: navy, opacity: phase === "fade" ? 0 : 1, pointerEvents: phase === "fade" ? "none" : undefined, transitionDuration: `${fade}ms` }}

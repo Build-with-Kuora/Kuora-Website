@@ -4,6 +4,7 @@ import { KouraSplash } from "@/components/koura-splash";
 import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full flex-col">
         <KouraSplash />
+        <SmoothScroll />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-fg focus:px-4 focus:py-2 focus:text-canvas"
