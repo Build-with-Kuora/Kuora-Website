@@ -345,6 +345,11 @@
   }
 }
 
+/* A loading screen this browser has already seen stays hidden (see lib/intro). */
+[data-intro="seen"] [data-kuora-splash] {
+  display: none;
+}
+
 /*
  * The reveal after the loading screen. KuoraSplash sets data-reveal="pending"
  * on <html> while it covers the page and "in" the moment it starts to fade,

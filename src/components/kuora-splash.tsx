@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import GlyphPortal, { type GlyphPortalStyle } from "@/components/ui/glyph-portal";
+import { INTRO_KEY, introSeen } from "@/lib/intro";
 
 /*
  * The loading screen: the KUORA wordmark, then the camera flies into the O by
  * itself and the site fades in behind it. The portal is scroll-driven, so it
  * sits in its own overflow-hidden scroller and the splash drives scrollTop;
- * visitors never scroll it. Plays on every full page load.
+ * visitors never scroll it. Plays once per browser (see lib/intro): later
+ * visits go straight to the page, with the cover hidden before first paint,
+ * and the page's own entrance still plays.
  *
  * Colours are the logo's: the navy tile, and inside the letters the same
  * mint-to-sky gradient as the chevron.
@@ -36,7 +39,9 @@ export function KuoraSplash() {
   const scroller = useRef<HTMLDivElement>(null);
 
   // Pick the face first: the portal freezes whichever one is loaded when it mounts.
+  // Seen before, the cover stays hidden and none of this runs.
   useEffect(() => {
+    if (introSeen()) return;
     let settled = false;
     const finish = (value: string) => {
       if (!settled) {
@@ -59,8 +64,16 @@ export function KuoraSplash() {
   }, []);
 
   // Hold the page out of view under the cover; it rises in as the cover fades.
+  // Seen before, there is no cover, but the page still rises in: the intro
+  // script has held it at "pending" since first paint, so let it go now.
   useEffect(() => {
     const root = document.documentElement;
+    if (introSeen()) {
+      const frame = requestAnimationFrame(() => {
+        root.dataset.reveal = "in";
+      });
+      return () => cancelAnimationFrame(frame);
+    }
     root.dataset.reveal = "pending";
     return () => {
       root.dataset.reveal = "in";
@@ -69,7 +82,7 @@ export function KuoraSplash() {
 
   // Lock the page while the splash covers it.
   useEffect(() => {
-    if (phase === "done") return;
+    if (phase === "done" || introSeen()) return;
     const root = document.documentElement;
     const previous = root.style.overflow;
     root.style.overflow = "hidden";
@@ -112,9 +125,15 @@ export function KuoraSplash() {
   }, [phase]);
 
   // Start the page reveal as the cover begins to fade, then remove the cover.
+  // From here it counts as seen, so the next visit skips it.
   useEffect(() => {
     if (phase !== "fade") return;
     document.documentElement.dataset.reveal = "in";
+    try {
+      localStorage.setItem(INTRO_KEY, "seen");
+    } catch {
+      // Storage blocked: the splash simply plays again next time.
+    }
     const timeout = window.setTimeout(() => setPhase("done"), fade);
     return () => clearTimeout(timeout);
   }, [phase]);

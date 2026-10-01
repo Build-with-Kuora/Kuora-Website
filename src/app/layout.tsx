@@ -6,6 +6,7 @@ import { ScrollEffects } from "@/components/scroll-effects";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { introScript } from "@/lib/intro";
 import { reveal } from "@/lib/reveal";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -36,7 +37,8 @@ export const viewport: Viewport = {
   ],
 };
 
-// Applies the saved theme before first paint, so there is no flash.
+// Applies the saved theme before first paint, so there is no flash. The intro
+// script does the same for a loading screen this browser has already seen.
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -48,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${instrumentSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: `${themeScript};${introScript}` }} />
       </head>
       <body className="flex min-h-full flex-col">
         <KuoraSplash />
