@@ -87,14 +87,32 @@ function startReveals() {
         );
       });
     },
-    // Trigger a little before the element's top reaches the bottom edge.
-    { rootMargin: "0px 0px -8% 0px", threshold: 0 },
+    // Trigger a little before the element's top reaches the bottom edge. The
+    // top margin reaches far above the screen, so anything jumped past in one
+    // go (a scrollbar drag, End, an anchor) still counts as arrived.
+    { rootMargin: "100000px 0px -8% 0px", threshold: 0 },
   );
 
-  document.querySelectorAll<HTMLElement>("[data-scroll-reveal]:not([data-in])").forEach((element) => observer.observe(element));
+  const watch = (root: ParentNode) =>
+    root.querySelectorAll<HTMLElement>("[data-scroll-reveal]:not([data-in])").forEach((element) => observer.observe(element));
+  watch(document);
+
+  // Content mounted later (streamed in, or swapped by a hot reload) would
+  // otherwise stay hidden, so watch for it too.
+  const mutations = new MutationObserver((records) => {
+    for (const record of records) {
+      record.addedNodes.forEach((node) => {
+        if (!(node instanceof HTMLElement)) return;
+        if (node.matches("[data-scroll-reveal]:not([data-in])")) observer.observe(node);
+        watch(node);
+      });
+    }
+  });
+  mutations.observe(document.body, { childList: true, subtree: true });
 
   return () => {
     observer.disconnect();
+    mutations.disconnect();
     timers.forEach((timer) => clearTimeout(timer));
   };
 }
