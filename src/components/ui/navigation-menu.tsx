@@ -1,9 +1,9 @@
 "use client";
 
 /*
- * Animated floating navigation, adapted from AnimatedNavFramer: a pill that
- * shrinks to a round menu button when you scroll down and springs back open
- * when you scroll up or tap it.
+ * Animated floating navigation, adapted from AnimatedNavFramer: a pill that,
+ * on screens below md, shrinks to a round menu button when you scroll down
+ * and springs back open when you scroll up or tap it. From md up it stays open.
  *
  * Changes from the original: the brand, links and actions are props rather
  * than a hard-coded arrow icon and "#" links; links are Next.js links with
@@ -74,6 +74,23 @@ const collapsedIconVariants: Variants = {
 
 const MotionLink = motion.create(Link);
 
+// The collapse only runs below md; from md up the pill stays open.
+const MOBILE_QUERY = "(max-width: 767px)";
+
+function subscribeMobile(onChange: () => void) {
+  const query = window.matchMedia(MOBILE_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function useIsMobile() {
+  return React.useSyncExternalStore(
+    subscribeMobile,
+    () => window.matchMedia(MOBILE_QUERY).matches,
+    () => false,
+  );
+}
+
 export function AnimatedNavFramer({
   brand,
   items,
@@ -90,7 +107,10 @@ export function AnimatedNavFramer({
   isActive?: (href: string) => boolean;
   className?: string;
 }) {
-  const [isExpanded, setExpanded] = React.useState(true);
+  const [collapsedOnMobile, setCollapsedOnMobile] = React.useState(false);
+  const isMobile = useIsMobile();
+  const isExpanded = !isMobile || !collapsedOnMobile;
+  const setExpanded = (expanded: boolean) => setCollapsedOnMobile(!expanded);
 
   const { scrollY } = useScroll();
   const lastScrollY = React.useRef(0);
@@ -98,6 +118,8 @@ export function AnimatedNavFramer({
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = lastScrollY.current;
+    lastScrollY.current = latest;
+    if (!isMobile) return;
 
     if (isExpanded && latest > previous && latest > COLLAPSE_AFTER) {
       setExpanded(false);
@@ -109,8 +131,6 @@ export function AnimatedNavFramer({
     ) {
       setExpanded(true);
     }
-
-    lastScrollY.current = latest;
   });
 
   return (

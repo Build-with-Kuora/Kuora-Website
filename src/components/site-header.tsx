@@ -26,9 +26,9 @@ const items = navigation.map((item) => ({ name: item.label, href: item.href }));
 /*
  * The site navigation: a floating pill (AnimatedNavFramer) centred at the top
  * of the screen, carrying the logo, the links, the theme toggle and Start a
- * project. It shrinks to a round button while you scroll down. Below md the
- * links and the call to action move into a sheet that slides in from the
- * right.
+ * project. Below md it shrinks to a round button while you scroll down, and
+ * the links and the call to action move into a sheet that slides in from the
+ * right. From md up it stays open.
  */
 export function SiteHeader() {
   const pathname = usePathname();
