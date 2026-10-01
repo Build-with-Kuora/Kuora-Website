@@ -104,16 +104,18 @@ export default function HomePage() {
       </section>
 
       {/*
-        What we do fills one screen. It snaps flush to the top
-        (data-snap="flush"), so nothing above or below shows, and its own
-        padding clears the floating nav. Its opaque background lets the hero's
-        parallax layers slide under it. The heading drifts a little against the
-        list, the section's one parallax depth.
+        From here each section is a band in its own tone (see globals.css),
+        alternating so neighbours never match, and snaps flush to the top
+        (data-snap="flush") with its own padding clearing the floating nav.
+
+        What we do also fills one screen, so nothing above or below shows. Its
+        opaque band lets the hero's parallax layers slide under it. The heading
+        drifts a little against the list, the section's one parallax depth.
       */}
       <section
         aria-labelledby="what-we-do"
         data-snap="flush"
-        className="relative mb-28 flex min-h-svh flex-col justify-center bg-canvas pt-24 pb-12 sm:pt-28 sm:pb-16 lg:mb-36"
+        className="tone-deep relative flex min-h-svh flex-col justify-center pt-24 pb-12 sm:pt-28 sm:pb-16"
       >
         <div className="container-sheet grid gap-x-10 gap-y-10 lg:grid-cols-12 lg:items-center">
           <div data-parallax="0.12" data-parallax-max="48" className="lg:col-span-5">
@@ -148,55 +150,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="services" aria-labelledby="services-title" className="container-sheet scroll-mt-24 pb-24 lg:pb-36">
-        <SectionHeading
-          id="services-title"
-          lead="Pick the one closest to where you are. Each starts with a written proposal for the first phase, so scope and cost are agreed before any work."
-        >
-          Ways to work with us.
-        </SectionHeading>
-        <ul className="mt-12 grid overflow-hidden rounded-2xl border border-line-strong bg-surface lg:grid-cols-3">
-          {services.map((service) => (
-            <li
-              key={service.id}
-              data-scroll-reveal="up"
-              className="flex flex-col border-line p-6 not-last:border-b sm:p-8 lg:not-last:border-r lg:not-last:border-b-0"
-            >
-              <h3 className="text-2xl font-semibold tracking-[-0.02em]">{service.name}</h3>
-              <p className="mt-3 text-muted">{service.audience}</p>
-              <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
-                {service.includes.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 16 16"
-                      className="mt-1 size-4 shrink-0 text-muted"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.75"
-                    >
-                      <path d="m3.5 8.5 3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto pt-8">
-                <p className="flex justify-between gap-4 border-t border-line pt-4 text-sm">
-                  <span className="text-muted">Typical length</span>
-                  <span className="font-medium">{service.length}</span>
-                </p>
-                <Link href={`/start?service=${service.id}`} className="btn-secondary mt-5 w-full justify-center">
-                  Get a quote
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <section id="services" aria-labelledby="services-title" data-snap="flush" className="py-24 lg:py-32">
+        <div className="container-sheet">
+          <SectionHeading
+            id="services-title"
+            lead="Pick the one closest to where you are. Each starts with a written proposal for the first phase, so scope and cost are agreed before any work."
+          >
+            Ways to work with us.
+          </SectionHeading>
+          <ul className="mt-12 grid overflow-hidden rounded-2xl border border-line-strong bg-surface lg:grid-cols-3">
+            {services.map((service) => (
+              <li
+                key={service.id}
+                data-scroll-reveal="up"
+                className="flex flex-col border-line p-6 not-last:border-b sm:p-8 lg:not-last:border-r lg:not-last:border-b-0"
+              >
+                <h3 className="text-2xl font-semibold tracking-[-0.02em]">{service.name}</h3>
+                <p className="mt-3 text-muted">{service.audience}</p>
+                <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
+                  {service.includes.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        className="mt-1 size-4 shrink-0 text-muted"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                      >
+                        <path d="m3.5 8.5 3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-8">
+                  <p className="flex justify-between gap-4 border-t border-line pt-4 text-sm">
+                    <span className="text-muted">Typical length</span>
+                    <span className="font-medium">{service.length}</span>
+                  </p>
+                  <Link href={`/start?service=${service.id}`} className="btn-secondary mt-5 w-full justify-center">
+                    Get a quote
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      <section aria-labelledby="pillars" className="container-sheet pb-24 lg:pb-36">
-        <div className="grid gap-12 lg:grid-cols-12">
+      <section aria-labelledby="pillars" data-snap="flush" className="tone-raised py-24 lg:py-32">
+        <div className="container-sheet grid gap-12 lg:grid-cols-12">
           <SectionHeading
             id="pillars"
             className="lg:col-span-4"
@@ -223,47 +227,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="work" className="container-sheet pb-24 lg:pb-36">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading id="work" lead="Systems we have designed, built and still run.">
-            Selected work.
-          </SectionHeading>
-          <Link href="/work" className="btn-secondary">
-            All projects
-          </Link>
+      <section aria-labelledby="work" data-snap="flush" className="tone-deep py-24 lg:py-32">
+        <div className="container-sheet">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeading id="work" lead="Systems we have designed, built and still run.">
+              Selected work.
+            </SectionHeading>
+            <Link href="/work" className="btn-secondary">
+              All projects
+            </Link>
+          </div>
+          <ul className="mt-12 border-t border-line-strong">
+            {projects.slice(0, 4).map((project) => (
+              <li key={project.slug} data-scroll-reveal="up" className="border-b border-line-strong">
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[minmax(0,14rem)_1fr_auto]"
+                >
+                  <span className="text-2xl font-semibold tracking-[-0.02em] underline-offset-4 group-hover:underline">
+                    {project.name}
+                  </span>
+                  <span className="max-w-xl text-muted">{project.summary}</span>
+                  <span className="label">
+                    {project.sector}, {project.year}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="mt-12 border-t border-line-strong">
-          {projects.slice(0, 4).map((project) => (
-            <li key={project.slug} data-scroll-reveal="up" className="border-b border-line-strong">
-              <Link
-                href={`/work/${project.slug}`}
-                className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[minmax(0,14rem)_1fr_auto]"
-              >
-                <span className="text-2xl font-semibold tracking-[-0.02em] underline-offset-4 group-hover:underline">
-                  {project.name}
-                </span>
-                <span className="max-w-xl text-muted">{project.summary}</span>
-                <span className="label">
-                  {project.sector}, {project.year}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
-      <section aria-labelledby="process" className="container-sheet pb-24 lg:pb-36">
-        <SectionHeading
-          id="process"
-          lead="One team from the first conversation to production, and after it."
-        >
-          How a project runs.
-        </SectionHeading>
-        <ProcessBeam />
+      <section aria-labelledby="process" data-snap="flush" className="py-24 lg:py-32">
+        <div className="container-sheet">
+          <SectionHeading
+            id="process"
+            lead="One team from the first conversation to production, and after it."
+          >
+            How a project runs.
+          </SectionHeading>
+          <ProcessBeam />
+        </div>
       </section>
 
-      <section aria-labelledby="questions" className="container-sheet pb-24 lg:pb-36">
-        <div className="grid gap-12 lg:grid-cols-12">
+      <section aria-labelledby="questions" data-snap="flush" className="tone-raised py-24 lg:py-32">
+        <div className="container-sheet grid gap-12 lg:grid-cols-12">
           <SectionHeading id="questions" className="lg:col-span-4">
             Common questions.
           </SectionHeading>
@@ -273,7 +281,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ContactBand />
+      <ContactBand tone="tone-tint" />
     </>
   );
 }
