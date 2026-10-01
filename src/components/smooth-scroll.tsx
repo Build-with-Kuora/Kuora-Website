@@ -37,7 +37,10 @@ const easeOut = (t: number) => 1 - (1 - t) ** 3;
  * waits until the scroll has been still for a moment, stays out of the way
  * while you hold the scrollbar, and lets go the instant you scroll again.
  * Sections keep their natural height, and anything farther than a quarter
- * of the screen from a section top is left exactly where you stopped.
+ * of the screen from a section top is left exactly where you stopped. A
+ * section marked data-snap="flush" fills the screen, so it settles with its
+ * top at the top of the screen instead and clears the nav with its own
+ * padding.
  * Touch screens and reduced motion keep plain scrolling.
  */
 function SectionSnap() {
@@ -69,7 +72,10 @@ function SectionSnap() {
           "main section:not(section section), main [data-snap], body > footer",
         );
         points = [...targets]
-          .map((target) => Math.max(0, Math.round(target.getBoundingClientRect().top + window.scrollY - header - GAP)))
+          .map((target) => {
+            const offset = target.dataset.snap === "flush" ? 0 : header + GAP;
+            return Math.max(0, Math.round(target.getBoundingClientRect().top + window.scrollY - offset));
+          })
           .sort((a, b) => a - b);
       });
     };

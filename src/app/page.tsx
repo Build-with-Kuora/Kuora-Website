@@ -3,12 +3,35 @@ import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
 import { KuoraMonogram, PillarGlyph } from "@/components/kuora-mark";
 import { ProcessBeam } from "@/components/process-beam";
-import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
 import { pillars } from "@/lib/pillars";
 import { reveal } from "@/lib/reveal";
 import { projects } from "@/lib/projects";
 import { services } from "@/lib/services";
+
+// The layers of a system we build, top to bottom. The Systems page covers each in depth.
+const layers = [
+  {
+    name: "Interfaces",
+    tech: "Next.js and React",
+    body: "Web apps and dashboards that stay fast on slow networks.",
+  },
+  {
+    name: "Services and APIs",
+    tech: "Node.js",
+    body: "Typed APIs, jobs and integrations that scale by adding instances.",
+  },
+  {
+    name: "Data models",
+    tech: "Prisma",
+    body: "One schema for the whole domain, with migrations reviewed like code.",
+  },
+  {
+    name: "Foundations",
+    tech: "PostgreSQL",
+    body: "Databases tuned to real queries and partitioned as the data grows.",
+  },
+];
 
 const questions: Question[] = [
   {
@@ -46,7 +69,7 @@ export default function HomePage() {
     <>
       {/*
         The hero fills the first screen below main's 5rem clearance for the
-        floating nav, so the planner starts on the next one. The logo's K sits in
+        floating nav, so What we do starts on the next one. The logo's K sits in
         the same centred column as the text, its right edge on the column's
         edge, so text and mark read as one composition at every width.
       */}
@@ -80,12 +103,50 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The pop lives on an inner wrapper so the snap point is measured untransformed. */}
-      <div data-snap className="container-sheet pb-24 lg:pb-36">
-        <div data-scroll-reveal="pop">
-          <ProjectPlanner />
+      {/*
+        What we do fills one screen. It snaps flush to the top
+        (data-snap="flush"), so nothing above or below shows, and its own
+        padding clears the floating nav. Its opaque background lets the hero's
+        parallax layers slide under it. The heading drifts a little against the
+        list, the section's one parallax depth.
+      */}
+      <section
+        aria-labelledby="what-we-do"
+        data-snap="flush"
+        className="relative mb-28 flex min-h-svh flex-col justify-center bg-canvas pt-24 pb-12 sm:pt-28 sm:pb-16 lg:mb-36"
+      >
+        <div className="container-sheet grid gap-x-10 gap-y-10 lg:grid-cols-12 lg:items-center">
+          <div data-parallax="0.12" data-parallax-max="48" className="lg:col-span-5">
+            <h2 id="what-we-do" data-scroll-reveal="up" className="display text-[clamp(2.5rem,5vw,4.25rem)]">
+              What we do.
+            </h2>
+            <p data-scroll-reveal="up" className="mt-5 max-w-md text-muted sm:text-lg">
+              We design, build and run whole systems, from the database to the screen. One team owns
+              every layer, so nothing is lost between them.
+            </p>
+            <div data-scroll-reveal="up" className="mt-6 sm:mt-8">
+              <Link href="/systems" className="btn-secondary">
+                See the systems
+              </Link>
+            </div>
+          </div>
+          <ul className="border-b border-line lg:col-span-6 lg:col-start-7">
+            {layers.map((layer) => (
+              <li
+                key={layer.name}
+                data-scroll-reveal="up"
+                className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 border-t border-line py-4 sm:py-6"
+              >
+                <div>
+                  <h3 className="text-xl font-semibold tracking-[-0.015em] sm:text-2xl">{layer.name}</h3>
+                  <p className="mt-1.5 hidden max-w-sm text-[0.9375rem] text-muted sm:block">{layer.body}</p>
+                </div>
+                <p className="label">{layer.tech}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      </section>
 
       <section id="services" aria-labelledby="services-title" className="container-sheet scroll-mt-24 pb-24 lg:pb-36">
         <SectionHeading
