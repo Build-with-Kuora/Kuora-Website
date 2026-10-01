@@ -143,20 +143,24 @@ export function AnimatedNavFramer({
         whileHover={!isExpanded ? { scale: 1.1 } : {}}
         whileTap={!isExpanded ? { scale: 0.95 } : {}}
         className={cn(
-          "pointer-events-auto relative flex h-12 items-center overflow-hidden rounded-full border border-border bg-background/80 shadow-lg shadow-black/20 backdrop-blur-md",
+          // Frosted glass: a see-through tint over a heavy blur, a faint rim, and a
+          // soft sheen across the top (the ::before, kept under the content).
+          "pointer-events-auto relative isolate flex h-12 items-center overflow-hidden rounded-full border border-foreground/10 bg-background/45 shadow-[0_8px_32px_rgb(0_0_0/0.22),inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-xl backdrop-saturate-150",
+          "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-linear-to-b before:from-white/[0.07] before:to-transparent",
           !isExpanded && "cursor-pointer justify-center",
           className,
         )}
       >
-        <motion.div variants={logoVariants} className="flex shrink-0 items-center pr-2 pl-2" inert={!isExpanded}>
+        <motion.div variants={logoVariants} className="flex shrink-0 items-center pr-2 pl-2 md:pl-3" inert={!isExpanded}>
           {brand}
         </motion.div>
 
+        {/* Given a min-width wider than its content, the links centre in the spare room. */}
         <motion.div
-          className={cn("flex items-center gap-1 pr-1.5", !isExpanded && "pointer-events-none")}
+          className={cn("flex items-center gap-1 pr-1.5 md:flex-1", !isExpanded && "pointer-events-none")}
           inert={!isExpanded}
         >
-          <div className="hidden items-center md:flex">
+          <div className="hidden items-center md:mx-auto md:flex">
             {items.map((item) => {
               const active = isActive?.(item.href) ?? false;
               return (
@@ -166,7 +170,7 @@ export function AnimatedNavFramer({
                   variants={itemVariants}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "rounded-full px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors",
+                    "rounded-full px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors md:text-[0.9375rem]",
                     active ? "text-accent" : "text-muted-foreground hover:text-foreground",
                   )}
                 >

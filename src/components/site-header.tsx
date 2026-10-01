@@ -37,7 +37,7 @@ export function SiteHeader() {
   return (
     <header
       {...reveal(0, "down")}
-      className="pointer-events-none fixed inset-x-0 top-3 z-40 flex justify-center px-4 sm:top-5 [view-transition-name:site-header]"
+      className="pointer-events-none fixed inset-x-0 top-3 z-40 flex justify-center px-4 sm:top-5"
     >
       <AnimatedNavFramer
         brand={
@@ -48,10 +48,14 @@ export function SiteHeader() {
         }
         items={items}
         isActive={isActive}
+        // The view-transition name sits on the pill, not the header: a named
+        // element confines backdrop blur to its own contents, so on the header
+        // the glass would have nothing behind it to blur.
+        className="md:h-14 md:min-w-[40rem] lg:min-w-[46rem] [view-transition-name:site-header]"
         actions={
           <>
             <ThemeToggle tone="pill" />
-            <Button asChild size="sm" className="hidden rounded-full px-4 font-semibold md:inline-flex">
+            <Button asChild size="sm" className="hidden rounded-full px-4 font-semibold md:inline-flex md:h-10 md:px-5">
               <Link href="/start">Start a project</Link>
             </Button>
             <MobileMenu isActive={isActive} />
