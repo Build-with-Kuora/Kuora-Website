@@ -1,9 +1,9 @@
 "use client";
 
 /*
- * Animated floating navigation, adapted from AnimatedNavFramer: a pill that
- * shrinks to a round menu button when you scroll down and springs back open
- * when you scroll up or tap it.
+ * Animated floating navigation, adapted from AnimatedNavFramer: a pill that,
+ * on screens below md, shrinks to a round menu button when you scroll down
+ * and springs back open when you scroll up or tap it. From md up it stays open.
  *
  * Changes from the original: the brand, links and actions are props rather
  * than a hard-coded arrow icon and "#" links; links are Next.js links with
@@ -74,6 +74,23 @@ const collapsedIconVariants: Variants = {
 
 const MotionLink = motion.create(Link);
 
+// The collapse only runs below md; from md up the pill stays open.
+const MOBILE_QUERY = "(max-width: 767px)";
+
+function subscribeMobile(onChange: () => void) {
+  const query = window.matchMedia(MOBILE_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function useIsMobile() {
+  return React.useSyncExternalStore(
+    subscribeMobile,
+    () => window.matchMedia(MOBILE_QUERY).matches,
+    () => false,
+  );
+}
+
 export function AnimatedNavFramer({
   brand,
   items,
@@ -90,7 +107,10 @@ export function AnimatedNavFramer({
   isActive?: (href: string) => boolean;
   className?: string;
 }) {
-  const [isExpanded, setExpanded] = React.useState(true);
+  const [collapsedOnMobile, setCollapsedOnMobile] = React.useState(false);
+  const isMobile = useIsMobile();
+  const isExpanded = !isMobile || !collapsedOnMobile;
+  const setExpanded = (expanded: boolean) => setCollapsedOnMobile(!expanded);
 
   const { scrollY } = useScroll();
   const lastScrollY = React.useRef(0);
@@ -98,6 +118,8 @@ export function AnimatedNavFramer({
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = lastScrollY.current;
+    lastScrollY.current = latest;
+    if (!isMobile) return;
 
     if (isExpanded && latest > previous && latest > COLLAPSE_AFTER) {
       setExpanded(false);
@@ -109,8 +131,6 @@ export function AnimatedNavFramer({
     ) {
       setExpanded(true);
     }
-
-    lastScrollY.current = latest;
   });
 
   return (
@@ -123,20 +143,24 @@ export function AnimatedNavFramer({
         whileHover={!isExpanded ? { scale: 1.1 } : {}}
         whileTap={!isExpanded ? { scale: 0.95 } : {}}
         className={cn(
-          "pointer-events-auto relative flex h-12 items-center overflow-hidden rounded-full border border-border bg-background/80 shadow-lg shadow-black/20 backdrop-blur-md",
+          // Frosted glass: a see-through tint over a heavy blur, a faint rim, and a
+          // soft sheen across the top (the ::before, kept under the content).
+          "pointer-events-auto relative isolate flex h-12 items-center overflow-hidden rounded-full border border-foreground/10 bg-background/45 shadow-[0_8px_32px_rgb(0_0_0/0.22),inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-xl backdrop-saturate-150",
+          "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-linear-to-b before:from-white/[0.07] before:to-transparent",
           !isExpanded && "cursor-pointer justify-center",
           className,
         )}
       >
-        <motion.div variants={logoVariants} className="flex shrink-0 items-center pr-2 pl-2" inert={!isExpanded}>
+        <motion.div variants={logoVariants} className="flex shrink-0 items-center pr-2 pl-2 md:pl-3" inert={!isExpanded}>
           {brand}
         </motion.div>
 
+        {/* Given a min-width wider than its content, the links centre in the spare room. */}
         <motion.div
-          className={cn("flex items-center gap-1 pr-1.5", !isExpanded && "pointer-events-none")}
+          className={cn("flex items-center gap-1 pr-1.5 md:flex-1", !isExpanded && "pointer-events-none")}
           inert={!isExpanded}
         >
-          <div className="hidden items-center md:flex">
+          <div className="hidden items-center md:mx-auto md:flex">
             {items.map((item) => {
               const active = isActive?.(item.href) ?? false;
               return (
@@ -146,7 +170,7 @@ export function AnimatedNavFramer({
                   variants={itemVariants}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "rounded-full px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors",
+                    "rounded-full px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors md:text-[0.9375rem]",
                     active ? "text-accent" : "text-muted-foreground hover:text-foreground",
                   )}
                 >

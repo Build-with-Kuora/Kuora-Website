@@ -44,6 +44,84 @@
   color-scheme: light;
 }
 
+/*
+ * Section tones. A tone re-points the page tokens for one full-width band, so
+ * everything inside (text, lines, cards, buttons) follows it. Every tone stays
+ * inside the active theme: navy shades in dark, light shades in light. Landing
+ * page sections take turns, so neighbours never share a colour and need no
+ * rule between them.
+ *
+ * deep:   a step darker than the page (dark), plain white (light).
+ * raised: a step lighter than the page (dark), blue-grey (light).
+ * tint:   the page washed with the logo's sky blue.
+ */
+.tone-deep {
+  --canvas: #081a30;
+  --surface: #0e2440;
+  --line: #17304f;
+  --line-strong: #24426a;
+  --fg: #f5f8fc;
+  --muted: #9cb0ca;
+  --accent: #4fa6e2;
+}
+
+[data-theme="light"] .tone-deep {
+  --canvas: #ffffff;
+  --surface: #f4f7fb;
+  --line: #e3e9f1;
+  --line-strong: #c9d5e3;
+  --fg: #0e2440;
+  --muted: #4b607e;
+  --accent: #1f78bd;
+}
+
+.tone-raised {
+  --canvas: #15325a;
+  --surface: #1b3c68;
+  --line: #264a77;
+  --line-strong: #345c8e;
+  --fg: #f5f8fc;
+  --muted: #abbfd8;
+  --accent: #4fa6e2;
+}
+
+[data-theme="light"] .tone-raised {
+  --canvas: #e3eaf4;
+  --surface: #ffffff;
+  --line: #ccd8e6;
+  --line-strong: #b3c3d7;
+  --fg: #0e2440;
+  --muted: #45597a;
+  --accent: #1f78bd;
+}
+
+.tone-tint {
+  --canvas: #123c66;
+  --surface: #18477a;
+  --line: #22558a;
+  --line-strong: #2f66a0;
+  --fg: #f5f8fc;
+  --muted: #b0c6de;
+  --accent: #6db8ea;
+}
+
+[data-theme="light"] .tone-tint {
+  --canvas: #e3f0fa;
+  --surface: #ffffff;
+  --line: #c9def0;
+  --line-strong: #a9c8e4;
+  --fg: #0e2440;
+  --muted: #3f5878;
+  --accent: #1a6aa8;
+}
+
+.tone-deep,
+.tone-raised,
+.tone-tint {
+  background-color: var(--canvas);
+  color: var(--fg);
+}
+
 @theme {
   --color-brand-mint: #3be2a6;
   --color-brand-sky: #4fa6e2;
@@ -265,6 +343,11 @@
   from {
     translate: 0 14px;
   }
+}
+
+/* A loading screen this browser has already seen stays hidden (see lib/intro). */
+[data-intro="seen"] [data-kuora-splash] {
+  display: none;
 }
 
 /*

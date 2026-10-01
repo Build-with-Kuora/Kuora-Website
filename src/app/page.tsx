@@ -3,12 +3,35 @@ import { ContactBand } from "@/components/contact-band";
 import { Faq, type Question } from "@/components/faq";
 import { KuoraMonogram, PillarGlyph } from "@/components/kuora-mark";
 import { ProcessBeam } from "@/components/process-beam";
-import { ProjectPlanner } from "@/components/project-planner";
 import { SectionHeading } from "@/components/section-heading";
 import { pillars } from "@/lib/pillars";
 import { reveal } from "@/lib/reveal";
 import { projects } from "@/lib/projects";
 import { services } from "@/lib/services";
+
+// The layers of a system we build, top to bottom. The Systems page covers each in depth.
+const layers = [
+  {
+    name: "Interfaces",
+    tech: "Next.js and React",
+    body: "Web apps and dashboards that stay fast on slow networks.",
+  },
+  {
+    name: "Services and APIs",
+    tech: "Node.js",
+    body: "Typed APIs, jobs and integrations that scale by adding instances.",
+  },
+  {
+    name: "Data models",
+    tech: "Prisma",
+    body: "One schema for the whole domain, with migrations reviewed like code.",
+  },
+  {
+    name: "Foundations",
+    tech: "PostgreSQL",
+    body: "Databases tuned to real queries and partitioned as the data grows.",
+  },
+];
 
 const questions: Question[] = [
   {
@@ -46,7 +69,7 @@ export default function HomePage() {
     <>
       {/*
         The hero fills the first screen below main's 5rem clearance for the
-        floating nav, so the planner starts on the next one. The logo's K sits in
+        floating nav, so What we do starts on the next one. The logo's K sits in
         the same centred column as the text, its right edge on the column's
         edge, so text and mark read as one composition at every width.
       */}
@@ -80,62 +103,104 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* The pop lives on an inner wrapper so the snap point is measured untransformed. */}
-      <div data-snap className="container-sheet pb-24 lg:pb-36">
-        <div data-scroll-reveal="pop">
-          <ProjectPlanner />
-        </div>
-      </div>
+      {/*
+        From here each section is a band in its own tone (see globals.css),
+        alternating so neighbours never match, and snaps flush to the top
+        (data-snap="flush") with its own padding clearing the floating nav.
 
-      <section id="services" aria-labelledby="services-title" className="container-sheet scroll-mt-24 pb-24 lg:pb-36">
-        <SectionHeading
-          id="services-title"
-          lead="Pick the one closest to where you are. Each starts with a written proposal for the first phase, so scope and cost are agreed before any work."
-        >
-          Ways to work with us.
-        </SectionHeading>
-        <ul className="mt-12 grid overflow-hidden rounded-2xl border border-line-strong bg-surface lg:grid-cols-3">
-          {services.map((service) => (
-            <li
-              key={service.id}
-              data-scroll-reveal="up"
-              className="flex flex-col border-line p-6 not-last:border-b sm:p-8 lg:not-last:border-r lg:not-last:border-b-0"
-            >
-              <h3 className="text-2xl font-semibold tracking-[-0.02em]">{service.name}</h3>
-              <p className="mt-3 text-muted">{service.audience}</p>
-              <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
-                {service.includes.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 16 16"
-                      className="mt-1 size-4 shrink-0 text-muted"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.75"
-                    >
-                      <path d="m3.5 8.5 3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto pt-8">
-                <p className="flex justify-between gap-4 border-t border-line pt-4 text-sm">
-                  <span className="text-muted">Typical length</span>
-                  <span className="font-medium">{service.length}</span>
-                </p>
-                <Link href={`/start?service=${service.id}`} className="btn-secondary mt-5 w-full justify-center">
-                  Get a quote
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
+        What we do also fills one screen, so nothing above or below shows. Its
+        opaque band lets the hero's parallax layers slide under it. The heading
+        drifts a little against the list, the section's one parallax depth.
+      */}
+      <section
+        aria-labelledby="what-we-do"
+        data-snap="flush"
+        className="tone-deep relative flex min-h-svh flex-col justify-center pt-24 pb-12 sm:pt-28 sm:pb-16"
+      >
+        <div className="container-sheet grid gap-x-10 gap-y-10 lg:grid-cols-12 lg:items-center">
+          <div data-parallax="0.12" data-parallax-max="48" className="lg:col-span-5">
+            <h2 id="what-we-do" data-scroll-reveal="up" className="display text-[clamp(2.5rem,5vw,4.25rem)]">
+              What we do.
+            </h2>
+            <p data-scroll-reveal="up" className="mt-5 max-w-md text-muted sm:text-lg">
+              We design, build and run whole systems, from the database to the screen. One team owns
+              every layer, so nothing is lost between them.
+            </p>
+            <div data-scroll-reveal="up" className="mt-6 sm:mt-8">
+              <Link href="/systems" className="btn-secondary">
+                See the systems
+              </Link>
+            </div>
+          </div>
+          <ul className="border-b border-line lg:col-span-6 lg:col-start-7">
+            {layers.map((layer) => (
+              <li
+                key={layer.name}
+                data-scroll-reveal="up"
+                className="grid grid-cols-[1fr_auto] items-baseline gap-x-6 border-t border-line py-4 sm:py-6"
+              >
+                <div>
+                  <h3 className="text-xl font-semibold tracking-[-0.015em] sm:text-2xl">{layer.name}</h3>
+                  <p className="mt-1.5 hidden max-w-sm text-[0.9375rem] text-muted sm:block">{layer.body}</p>
+                </div>
+                <p className="label">{layer.tech}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      <section aria-labelledby="pillars" className="container-sheet pb-24 lg:pb-36">
-        <div className="grid gap-12 lg:grid-cols-12">
+      <section id="services" aria-labelledby="services-title" data-snap="flush" className="py-24 lg:py-32">
+        <div className="container-sheet">
+          <SectionHeading
+            id="services-title"
+            lead="Pick the one closest to where you are. Each starts with a written proposal for the first phase, so scope and cost are agreed before any work."
+          >
+            Ways to work with us.
+          </SectionHeading>
+          <ul className="mt-12 grid overflow-hidden rounded-2xl border border-line-strong bg-surface lg:grid-cols-3">
+            {services.map((service) => (
+              <li
+                key={service.id}
+                data-scroll-reveal="up"
+                className="flex flex-col border-line p-6 not-last:border-b sm:p-8 lg:not-last:border-r lg:not-last:border-b-0"
+              >
+                <h3 className="text-2xl font-semibold tracking-[-0.02em]">{service.name}</h3>
+                <p className="mt-3 text-muted">{service.audience}</p>
+                <ul className="mt-6 space-y-2.5 text-[0.9375rem]">
+                  {service.includes.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        className="mt-1 size-4 shrink-0 text-muted"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                      >
+                        <path d="m3.5 8.5 3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-8">
+                  <p className="flex justify-between gap-4 border-t border-line pt-4 text-sm">
+                    <span className="text-muted">Typical length</span>
+                    <span className="font-medium">{service.length}</span>
+                  </p>
+                  <Link href={`/start?service=${service.id}`} className="btn-secondary mt-5 w-full justify-center">
+                    Get a quote
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="pillars" data-snap="flush" className="tone-raised py-24 lg:py-32">
+        <div className="container-sheet grid gap-12 lg:grid-cols-12">
           <SectionHeading
             id="pillars"
             className="lg:col-span-4"
@@ -162,47 +227,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="work" className="container-sheet pb-24 lg:pb-36">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading id="work" lead="Systems we have designed, built and still run.">
-            Selected work.
-          </SectionHeading>
-          <Link href="/work" className="btn-secondary">
-            All projects
-          </Link>
+      <section aria-labelledby="work" data-snap="flush" className="tone-deep py-24 lg:py-32">
+        <div className="container-sheet">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeading id="work" lead="Systems we have designed, built and still run.">
+              Selected work.
+            </SectionHeading>
+            <Link href="/work" className="btn-secondary">
+              All projects
+            </Link>
+          </div>
+          <ul className="mt-12 border-t border-line-strong">
+            {projects.slice(0, 4).map((project) => (
+              <li key={project.slug} data-scroll-reveal="up" className="border-b border-line-strong">
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[minmax(0,14rem)_1fr_auto]"
+                >
+                  <span className="text-2xl font-semibold tracking-[-0.02em] underline-offset-4 group-hover:underline">
+                    {project.name}
+                  </span>
+                  <span className="max-w-xl text-muted">{project.summary}</span>
+                  <span className="label">
+                    {project.sector}, {project.year}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="mt-12 border-t border-line-strong">
-          {projects.slice(0, 4).map((project) => (
-            <li key={project.slug} data-scroll-reveal="up" className="border-b border-line-strong">
-              <Link
-                href={`/work/${project.slug}`}
-                className="group grid items-baseline gap-x-8 gap-y-1 py-6 sm:grid-cols-[minmax(0,14rem)_1fr_auto]"
-              >
-                <span className="text-2xl font-semibold tracking-[-0.02em] underline-offset-4 group-hover:underline">
-                  {project.name}
-                </span>
-                <span className="max-w-xl text-muted">{project.summary}</span>
-                <span className="label">
-                  {project.sector}, {project.year}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
-      <section aria-labelledby="process" className="container-sheet pb-24 lg:pb-36">
-        <SectionHeading
-          id="process"
-          lead="One team from the first conversation to production, and after it."
-        >
-          How a project runs.
-        </SectionHeading>
-        <ProcessBeam />
+      <section aria-labelledby="process" data-snap="flush" className="py-24 lg:py-32">
+        <div className="container-sheet">
+          <SectionHeading
+            id="process"
+            lead="One team from the first conversation to production, and after it."
+          >
+            How a project runs.
+          </SectionHeading>
+          <ProcessBeam />
+        </div>
       </section>
 
-      <section aria-labelledby="questions" className="container-sheet pb-24 lg:pb-36">
-        <div className="grid gap-12 lg:grid-cols-12">
+      <section aria-labelledby="questions" data-snap="flush" className="tone-raised py-24 lg:py-32">
+        <div className="container-sheet grid gap-12 lg:grid-cols-12">
           <SectionHeading id="questions" className="lg:col-span-4">
             Common questions.
           </SectionHeading>
@@ -212,7 +281,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ContactBand />
+      <ContactBand tone="tone-tint" />
     </>
   );
 }
